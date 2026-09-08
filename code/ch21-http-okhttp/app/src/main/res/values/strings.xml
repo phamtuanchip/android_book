@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">OkHttp Demo</string>
+    <string name="button_load">Tải danh sách bài viết</string>
+    <string name="error_network">Lỗi mạng: %1$s</string>
+    <string name="error_http">Server trả lỗi HTTP %1$d</string>
+    <string name="error_parse">Lỗi đọc dữ liệu JSON: %1$s</string>
+</resources>
