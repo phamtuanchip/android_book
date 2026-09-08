@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JUnit Demo</string>
+    <string name="hint_password">Nhập mật khẩu để kiểm tra độ mạnh</string>
+    <string name="strength_weak">Yếu</string>
+    <string name="strength_medium">Trung bình</string>
+    <string name="strength_strong">Mạnh</string>
+</resources>

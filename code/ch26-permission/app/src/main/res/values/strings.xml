@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Permission Demo</string>
+    <string name="button_read_contacts">Đọc số lượng danh bạ</string>
+    <string name="button_open_settings">Mở Cài đặt ứng dụng</string>
+    <string name="loading">Đang đọc…</string>
+    <string name="contacts_count_format">Thiết bị có %1$d liên hệ trong danh bạ.</string>
+    <string name="rationale_contacts">App cần quyền đọc danh bạ để đếm số liên hệ hiện có — không lưu hay gửi đi bất kỳ đâu.</string>
+    <string name="permission_denied_once">Bạn đã từ chối — bấm nút lần nữa để được hỏi lại.</string>
+    <string name="permission_permanently_denied">Bạn đã chọn \"Không hỏi lại\". Vào Cài đặt để tự bật quyền.</string>
+</resources>
