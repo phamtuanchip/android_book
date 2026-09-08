@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Intent &amp; Navigation Demo</string>
+    <string name="hint_message">Nhập một tin nhắn</string>
+    <string name="button_send_to_second">Gửi sang màn hình 2</string>
+    <string name="button_open_browser">Mở trình duyệt (implicit intent)</string>
+    <string name="result_reply_format">Phản hồi từ màn hình 2: %1$s</string>
+    <string name="received_format">Nhận được: %1$s</string>
+    <string name="no_message_received">Không có tin nhắn nào được gửi kèm.</string>
+    <string name="button_reply">Trả lời &amp; quay lại</string>
+    <string name="default_reply">Đã nhận, cảm ơn!</string>
+</resources>

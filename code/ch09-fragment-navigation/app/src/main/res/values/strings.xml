@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fragment &amp; Navigation Demo</string>
+    <string name="hint_message">Nhập một tin nhắn</string>
+    <string name="button_next">Tiếp theo</string>
+    <string name="button_back">Quay lại</string>
+    <string name="received_format">Nhận được: %1$s</string>
+</resources>

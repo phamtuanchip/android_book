@@ -1,0 +1,5 @@
+<resources>
+    <color name="screen_background">#FFFFFF</color>
+    <color name="text_primary">#1C2127</color>
+    <color name="text_secondary">#5B6472</color>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <!-- sw600dp = màn hình rộng tối thiểu 600dp (máy tính bảng cỡ nhỏ trở lên) -->
+    <dimen name="screen_padding">64dp</dimen>
+    <dimen name="greeting_text_size">32sp</dimen>
+</resources>

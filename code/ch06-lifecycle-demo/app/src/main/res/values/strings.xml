@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Lifecycle Demo</string>
+    <string name="hello_message">Xin chào, Android!</string>
+    <string name="open_second_screen">Mở màn hình 2</string>
+    <string name="second_screen_message">Đây là màn hình 2 — xem Logcat để thấy MainActivity đã onPause/onStop</string>
+</resources>

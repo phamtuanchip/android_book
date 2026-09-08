@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Layout &amp; Views Demo</string>
+    <string name="hint_name">Nhập tên của bạn</string>
+    <string name="button_greet">Chào</string>
+    <string name="result_empty_name">Bạn chưa nhập tên.</string>
+    <string name="result_greeting">Xin chào, %1$s!</string>
+    <string name="checkbox_subscribe">Đăng ký nhận tin</string>
+    <string name="label_age">Chọn độ tuổi</string>
+    <string name="age_value_default">Độ tuổi: 0</string>
+    <string name="age_value">Độ tuổi: %1$d</string>
+</resources>

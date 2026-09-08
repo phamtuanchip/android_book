@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Resource Demo</string>
+    <string name="greeting">Hello!</string>
+    <string name="note_resource_qualifier">Switch the system language to English, or enable dark mode, to see this content/color change without touching any Java code.</string>
+</resources>

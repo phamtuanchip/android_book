@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="screen_padding">24dp</dimen>
+    <dimen name="greeting_text_size">22sp</dimen>
+</resources>

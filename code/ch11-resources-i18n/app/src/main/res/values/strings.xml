@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Resource Demo</string>
+    <string name="greeting">Xin chào!</string>
+    <string name="note_resource_qualifier">Đổi ngôn ngữ hệ thống sang tiếng Anh, hoặc bật chế độ tối, để thấy nội dung/màu sắc thay đổi mà không cần sửa code Java.</string>
+</resources>
