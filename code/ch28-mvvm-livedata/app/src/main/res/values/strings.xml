@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MVVM Demo</string>
+    <string name="button_load">Làm mới</string>
+    <string name="error_refresh_kept_cache">Không đồng bộ được (%1$s) — vẫn hiển thị dữ liệu đã lưu lần trước.</string>
+</resources>
