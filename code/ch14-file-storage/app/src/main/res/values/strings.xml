@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">File Storage Demo</string>
+    <string name="hint_content">Nhập nội dung cần lưu</string>
+    <string name="button_save_internal">Lưu vào bộ nhớ TRONG (internal)</string>
+    <string name="button_save_external">Lưu vào bộ nhớ NGOÀI riêng của app (external)</string>
+    <string name="button_read_both">Đọc lại cả hai nơi</string>
+    <string name="saved_format">Đã lưu vào %1$s:\n%2$s</string>
+    <string name="save_failed">Lưu thất bại.</string>
+    <string name="read_failed">(lỗi đọc file)</string>
+    <string name="file_not_found">(chưa có file — bấm Lưu trước)</string>
+    <string name="read_result_format">== Bộ nhớ TRONG ==\n%1$s\n\n== Bộ nhớ NGOÀI ==\n%2$s</string>
+</resources>

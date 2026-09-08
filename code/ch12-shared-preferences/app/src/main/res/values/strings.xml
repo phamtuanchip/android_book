@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SharedPreferences Demo</string>
+    <string name="label_display_name">Tên hiển thị</string>
+    <string name="label_notifications">Bật thông báo</string>
+    <string name="label_font_size">Cỡ chữ</string>
+    <string name="label_font_size_value">Cỡ chữ: %1$dsp</string>
+    <string name="button_save">Lưu</string>
+    <string name="status_saved_at">Đã lưu lúc %1$s — đóng app hẳn rồi mở lại để kiểm chứng vẫn còn.</string>
+</resources>

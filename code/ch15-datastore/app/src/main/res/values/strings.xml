@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DataStore Demo</string>
+    <string name="label_display_name">Tên hiển thị</string>
+    <string name="label_notifications">Bật thông báo</string>
+    <string name="button_save">Lưu</string>
+    <string name="saved_at">Đã lưu lúc %1$s (qua DataStore)</string>
+    <string name="save_error">Lưu thất bại: %1$s</string>
+    <string name="read_error">Đọc dữ liệu thất bại: %1$s</string>
+</resources>

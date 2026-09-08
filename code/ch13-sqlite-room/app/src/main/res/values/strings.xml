@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SQLite &amp; Room Demo</string>
+    <string name="hint_note_title">Tiêu đề ghi chú mới</string>
+    <string name="button_add">Thêm</string>
+    <string name="hint_tap_to_delete">Bấm vào một ghi chú để xoá</string>
+    <string name="deleted_format">Đã xoá: %1$s</string>
+</resources>

@@ -1,0 +1,3 @@
+<resources>
+    <style name="Theme.HelloAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+</resources>
