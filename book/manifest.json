@@ -1,0 +1,100 @@
+{
+  "title": "Android Từ Cơ Bản Đến Nâng Cao",
+  "subtitle": "Dành cho người đã biết Java OOP cơ bản",
+  "parts": [
+    {
+      "id": "part0-setup",
+      "title": "Phần 0 — Chuẩn bị môi trường",
+      "chapters": [
+        { "num": 1, "slug": "ch01-gioi-thieu-android", "title": "Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái" },
+        { "num": 2, "slug": "ch02-cai-dat-moi-truong", "title": "Cài đặt JDK, Android Studio, SDK/SDK Manager" },
+        { "num": 3, "slug": "ch03-may-ao-thiet-bi-that", "title": "Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)" },
+        { "num": 4, "slug": "ch04-project-dau-tien", "title": "Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml" },
+        { "num": 5, "slug": "ch05-hello-world", "title": "Build & deploy ứng dụng \"Hello World\" đầu tiên lên emulator/thiết bị thật" }
+      ]
+    },
+    {
+      "id": "part1-fundamentals",
+      "title": "Phần 1 — Nền tảng",
+      "chapters": [
+        { "num": 6, "slug": "ch06-vong-doi-activity", "title": "Vòng đời Activity & Application" },
+        { "num": 7, "slug": "ch07-layout-views", "title": "Layout & Views (XML layout, ConstraintLayout, ViewGroup)" },
+        { "num": 8, "slug": "ch08-su-kien-intent", "title": "Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình" },
+        { "num": 9, "slug": "ch09-fragment-navigation", "title": "Fragment & Navigation Component" },
+        { "num": 10, "slug": "ch10-recyclerview-adapter", "title": "RecyclerView & Adapter (danh sách, hiệu năng)" },
+        { "num": 11, "slug": "ch11-resource-da-ngon-ngu", "title": "Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình" }
+      ]
+    },
+    {
+      "id": "part2-storage",
+      "title": "Phần 2 — Lưu trữ dữ liệu",
+      "chapters": [
+        { "num": 12, "slug": "ch12-shared-preferences", "title": "SharedPreferences (cấu hình, trạng thái đơn giản)" },
+        { "num": 13, "slug": "ch13-sqlite-room", "title": "SQLite & Room (cơ sở dữ liệu quan hệ)" },
+        { "num": 14, "slug": "ch14-file-storage", "title": "File storage: internal vs external, scoped storage" },
+        { "num": 15, "slug": "ch15-datastore", "title": "Jetpack DataStore (thay thế SharedPreferences hiện đại)" }
+      ]
+    },
+    {
+      "id": "part3-background",
+      "title": "Phần 3 — Chạy ngầm & bất đồng bộ",
+      "chapters": [
+        { "num": 16, "slug": "ch16-service", "title": "Service & foreground service" },
+        { "num": 17, "slug": "ch17-broadcast-receiver", "title": "BroadcastReceiver, hệ thống sự kiện của Android" },
+        { "num": 18, "slug": "ch18-workmanager", "title": "WorkManager (tác vụ nền có lịch/điều kiện)" },
+        { "num": 19, "slug": "ch19-bat-dong-bo", "title": "Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)" },
+        { "num": 20, "slug": "ch20-notification", "title": "Notification" }
+      ]
+    },
+    {
+      "id": "part4-networking",
+      "title": "Phần 4 — Mạng & API",
+      "chapters": [
+        { "num": 21, "slug": "ch21-http-retrofit", "title": "Gọi HTTP với OkHttp/Retrofit" },
+        { "num": 22, "slug": "ch22-json-parsing", "title": "Parse JSON (Gson/Moshi), mapping dữ liệu" },
+        { "num": 23, "slug": "ch23-loi-mang-cache", "title": "Xử lý lỗi mạng, retry, cache offline-first cơ bản" }
+      ]
+    },
+    {
+      "id": "part5-testing-security",
+      "title": "Phần 5 — Kiểm thử, Sandbox & Bảo mật",
+      "chapters": [
+        { "num": 24, "slug": "ch24-unit-test-junit", "title": "Unit test với JUnit" },
+        { "num": 25, "slug": "ch25-ui-test-espresso", "title": "UI test với Espresso" },
+        { "num": 26, "slug": "ch26-sandbox-permission", "title": "Sandbox của Android: mô hình quyền (permission), runtime permission" },
+        { "num": 27, "slug": "ch27-bao-mat-co-ban", "title": "Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng" }
+      ]
+    },
+    {
+      "id": "part6-architecture",
+      "title": "Phần 6 — Kiến trúc nâng cao",
+      "chapters": [
+        { "num": 28, "slug": "ch28-mvvm-livedata", "title": "MVVM, ViewModel & LiveData" },
+        { "num": 29, "slug": "ch29-di-hilt", "title": "Dependency Injection với Hilt" },
+        { "num": 30, "slug": "ch30-jetpack-compose", "title": "Giới thiệu Jetpack Compose" },
+        { "num": 31, "slug": "ch31-clean-architecture", "title": "Clean Architecture cơ bản cho ứng dụng Android" }
+      ]
+    },
+    {
+      "id": "part7-interop-hardware",
+      "title": "Phần 7 — Giao tiếp liên ứng dụng & phần cứng nâng cao",
+      "chapters": [
+        { "num": 32, "slug": "ch32-content-provider", "title": "Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng" },
+        { "num": 33, "slug": "ch33-app-links-share", "title": "Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent" },
+        { "num": 34, "slug": "ch34-aidl-bound-service", "title": "AIDL & Bound Service: giao tiếp liên tiến trình (IPC) giữa các app" },
+        { "num": 35, "slug": "ch35-bluetooth", "title": "Bluetooth: Classic & BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu" },
+        { "num": 36, "slug": "ch36-nfc", "title": "NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị" },
+        { "num": 37, "slug": "ch37-quyen-phan-cung", "title": "Quyền & sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level" }
+      ]
+    },
+    {
+      "id": "part8-publishing",
+      "title": "Phần 8 — Xuất bản ứng dụng",
+      "chapters": [
+        { "num": 38, "slug": "ch38-release-build", "title": "Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)" },
+        { "num": 39, "slug": "ch39-google-play-console", "title": "Đưa ứng dụng lên Google Play Console" },
+        { "num": 40, "slug": "ch40-theo-doi-sau-phat-hanh", "title": "Theo dõi sau phát hành: Crashlytics, Analytics cơ bản" }
+      ]
+    }
+  ]
+}

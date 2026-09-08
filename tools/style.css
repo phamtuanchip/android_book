@@ -1,0 +1,177 @@
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f5f6f8;
+  --text: #1c2127;
+  --text-muted: #5b6472;
+  --border: #e2e5ea;
+  --accent: #1a73e8;
+  --code-bg: #0d1117;
+  --sidebar-w: 320px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171c;
+    --bg-alt: #1b1f26;
+    --text: #e6e9ee;
+    --text-muted: #9aa4b2;
+    --border: #2b3038;
+    --accent: #6cabff;
+    --code-bg: #0d1117;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--sidebar-w);
+  overflow-y: auto;
+  background: var(--bg-alt);
+  border-right: 1px solid var(--border);
+  padding: 1rem 0 3rem;
+}
+
+.sidebar-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0 1.25rem 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-part { padding: 0.4rem 1.25rem; }
+.sidebar-part-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin: 0.6rem 0 0.35rem;
+}
+.sidebar-part ul { list-style: none; margin: 0; padding: 0; }
+.sidebar-part li { margin: 0.15rem 0; }
+.sidebar-part li a {
+  display: block;
+  color: var(--text);
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+.sidebar-part li a:hover { background: var(--border); text-decoration: none; }
+.sidebar-part li.active a { background: var(--accent); color: #fff; }
+.sidebar-part li.planned a { color: var(--text-muted); font-style: italic; }
+
+.nav-toggle {
+  display: none;
+  position: fixed;
+  top: 0.75rem; left: 0.75rem;
+  z-index: 20;
+  width: 2.25rem; height: 2.25rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.content {
+  margin-left: var(--sidebar-w);
+  padding: 2.5rem 3rem 4rem;
+  max-width: 860px;
+}
+
+article h1 { font-size: 1.9rem; margin-top: 0; }
+article h2 { font-size: 1.4rem; margin-top: 2.2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+article h3 { font-size: 1.15rem; margin-top: 1.6rem; }
+.subtitle { color: var(--text-muted); margin-top: -0.5rem; }
+.tbd { color: var(--text-muted); font-style: italic; }
+.badge {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+}
+
+pre:not(.mermaid) {
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+}
+code { font-family: "Cascadia Code", Consolas, "SF Mono", monospace; font-size: 0.88rem; }
+:not(pre) > code {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.08rem 0.35rem;
+}
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-alt);
+  color: var(--text-muted);
+}
+
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+th { background: var(--bg-alt); }
+
+.mermaid-wrap {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  margin: 1.25rem 0;
+  overflow: hidden;
+}
+.mermaid-wrap svg { display: block; max-width: none; }
+.mermaid-wrap::after {
+  content: "Kéo để di chuyển · cuộn hoặc dùng nút +/- để zoom";
+  position: absolute;
+  bottom: 6px; right: 10px;
+  font-size: 0.7rem;
+  color: #8a919c;
+  pointer-events: none;
+}
+
+.prev-next {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.92rem;
+}
+.prev-next a { max-width: 46%; }
+.prev-next .next { text-align: right; margin-left: auto; }
+
+@media (max-width: 900px) {
+  .nav-toggle { display: block; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    z-index: 15;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.25);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .content { margin-left: 0; padding: 4rem 1.25rem 3rem; }
+}

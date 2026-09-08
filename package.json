@@ -1,0 +1,19 @@
+{
+  "name": "android_book",
+  "version": "1.0.0",
+  "description": "Sách lập trình Android bằng tiếng Việt, dành cho người đã biết Java OOP cơ bản, đi từ cài đặt môi trường đến kiến trúc nâng cao, kèm code mẫu chạy được cho từng chương.",
+  "main": "index.js",
+  "scripts": {
+    "build": "node tools/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "markdown-it": "^15.0.1"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.10.0"
+  }
+}
