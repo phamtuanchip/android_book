@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BroadcastReceiver Demo</string>
+    <string name="label_battery">Pin hiện tại (ACTION_BATTERY_CHANGED — broadcast hệ thống)</string>
+    <string name="battery_format">%1$d%%</string>
+    <string name="label_ping">Tín hiệu tự định nghĩa (custom broadcast)</string>
+    <string name="ping_count_initial">Chưa nhận tín hiệu nào</string>
+    <string name="ping_count_format">Đã nhận %1$d lần (gần nhất: #%2$d)</string>
+    <string name="button_send_ping">Gửi tín hiệu (sendBroadcast)</string>
+</resources>

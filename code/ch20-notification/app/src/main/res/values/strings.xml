@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Notification Demo</string>
+    <string name="button_send">Gửi thông báo nhắc nhở</string>
+    <string name="notification_sent">Đã gửi — kéo thanh trạng thái xuống để xem.</string>
+    <string name="permission_denied">Bạn đã từ chối quyền thông báo — không thể hiển thị.</string>
+    <string name="opened_from_notification">Bạn vừa mở app bằng cách bấm vào thông báo!</string>
+    <string name="channel_name">Nhắc nhở</string>
+    <string name="channel_description">Các thông báo nhắc nhở từ app demo Chương 20</string>
+    <string name="reminder_title">Đừng quên ôn bài!</string>
+    <string name="reminder_body">Đã đến giờ ôn lại Chương 20 về Notification — bấm vào đây để mở app, hoặc bấm nút bên dưới để đánh dấu đã đọc mà không cần mở app.</string>
+    <string name="action_mark_read">Đánh dấu đã đọc</string>
+    <string name="marked_read_toast">Đã đánh dấu đã đọc — không cần mở app!</string>
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WorkManager Demo</string>
+    <string name="button_sync_now">Đồng bộ ngay (OneTimeWorkRequest)</string>
+    <string name="status_idle">Chưa chạy lần nào</string>
+    <string name="status_enqueued">Đã đưa vào hàng đợi (ENQUEUED)…</string>
+    <string name="status_running">Đang chạy (RUNNING)…</string>
+    <string name="status_succeeded">Thành công (SUCCEEDED) lúc %1$s</string>
+    <string name="status_failed">Thất bại (FAILED)</string>
+    <string name="button_schedule_periodic">Lên lịch định kỳ mỗi 15 phút</string>
+    <string name="note_periodic">Chỉ minh hoạ cú pháp — chu kỳ tối thiểu 15 phút nên không thấy kết quả ngay.</string>
+    <string name="note_periodic_scheduled">Đã lên lịch định kỳ (kiểm tra qua Logcat tag SyncWorker sau ~15 phút).</string>
+</resources>

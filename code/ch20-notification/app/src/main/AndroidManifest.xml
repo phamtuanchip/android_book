@@ -1,0 +1,31 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".ReminderApplication"
+        android:allowBackup="true"
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.HelloAndroid">
+
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Đăng ký TĨNH qua manifest — trường hợp hợp lệ hiếm hoi khác với nguyên
+             tắc "luôn đăng ký động" ở Chương 17: PendingIntent từ notification có
+             thể được kích hoạt ngay cả khi tiến trình app không còn chạy, lúc đó
+             không có Activity/Service nào sống để tự đăng ký receiver động. -->
+        <receiver
+            android:name=".MarkReadReceiver"
+            android:exported="false" />
+    </application>
+
+</manifest>

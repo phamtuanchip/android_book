@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Service Demo</string>
+    <string name="count_initial">Chưa bắt đầu</string>
+    <string name="count_format">Đã đếm: %1$d giây</string>
+    <string name="button_start">Bắt đầu (Foreground Service)</string>
+    <string name="button_stop">Dừng</string>
+    <string name="notification_title">Counter Service đang chạy</string>
+    <string name="notification_text_format">Đã đếm: %1$d giây</string>
+</resources>

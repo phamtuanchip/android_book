@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Thread &amp; Executor Demo</string>
+    <string name="hint_limit">Đếm số nguyên tố tới…</string>
+    <string name="default_limit">2000000</string>
+    <string name="button_start">Bắt đầu (chạy trên Executor)</string>
+    <string name="button_cancel">Huỷ</string>
+    <string name="status_idle">Sẵn sàng</string>
+    <string name="status_running">Đang tính…</string>
+    <string name="status_done">Xong: tìm được %1$d số nguyên tố</string>
+    <string name="status_cancelled">Đã huỷ giữa chừng — đếm được %1$d số nguyên tố trước khi dừng</string>
+    <string name="status_invalid_input">Vui lòng nhập một số hợp lệ</string>
+</resources>
