@@ -3,9 +3,10 @@
 Sách lập trình Android bằng tiếng Việt, dành cho người đã biết Java OOP cơ bản, đi từ
 cài đặt môi trường đến kiến trúc nâng cao, kèm code mẫu chạy được cho từng chương.
 
-> **Trạng thái: đã viết xong toàn bộ 40 chương + 2 phụ lục.** Xem `dist/index.html` (chạy
-> `npm run build` trước) để đọc bản HTML đầy đủ. Phần còn lại: xuất bản PDF (mục 6) và rà soát
-> mở rộng thêm nếu cần.
+> **Trạng thái: đã viết xong toàn bộ 40 chương + 2 phụ lục, đã có bản HTML và PDF.**
+> Xem `dist/index.html` để đọc bản HTML, hoặc `dist/android-tu-co-ban-den-nang-cao.pdf`
+> (225 trang) cho bản in. Cả hai đã commit sẵn trong repo — chạy `npm run build:all` để tự
+> build lại từ nguồn Markdown khi nội dung thay đổi. Còn lại: EPUB (mục 6).
 
 ## 1. Mục tiêu
 
@@ -132,11 +133,13 @@ sẵn không hỗ trợ sẵn ra khỏi hộp.
 
 - `npm run build` (hoặc `node tools/build.js`) đọc `book/manifest.json` + từng file
   `book/<part>/chXX-*.md`, sinh HTML đầy đủ vào `dist/` (sidebar điều hướng, prev/next, syntax
-  highlight bằng highlight.js, sơ đồ Mermaid có zoom/pan).
-- **PDF**: chưa làm — bước tiếp theo dự kiến là in trực tiếp từ bản HTML đã build bằng Chromium
-  headless (Puppeteer, đã có sẵn trong `devDependencies`), giữ nguyên định dạng thay vì đi qua
-  Pandoc/LaTeX (tránh phải viết lại phần hiển thị sơ đồ Mermoid/code cho một pipeline riêng).
-- **EPUB**: dự kiến ở giai đoạn sau PDF, dùng lại đúng nguồn Markdown, không viết lại nội dung.
+  highlight bằng highlight.js, sơ đồ Mermaid có zoom/pan). Đã commit sẵn trong repo.
+- **PDF**: `npm run build:pdf` (hoặc `node tools/build-pdf.js`) — gộp toàn bộ chương thành một
+  trang HTML dài (bìa, mục lục liên kết, mỗi chương một trang in riêng), dùng Puppeteer
+  (Chromium headless, đã có sẵn trong `devDependencies`) render Mermaid/highlight.js rồi in
+  thành `dist/android-tu-co-ban-den-nang-cao.pdf` — không qua Pandoc/LaTeX, tái sử dụng đúng
+  CSS/font đã dùng cho bản HTML. `npm run build:all` chạy cả hai bước liên tiếp. Đã commit sẵn.
+- **EPUB**: dự kiến bước tiếp theo, dùng lại đúng nguồn Markdown, không viết lại nội dung.
 
 ## 7. Lộ trình biên soạn (milestones)
 
@@ -148,7 +151,10 @@ sẵn không hỗ trợ sẵn ra khỏi hộp.
 6. ✅ Viết & code mẫu xong Phần 7 (giao tiếp liên ứng dụng, Bluetooth, NFC) — các chương phần
    cứng (35-36) cần thiết bị thật để tự kiểm chứng, đã ghi rõ trong README từng code mẫu.
 7. ✅ Viết Phần 8 (xuất bản) + Phụ lục A-B.
-8. ⬜ Build bản PDF hoàn chỉnh (Puppeteer in từ HTML), rà soát lần cuối toàn bộ code mẫu.
+8. ✅ Build bản HTML + PDF hoàn chỉnh (Puppeteer in từ HTML), đã rà soát toàn bộ code mẫu qua
+   một đợt review độc lập (sửa các lỗi phát hiện được: `ContentProvider.requireContext()` cần
+   API 30 dù minSdk 24 ở Chương 32, thiếu rebind Service ở Chương 16, và một lỗi hiển thị số ở
+   Chương 10).
 9. ⬜ Xuất bản EPUB.
 
 ## 8. Các quyết định đã chốt trong quá trình viết
