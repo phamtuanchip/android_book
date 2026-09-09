@@ -73,6 +73,19 @@ public class MainActivity extends AppCompatActivity implements CounterService.Co
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Bù lại việc onStop() luôn unbind: nếu Service VẪN ĐANG CHẠY từ trước (ví
+        // dụ người dùng bấm Home rồi mở lại app, thay vì bấm Dừng), phải bind LẠI ở
+        // đây — nếu không, isBound/boundService ở trạng thái "chưa kết nối" dù
+        // Service (và notification) trên thực tế vẫn đang chạy, khiến nút Dừng
+        // không còn tác dụng gì cho tới khi tự tay bấm Bắt đầu lại.
+        if (!isBound && CounterService.isRunning()) {
+            bindService(new Intent(this, CounterService.class), connection, 0);
+        }
+    }
+
     private void startAndBindService() {
         Intent intent = new Intent(this, CounterService.class);
         // startForegroundService(): báo hệ thống Service này SẼ gọi startForeground()

@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         adapter.submitList(new ArrayList<>(notes));
 
         binding.buttonAddNote.setOnClickListener(v -> {
-            notes.add(0, new Note(nextId++, getString(R.string.note_title_format, nextId),
+            long id = nextId++;
+            notes.add(0, new Note(id, getString(R.string.note_title_format, id),
                     DateFormat.format("HH:mm:ss", System.currentTimeMillis()).toString()));
             // submitList() nhận danh sách MỚI, ListAdapter tự so sánh với danh sách cũ
             // bằng DIFF_CALLBACK ở NoteAdapter — không tự tay gọi notifyItemInserted().

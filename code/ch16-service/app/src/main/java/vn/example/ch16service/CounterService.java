@@ -44,6 +44,17 @@ public class CounterService extends Service {
     private boolean running = false;
     private CounterListener listener;
 
+    // static, KHÔNG PHẢI tuỳ chọn thiết kế "cho gọn" — đây là cách để MainActivity
+    // biết Service có đang thật sự chạy hay không SAU KHI Activity đã unbind ở
+    // onStop() (Home, mở Activity khác...). Sống được vì Service và Activity luôn
+    // cùng một tiến trình (LocalBinder, mục 16.4) — không dùng được cách này nếu
+    // đây là bound service liên tiến trình như AIDL ở Chương 34.
+    private static volatile boolean isRunning = false;
+
+    public static boolean isRunning() {
+        return isRunning;
+    }
+
     private final Runnable tick = new Runnable() {
         @Override
         public void run() {
@@ -73,6 +84,7 @@ public class CounterService extends Service {
         startForeground(NOTIFICATION_ID, buildNotification());
         if (!running) {
             running = true;
+            isRunning = true;
             handler.post(tick);
         }
         // START_STICKY: nếu hệ thống kill tiến trình để giải phóng bộ nhớ, tự khởi
@@ -97,9 +109,18 @@ public class CounterService extends Service {
 
     public void stopCounting() {
         running = false;
+        isRunning = false;
         handler.removeCallbacks(tick);
-        stopForeground(true);
+        stopForeground(STOP_FOREGROUND_REMOVE);
         stopSelf();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // Lưới an toàn: đảm bảo isRunning luôn phản ánh đúng thực tế dù Service kết
+        // thúc qua đường nào (stopCounting(), hay hệ thống tự dọn dẹp tiến trình).
+        isRunning = false;
     }
 
     private void createNotificationChannel() {

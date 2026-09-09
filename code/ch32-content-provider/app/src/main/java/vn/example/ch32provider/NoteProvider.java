@@ -40,7 +40,7 @@ public class NoteProvider extends ContentProvider {
     }
 
     private SupportSQLiteDatabase writableDb() {
-        return AppDatabase.getInstance(requireContext()).getOpenHelper().getWritableDatabase();
+        return AppDatabase.getInstance(getContext()).getOpenHelper().getWritableDatabase();
     }
 
     @Nullable
@@ -63,7 +63,7 @@ public class NoteProvider extends ContentProvider {
         }
         // Client gọi registerContentObserver(uri, ...) sẽ được báo mỗi khi
         // insert()/delete() bên dưới gọi notifyChange() với cùng uri gốc này.
-        cursor.setNotificationUri(requireContext().getContentResolver(), uri);
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
 
@@ -75,7 +75,7 @@ public class NoteProvider extends ContentProvider {
         }
         long id = writableDb().insert("notes", SQLiteDatabase.CONFLICT_REPLACE, values);
         Uri result = ContentUris.withAppendedId(NoteContract.CONTENT_URI, id);
-        requireContext().getContentResolver().notifyChange(result, null);
+        getContext().getContentResolver().notifyChange(result, null);
         return result;
     }
 
@@ -83,7 +83,7 @@ public class NoteProvider extends ContentProvider {
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
         int count = writableDb().delete("notes", selection, selectionArgs);
         if (count > 0) {
-            requireContext().getContentResolver().notifyChange(uri, null);
+            getContext().getContentResolver().notifyChange(uri, null);
         }
         return count;
     }
