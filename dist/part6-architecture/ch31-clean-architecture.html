@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>31. Clean Architecture cơ bản cho ứng dụng Android — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="./ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="./ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="./ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class="active"><a href="./ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 31: Clean Architecture cơ bản cho ứng dụng Android</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu nguyên tắc cốt lõi của Clean Architecture: <strong>phụ thuộc chỉ hướng vào trong</strong>.</li>
+<li>Tổ chức code thành ba tầng: domain (nghiệp vụ thuần), data (chi tiết kỹ thuật), presentation (UI).</li>
+<li>Viết Use Case đơn giản, hiểu khi nào nó thật sự có giá trị so với gọi thẳng Repository.</li>
+<li>Biết đây là kỹ thuật cho project <strong>lớn dần theo thời gian</strong>, không phải yêu cầu bắt buộc cho mọi app.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch31-clean-architecture/</code> — tổ chức lại đúng app đã xây từ Chương 13/22/23/28/29.</p>
+</blockquote>
+<h2>31.1 Nguyên tắc cốt lõi: phụ thuộc chỉ hướng vào trong</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    Presentation[&quot;presentation/&lt;br/&gt;MainActivity, PostViewModel, PostAdapter&quot;] --&gt; Domain[&quot;domain/&lt;br/&gt;Post, PostRepository (interface),&lt;br/&gt;GetPostsUseCase, RefreshPostsUseCase&quot;]
+    Data[&quot;data/&lt;br/&gt;PostEntity, PostDao, AppDatabase,&lt;br/&gt;JsonPlaceholderApi, PostRepositoryImpl&quot;] --&gt; Domain
+    Domain -.-&gt;|&quot;KHÔNG BAO GIỜ phụ thuộc ngược lại&quot;| Presentation
+    Domain -.-&gt;|&quot;KHÔNG BAO GIỜ phụ thuộc ngược lại&quot;| Data
+</pre></div>
+<p>Cả <code>presentation</code> và <code>data</code> đều phụ thuộc vào <code>domain</code> — nhưng <code>domain</code> <strong>không biết gì</strong> về Android framework, Room, hay Retrofit. Đây là lý do <code>domain/Post.java</code> không có bất kỳ annotation nào (so sánh với <code>data/PostEntity.java</code> đầy <code>@Entity</code>/<code>@SerializedName</code>), và <code>domain/PostRepository.java</code> chỉ là một <code>interface</code> trống nghĩa vụ triển khai.</p>
+<h2>31.2 Ba tầng, ba trách nhiệm</h2>
+<table>
+<thead>
+<tr>
+<th>Tầng</th>
+<th>Biết gì</th>
+<th>Không biết gì</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>domain</strong></td>
+<td>Quy tắc nghiệp vụ thuần (<code>Post</code> là gì, &quot;lấy danh sách bài viết&quot; nghĩa là gì)</td>
+<td>Room, Retrofit, Android UI</td>
+</tr>
+<tr>
+<td><strong>data</strong></td>
+<td>Cách lấy dữ liệu thật (SQLite qua Room, HTTP qua Retrofit)</td>
+<td><code>MainActivity</code>, <code>PostViewModel</code> tồn tại</td>
+</tr>
+<tr>
+<td><strong>presentation</strong></td>
+<td>Cách hiển thị dữ liệu, phản ứng thao tác người dùng</td>
+<td><code>PostEntity</code>, <code>JsonPlaceholderApi</code> tồn tại</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-java">// domain/PostRepository.java — CHỈ khai báo, không có Room/Retrofit
+public interface PostRepository {
+    LiveData&lt;List&lt;Post&gt;&gt; getCachedPosts();
+    void refresh(RefreshCallback callback);
+}
+</code></pre>
+<pre><code class="language-java">// data/PostRepositoryImpl.java — cài đặt THẬT, biết Room và Retrofit
+@Singleton
+public class PostRepositoryImpl implements PostRepository {
+    @Inject
+    public PostRepositoryImpl(PostDao dao, JsonPlaceholderApi api) { ... }
+
+    @Override
+    public LiveData&lt;List&lt;Post&gt;&gt; getCachedPosts() {
+        return Transformations.map(dao.getAll(), PostMapper::toDomainList);
+    }
+}
+</code></pre>
+<p><code>Transformations.map(...)</code> (dòng cuối) chính là <strong>ranh giới vật lý</strong> giữa hai tầng: <code>dao.getAll()</code> trả <code>LiveData&lt;List&lt;PostEntity&gt;&gt;</code> (kiểu của tầng data), được chuyển thành <code>LiveData&lt;List&lt;Post&gt;&gt;</code> (kiểu của tầng domain) ngay tại đây — <code>PostEntity</code> không bao giờ &quot;rò rỉ&quot; ra khỏi package <code>data</code>.</p>
+<h2>31.3 Nối hai tầng bằng Hilt <code>@Binds</code></h2>
+<pre><code class="language-java">@Module
+@InstallIn(SingletonComponent.class)
+public abstract class RepositoryModule {
+
+    @Binds
+    public abstract PostRepository bindPostRepository(PostRepositoryImpl impl);
+}
+</code></pre>
+<p><code>@Binds</code> là cú pháp gọn hơn <code>@Provides</code> (Chương 29) dành riêng cho đúng một tình huống: &quot;khi cần một <code>PostRepository</code>, hãy đưa một <code>PostRepositoryImpl</code>&quot;. Nhờ khai báo này, <code>PostViewModel</code> (tầng presentation) chỉ cần khai báo phụ thuộc vào <strong>interface</strong> <code>PostRepository</code> — Hilt tự biết phải truyền vào instance <code>PostRepositoryImpl</code> thật.</p>
+<h2>31.4 Use Case — khi nào thật sự có giá trị?</h2>
+<pre><code class="language-java">public class GetPostsUseCase {
+    private final PostRepository repository;
+
+    @Inject
+    public GetPostsUseCase(PostRepository repository) {
+        this.repository = repository;
+    }
+
+    public LiveData&lt;List&lt;Post&gt;&gt; execute() {
+        return repository.getCachedPosts();
+    }
+}
+</code></pre>
+<p>Thành thật mà nói: với logic đơn giản như &quot;lấy danh sách bài viết&quot;, <code>GetPostsUseCase</code> ở đây gần như chỉ <strong>chuyển tiếp</strong> lời gọi tới <code>repository.getCachedPosts()</code> — không thêm giá trị xử lý nào. Đây là điều nên thừa nhận thẳng thắn thay vì che giấu: Use Case phát huy giá trị thật sự khi nghiệp vụ <strong>phức tạp hơn một lệnh gọi đơn giản</strong> — ví dụ: lọc bài viết theo quyền hạn người dùng, ghép dữ liệu từ hai Repository khác nhau, áp dụng một quy tắc validate trước khi trả kết quả. Với app nhỏ, đơn giản, việc <code>ViewModel</code> gọi thẳng <code>Repository</code> (như Chương 28/29 đã làm) hoàn toàn hợp lý — không nhất thiết phải có tầng Use Case.</p>
+<h2>31.5 Đây có phải &quot;must-have&quot; cho mọi app không?</h2>
+<p><strong>Không.</strong> Đây là điểm quan trọng nhất chương cần nhấn mạnh: Clean Architecture (và tầng Use Case nói riêng) là công cụ giải quyết vấn đề <strong>quy mô và độ phức tạp tăng dần theo thời gian</strong> — nhiều màn hình, nhiều nguồn dữ liệu, nhiều người cùng code, cần thay đổi chi tiết kỹ thuật (đổi từ Room sang một giải pháp lưu trữ khác, ví dụ) mà không muốn động vào logic hiển thị.</p>
+<p>Với một app nhỏ, một người viết, ít màn hình — kiến trúc MVVM đơn giản ở Chương 28 (thậm chí không cần Hilt) đã là đủ, và việc áp Clean Architecture đầy đủ có thể chỉ tạo thêm nhiều file, nhiều tầng gián tiếp không cần thiết. Áp dụng đúng lúc, đúng quy mô — không áp dụng &quot;cho có&quot; chỉ vì nghe có vẻ chuyên nghiệp.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Q1{&quot;App có nhiều màn hình,&lt;br/&gt;nhiều nguồn dữ liệu,&lt;br/&gt;nhiều người cùng code?&quot;}
+    Q1 --&gt;|&quot;Không — app nhỏ,&lt;br/&gt;1-2 người, ít màn hình&quot;| Simple[&quot;MVVM đơn giản (Chương 28)&lt;br/&gt;đã đủ dùng&quot;]
+    Q1 --&gt;|&quot;Có — dự đoán sẽ&lt;br/&gt;phức tạp dần theo thời gian&quot;| Clean[&quot;Cân nhắc Clean Architecture&lt;br/&gt;(chương này)&quot;]
+</pre></div>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, xác nhận hành vi giống hệt Chương 28/29.</li>
+<li>Mở <code>domain/Post.java</code> và <code>data/PostEntity.java</code> cạnh nhau — liệt kê chính xác những annotation nào có ở bên này mà không có ở bên kia, và giải thích tại sao.</li>
+<li>Thử tưởng tượng (không cần code thật): nếu muốn thêm một nguồn dữ liệu thứ hai — ví dụ đọc thêm bài viết yêu thích lưu trong <code>SharedPreferences</code> (Chương 12) — bạn sẽ sửa ở những file nào trong ba tầng? Xác nhận rằng <code>presentation/</code> không cần đổi gì nếu interface <code>PostRepository</code> vẫn giữ nguyên chữ ký.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Để <code>PostEntity</code> (hoặc bất kỳ model tầng data nào) rò rỉ vào <code>presentation/</code></strong>: phá vỡ hoàn toàn mục đích tách tầng — kiểm tra bằng cách tự hỏi &quot;package <code>presentation</code> có <code>import</code> gì từ package <code>data</code> không?&quot;, câu trả lời đúng luôn phải là &quot;không&quot;.</li>
+<li><strong>Viết Use Case rỗng cho MỌI thao tác dù chẳng thêm logic gì</strong> (như ví dụ thẳng thắn ở mục 31.4): tạo thêm tầng gián tiếp không cần thiết, làm code khó theo dõi hơn mà không đổi lại lợi ích gì.</li>
+<li><strong>Áp dụng Clean Architecture đầy đủ ngay từ app &quot;Hello World&quot; đầu tiên</strong>: over-engineering — chi phí tổ chức nhiều tầng chỉ xứng đáng khi độ phức tạp thực tế đạt tới mức cần nó.</li>
+<li><strong>Quên <code>Transformations.map()</code> (hoặc mapper tương đương) khi nối data → domain</strong>: dễ dẫn tới tình huống dở dang — vẫn còn <code>PostEntity</code> xuất hiện ở tầng domain vì &quot;tiện&quot; tái sử dụng model, phá vỡ ranh giới đã cố công dựng lên.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã khép lại <strong>Phần 6 — Kiến trúc nâng cao</strong>: MVVM, Dependency Injection với Hilt, giới thiệu Compose, và Clean Architecture — một bộ công cụ đầy đủ để tổ chức app Android ở quy mô lớn dần. Phần 7 chuyển hướng hoàn toàn sang một nhóm chủ đề khác: giao tiếp giữa các ứng dụng và điều khiển phần cứng tầng sâu — bắt đầu với Content Provider ở Chương 32.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch30-jetpack-compose.html">&larr; 30. Giới thiệu Jetpack Compose</a><a class="next" href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

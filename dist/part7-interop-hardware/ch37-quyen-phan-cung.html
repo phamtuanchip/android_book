@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="./ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="./ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="./ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="./ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="./ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class="active"><a href="./ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 37: Quyền &amp; sandbox cho phần cứng — vị trí cho BLE/NFC, background location, runtime permission theo API level</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hệ thống hoá lại toàn bộ các quyền runtime đã gặp rải rác từ Chương 26, 35, 36 thành một bức tranh theo dòng thời gian API level.</li>
+<li>Xin đúng trình tự quyền vị trí foreground và background — hai bước bắt buộc tách biệt.</li>
+<li>Biết tự đặt câu hỏi &quot;app có thật sự cần quyền này không?&quot; trước khi xin — nguyên tắc xuyên suốt của cả Phần 7.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch37-hardware-permission/</code>.</p>
+</blockquote>
+<h2>37.1 Toàn cảnh: quyền phần cứng đã đổi thế nào qua các phiên bản</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    API21[&quot;API 21-22&lt;br/&gt;Cấp quyền LÚC CÀI ĐẶT&lt;br/&gt;(chưa có runtime permission)&quot;] --&gt; API23
+    API23[&quot;API 23 (Android 6.0)&lt;br/&gt;Runtime permission ra đời&lt;br/&gt;(Chương 26)&quot;] --&gt; API29
+    API29[&quot;API 29 (Android 10)&lt;br/&gt;ACCESS_BACKGROUND_LOCATION&lt;br/&gt;tách riêng khỏi foreground&quot;] --&gt; API30
+    API30[&quot;API 30 (Android 11)&lt;br/&gt;Bắt buộc xin foreground TRƯỚC,&lt;br/&gt;background SAU, không gộp chung&lt;br/&gt;+ Package visibility (Chương 34)&quot;] --&gt; API31
+    API31[&quot;API 31 (Android 12)&lt;br/&gt;BLUETOOTH_SCAN/CONNECT thay thế&lt;br/&gt;vai trò ACCESS_FINE_LOCATION&lt;br/&gt;cho Bluetooth (Chương 35)&quot;] --&gt; API33
+    API33[&quot;API 33 (Android 13)&lt;br/&gt;POST_NOTIFICATIONS runtime&lt;br/&gt;(Chương 20)&quot;]
+</pre></div>
+<p>Mỗi mốc trong sơ đồ này đã xuất hiện rải rác: Chương 20 (thông báo), Chương 26 (mô hình chung + danh bạ), Chương 34 (package visibility), Chương 35 (Bluetooth). Chương này gom lại thành một bức tranh duy nhất, tập trung vào mảnh còn thiếu: <strong>vị trí (location)</strong>.</p>
+<h2>37.2 Vì sao quét Bluetooth/BLE từng cần quyền vị trí?</h2>
+<p>Đây là câu hỏi khiến nhiều người mới bối rối nhất: &quot;Tại sao app Bluetooth của tôi lại đòi quyền vị trí?&quot; Chương 35 đã nhắc: <strong>trước Android 12</strong>, hệ thống dùng chung <code>ACCESS_FINE_LOCATION</code> để bảo vệ cả việc truy cập vị trí GPS thật lẫn việc quét Bluetooth/Wi-Fi — vì địa chỉ MAC của các access point/thiết bị BLE xung quanh có thể dùng để <strong>suy luận ra vị trí tương đối chính xác</strong> của người dùng (kỹ thuật định vị không cần GPS, dựa vào cơ sở dữ liệu vị trí các access point đã biết).</p>
+<p>Từ Android 12, hai quyền <code>BLUETOOTH_SCAN</code>/<code>BLUETOOTH_CONNECT</code> tách riêng, cho phép khai báo rõ ràng <code>neverForLocation</code> (mục 35.2) nếu app không dùng kết quả quét để suy ra vị trí — tách bạch hai mục đích trước đây bị gộp chung.</p>
+<h2>37.3 Vị trí Foreground và Background — hai quyền, hai câu hỏi khác nhau</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Q1{&quot;App cần biết vị trí&lt;br/&gt;KHI NÀO?&quot;}
+    Q1 --&gt;|&quot;Chỉ khi người dùng&lt;br/&gt;đang mở app&quot;| FG[&quot;ACCESS_FINE_LOCATION /&lt;br/&gt;ACCESS_COARSE_LOCATION&lt;br/&gt;(foreground — ĐỦ cho hầu hết app)&quot;]
+    Q1 --&gt;|&quot;Cả khi app KHÔNG mở&lt;br/&gt;(chạy nền/màn hình tắt)&quot;| BG[&quot;THÊM ACCESS_BACKGROUND_LOCATION&lt;br/&gt;(xin RIÊNG, sau khi đã có foreground)&quot;]
+</pre></div>
+<pre><code class="language-java">// Bước 1 — foreground, xin trước, dùng được ngay khi app đang mở
+foregroundLauncher.launch(new String[]{
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+});
+
+// Bước 2 — CHỈ xin nếu thật sự cần, và CHỈ SAU KHI đã có bước 1
+backgroundLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+</code></pre>
+<p>Từ Android 11 (API 30), hệ thống <strong>không cho phép</strong> xin cả hai quyền trong cùng một hộp thoại — phải tách thành hai bước tuần tự như trên. Nhiều phiên bản Android còn tự động <strong>chuyển hướng người dùng sang màn hình Settings</strong> để chọn &quot;Allow all the time&quot; cho quyền nền, thay vì hiện hộp thoại Allow/Deny quen thuộc — hành vi giao diện cụ thể do hệ thống quyết định, code gọi API vẫn giữ nguyên cách làm.</p>
+<p><strong>Câu hỏi quan trọng nhất trước khi viết dòng code xin quyền nền</strong>: &quot;Tính năng này có thật sự cần vị trí khi app không mở không?&quot; Một app bản đồ tra cứu đường đi, hay tìm cửa hàng gần đây, <strong>không cần</strong> <code>ACCESS_BACKGROUND_LOCATION</code> — chỉ ứng dụng như theo dõi hành trình chạy bộ liên tục, hay chia sẻ vị trí thời gian thực khi đã tắt màn hình, mới thật sự cần. Google Play cũng yêu cầu giải trình rõ ràng mục đích sử dụng quyền này khi phát hành (liên quan tới Chương 39) — xin quá tay không chỉ ảnh hưởng lòng tin người dùng mà còn có thể bị từ chối duyệt.</p>
+<h2>37.4 Bảng tổng hợp — tra cứu nhanh</h2>
+<table>
+<thead>
+<tr>
+<th>Tính năng</th>
+<th>Quyền cần thiết</th>
+<th>Từ API level</th>
+<th>Xin runtime?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mạng (Chương 21)</td>
+<td><code>INTERNET</code></td>
+<td>Mọi phiên bản</td>
+<td>Không (normal)</td>
+</tr>
+<tr>
+<td>Foreground service (Chương 16)</td>
+<td><code>FOREGROUND_SERVICE</code></td>
+<td>28+</td>
+<td>Không (normal)</td>
+</tr>
+<tr>
+<td>Thông báo (Chương 20)</td>
+<td><code>POST_NOTIFICATIONS</code></td>
+<td>33+</td>
+<td><strong>Có</strong></td>
+</tr>
+<tr>
+<td>Đọc danh bạ (Chương 26)</td>
+<td><code>READ_CONTACTS</code></td>
+<td>Mọi phiên bản</td>
+<td><strong>Có</strong> (dangerous)</td>
+</tr>
+<tr>
+<td>Quét Bluetooth/BLE (Chương 35), trước 12</td>
+<td><code>ACCESS_FINE_LOCATION</code></td>
+<td>≤ 30</td>
+<td><strong>Có</strong></td>
+</tr>
+<tr>
+<td>Quét/kết nối Bluetooth (Chương 35), từ 12</td>
+<td><code>BLUETOOTH_SCAN</code>, <code>BLUETOOTH_CONNECT</code></td>
+<td>31+</td>
+<td><strong>Có</strong></td>
+</tr>
+<tr>
+<td>NFC (Chương 36)</td>
+<td><code>NFC</code></td>
+<td>Mọi phiên bản</td>
+<td>Không (normal)</td>
+</tr>
+<tr>
+<td>Vị trí khi dùng app (chương này)</td>
+<td><code>ACCESS_FINE_LOCATION</code>/<code>ACCESS_COARSE_LOCATION</code></td>
+<td>Mọi phiên bản (runtime từ 23)</td>
+<td><strong>Có</strong></td>
+</tr>
+<tr>
+<td>Vị trí khi chạy nền (chương này)</td>
+<td><code>ACCESS_BACKGROUND_LOCATION</code></td>
+<td>29+</td>
+<td><strong>Có</strong>, xin RIÊNG sau foreground</td>
+</tr>
+</tbody>
+</table>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, xin quyền foreground trước, xác nhận vị trí cập nhật đúng.</li>
+<li>Thử xin quyền background — quan sát hành vi hệ thống trên máy ảo/thiết bị bạn đang dùng (hộp thoại thường, hay chuyển sang Settings).</li>
+<li>Tự tra bảng ở mục 37.4, chọn ra 3 quyền bạn nghĩ dễ bị lạm dụng/xin quá mức nhất trong các app thường gặp trên điện thoại của mình, giải thích lý do.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Xin <code>ACCESS_BACKGROUND_LOCATION</code> cùng lúc với <code>ACCESS_FINE_LOCATION</code> trong cùng một lời gọi</strong>: bị hệ thống từ chối/bỏ qua trên Android 11+ — phải tách thành hai bước tuần tự đúng như mục 37.3.</li>
+<li><strong>Xin quyền vị trí nền &quot;cho chắc&quot; dù tính năng không thật sự cần</strong>: tăng nguy cơ bị từ chối khi đăng Google Play, và giảm lòng tin người dùng khi thấy yêu cầu quyền không tương xứng với chức năng hiển thị.</li>
+<li><strong>Quên rằng hành vi UI của hộp thoại xin quyền vị trí nền thay đổi giữa các phiên bản Android</strong>: đừng giả định luôn có nút &quot;Allow&quot;/&quot;Deny&quot; đơn giản — một số phiên bản đưa thẳng người dùng vào Settings.</li>
+<li><strong>Nhầm lẫn quyền cho việc quét Bluetooth (Chương 35) với quyền vị trí thật của chương này</strong>: dù cùng nhóm &quot;location-related&quot; trong lịch sử Android, <code>BLUETOOTH_SCAN</code> (từ Android 12) và <code>ACCESS_FINE_LOCATION</code> (dùng cho GPS thật) là hai quyền độc lập, phục vụ hai mục đích khác nhau.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã khép lại <strong>Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</strong>: chia sẻ dữ liệu (ContentProvider), deep link/share, IPC qua AIDL, Bluetooth, NFC, và toàn cảnh hệ thống quyền chi phối tất cả. Phần 8 — phần cuối cùng của sách — chuyển sang việc đưa ứng dụng ra thế giới thật: chuẩn bị bản release, ký ứng dụng, và phát hành lên Google Play.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch36-nfc.html">&larr; 36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a><a class="next" href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle) &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

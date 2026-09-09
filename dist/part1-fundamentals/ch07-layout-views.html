@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup) — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="./ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class="active"><a href="./ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="./ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="./ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="./ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="./ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 7: Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Phân biệt <code>View</code> và <code>ViewGroup</code>, hiểu cây phân cấp (view hierarchy) của một layout.</li>
+<li>Dùng thành thạo <code>ConstraintLayout</code> — layout mặc định và khuyến nghị hiện nay.</li>
+<li>Đọc hiểu vì sao <code>findViewById</code> dễ gây lỗi runtime, và chuyển sang dùng <code>ViewBinding</code>.</li>
+<li>Biết một số View cơ bản: <code>TextView</code>, <code>EditText</code>, <code>Button</code>, <code>CheckBox</code>, <code>SeekBar</code>.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch07-layout-views/</code>.</p>
+</blockquote>
+<h2>7.1 View và ViewGroup</h2>
+<p>Mọi thứ hiển thị trên màn hình Android đều là một <code>View</code>. <code>ViewGroup</code> là một <code>View</code> đặc biệt có thể chứa các <code>View</code> khác bên trong (kể cả <code>ViewGroup</code> khác) — tạo thành cây phân cấp:</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    CL[&quot;ConstraintLayout (ViewGroup gốc)&quot;] --&gt; ET[&quot;EditText: editName&quot;]
+    CL --&gt; BTN[&quot;Button: buttonGreet&quot;]
+    CL --&gt; TV1[&quot;TextView: textResult&quot;]
+    CL --&gt; CB[&quot;CheckBox: checkSubscribe&quot;]
+    CL --&gt; LBL[&quot;TextView: labelAge&quot;]
+    CL --&gt; SB[&quot;SeekBar: seekAge&quot;]
+    CL --&gt; TV2[&quot;TextView: textAgeValue&quot;]
+</pre></div>
+<p>Cây càng sâu (ViewGroup lồng nhiều tầng), hệ thống càng tốn công đo đạc/vẽ lại (<code>measure</code>/<code>layout</code> pass) mỗi khi màn hình cập nhật — đây là lý do <code>ConstraintLayout</code> ra đời: cho phép tạo layout <strong>phẳng</strong> (ít lồng tầng) mà vẫn định vị được các View phức tạp tương đối với nhau.</p>
+<h2>7.2 ConstraintLayout — định vị bằng ràng buộc</h2>
+<p>Thay vì lồng nhiều <code>LinearLayout</code>, <code>ConstraintLayout</code> định vị mỗi View bằng các <strong>ràng buộc (constraint)</strong> tới cạnh của View khác hoặc của layout cha:</p>
+<pre><code class="language-xml">&lt;Button
+    android:id=&quot;@+id/buttonGreet&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    app:layout_constraintTop_toBottomOf=&quot;@id/editName&quot;
+    app:layout_constraintStart_toStartOf=&quot;parent&quot; /&gt;
+</code></pre>
+<p>Đọc thành lời: &quot;cạnh trên của <code>buttonGreet</code> nằm dưới cạnh dưới của <code>editName</code>; cạnh trái của <code>buttonGreet</code> thẳng với cạnh trái của layout cha&quot;. Bốn hướng ràng buộc cơ bản: <code>Top</code>, <code>Bottom</code>, <code>Start</code>, <code>End</code> (dùng <code>Start</code>/<code>End</code> thay vì <code>Left</code>/<code>Right</code> để tự động đổi chiều cho ngôn ngữ viết phải-sang-trái).</p>
+<p>Quy tắc thực dụng: mỗi View cần <strong>ít nhất một ràng buộc theo chiều ngang và một theo chiều dọc</strong> để có vị trí xác định — thiếu sẽ khiến View &quot;nhảy&quot; về góc trên-trái (0,0) lúc chạy thật dù Preview trong Android Studio có thể vẫn hiển thị đúng.</p>
+<h2>7.3 <code>findViewById</code> và vì sao nên chuyển sang ViewBinding</h2>
+<p>Cách truyền thống:</p>
+<pre><code class="language-java">TextView textResult = findViewById(R.id.textResult);
+textResult.setText(&quot;...&quot;);
+</code></pre>
+<p>Vấn đề: <code>findViewById</code> trả kiểu <code>View</code> (phải tự ép kiểu), và nếu bạn gõ sai <code>R.id.textResullt</code>, lỗi chỉ lộ ra <strong>lúc chạy</strong> (<code>NullPointerException</code>), không phải lúc biên dịch.</p>
+<p>ViewBinding giải quyết cả hai: bật trong <code>app/build.gradle</code>:</p>
+<pre><code class="language-groovy">android {
+    buildFeatures {
+        viewBinding true
+    }
+}
+</code></pre>
+<p>Gradle tự sinh ra class <code>ActivityMainBinding</code> (tên suy từ <code>activity_main.xml</code>) với field cho mỗi View có <code>android:id</code>, đúng kiểu sẵn:</p>
+<pre><code class="language-java">private ActivityMainBinding binding;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    binding = ActivityMainBinding.inflate(getLayoutInflater());
+    setContentView(binding.getRoot());
+
+    binding.buttonGreet.setOnClickListener(v -&gt; { ... });  // gõ sai sẽ báo lỗi compile
+}
+</code></pre>
+<p>Từ chương này trở đi, sách dùng ViewBinding mặc định cho mọi ví dụ có giao diện.</p>
+<h2>7.4 Một vài View cơ bản dùng trong code mẫu</h2>
+<table>
+<thead>
+<tr>
+<th>View</th>
+<th>Vai trò</th>
+<th>Sự kiện thường dùng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TextView</code></td>
+<td>Hiển thị chữ (không cho sửa)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>EditText</code></td>
+<td>Ô nhập liệu</td>
+<td>đọc qua <code>.getText().toString()</code></td>
+</tr>
+<tr>
+<td><code>Button</code></td>
+<td>Nút bấm</td>
+<td><code>setOnClickListener</code></td>
+</tr>
+<tr>
+<td><code>CheckBox</code></td>
+<td>Chọn có/không</td>
+<td><code>setOnCheckedChangeListener</code></td>
+</tr>
+<tr>
+<td><code>SeekBar</code></td>
+<td>Thanh trượt chọn giá trị số</td>
+<td><code>setOnSeekBarChangeListener</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ví dụ đọc dữ liệu người dùng nhập và phản hồi lại — mẫu lặp lại rất nhiều lần trong các chương sau:</p>
+<pre><code class="language-java">binding.buttonGreet.setOnClickListener(v -&gt; {
+    String name = binding.editName.getText().toString().trim();
+    binding.textResult.setText(name.isEmpty()
+        ? getString(R.string.result_empty_name)
+        : getString(R.string.result_greeting, name));
+});
+</code></pre>
+<p><code>getString(R.string.result_greeting, name)</code> minh hoạ chuỗi có tham số (<code>%1$s</code> trong <code>strings.xml</code>) — cách chuẩn để ghép chuỗi có dữ liệu động mà vẫn giữ được khả năng dịch đa ngôn ngữ (Chương 11), thay vì nối chuỗi bằng <code>+</code>.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, thử nhập tên rỗng rồi bấm Chào — xác nhận đúng thông báo lỗi hiển thị.</li>
+<li>Thêm một <code>TextView</code> mới hiển thị trạng thái của <code>CheckBox</code> (&quot;Đã đăng ký&quot; / &quot;Chưa đăng ký&quot;), cập nhật qua <code>setOnCheckedChangeListener</code>.</li>
+<li>Thử xoá ràng buộc <code>app:layout_constraintStart_toStartOf=&quot;parent&quot;</code> của <code>buttonGreet</code>, build lại và quan sát vị trí nút bị lệch — đối chiếu với cảnh báo ở mục 7.2.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong><code>Unresolved reference</code> khi dùng ViewBinding</strong>: quên bật <code>viewBinding true</code> trong <code>build.gradle</code>, hoặc build cache cũ — thử <strong>Build → Clean Project</strong> rồi build lại.</li>
+<li><strong>View &quot;biến mất&quot; hoặc nằm sai vị trí dù XML trông đúng</strong>: thiếu ràng buộc theo một chiều (ngang hoặc dọc) — xem lại mục 7.2.</li>
+<li><strong>Lồng quá nhiều <code>LinearLayout</code> bên trong nhau</strong>: build được nhưng vẽ chậm hơn — cân nhắc chuyển sang <code>ConstraintLayout</code> phẳng nếu layout phức tạp.</li>
+<li><strong>Gọi <code>.getText().toString()</code> khi <code>EditText</code> là <code>null</code></strong>: xảy ra khi gọi trước <code>setContentView</code>/<code>binding.inflate</code> — luôn đảm bảo binding đã khởi tạo trước khi truy cập.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết dựng giao diện bằng <code>ConstraintLayout</code>, thao tác với View qua ViewBinding an toàn hơn <code>findViewById</code>. Chương 8 sẽ dùng chính những kỹ năng này để xây 2 màn hình và học cách điều hướng, truyền dữ liệu giữa chúng bằng Intent.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch06-vong-doi-activity.html">&larr; 6. Vòng đời Activity &amp; Application</a><a class="next" href="./ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

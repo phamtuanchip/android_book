@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12. SharedPreferences (cấu hình, trạng thái đơn giản) — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class="active"><a href="./ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="./ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="./ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="./ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 12: SharedPreferences (cấu hình, trạng thái đơn giản)</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu <code>SharedPreferences</code> phù hợp cho loại dữ liệu nào, không phù hợp cho loại nào.</li>
+<li>Đọc/ghi được các kiểu dữ liệu cơ bản, phân biệt <code>apply()</code> và <code>commit()</code>.</li>
+<li>Biết gom logic đọc/ghi vào một class quản lý riêng thay vì rải key khắp nơi.</li>
+<li>Lắng nghe thay đổi bằng <code>OnSharedPreferenceChangeListener</code> và biết khi nào phải huỷ đăng ký.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch12-shared-preferences/</code>.</p>
+</blockquote>
+<h2>12.1 SharedPreferences là gì, dùng khi nào?</h2>
+<p><code>SharedPreferences</code> lưu dữ liệu dạng <strong>key-value</strong> đơn giản (chuỗi, số, boolean, tập hợp chuỗi) xuống một file XML riêng của app, tồn tại <strong>qua mọi lần khởi động lại tiến trình</strong> — khác hẳn <code>onSaveInstanceState</code> ở Chương 6 (chỉ sống qua configuration change, mất khi app bị đóng hẳn).</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Q1{&quot;Dữ liệu là gì?&quot;}
+    Q1 --&gt;|&quot;Vài cấu hình đơn giản&lt;br/&gt;(bật/tắt, tên hiển thị, cỡ chữ...)&quot;| SP[&quot;SharedPreferences&lt;br/&gt;(Chương này)&quot;]
+    Q1 --&gt;|&quot;Danh sách bản ghi có cấu trúc,&lt;br/&gt;cần truy vấn/lọc/sắp xếp&quot;| Room[&quot;SQLite/Room&lt;br/&gt;(Chương 13)&quot;]
+    Q1 --&gt;|&quot;File nhị phân/văn bản lớn&lt;br/&gt;(ảnh, export, log)&quot;| File[&quot;File storage&lt;br/&gt;(Chương 14)&quot;]
+</pre></div>
+<p>Dùng đúng chỗ: cờ &quot;đã xem hướng dẫn lần đầu chưa&quot;, tên hiển thị người dùng, cỡ chữ, trạng thái bật/tắt tính năng. <strong>Không dùng</strong> cho danh sách lớn hay dữ liệu cần truy vấn phức tạp — đó là việc của Room (Chương 13).</p>
+<h2>12.2 Đọc và ghi cơ bản</h2>
+<pre><code class="language-java">SharedPreferences prefs = context.getSharedPreferences(&quot;app_settings&quot;, Context.MODE_PRIVATE);
+
+// Đọc — luôn kèm giá trị mặc định cho lần đầu chưa từng lưu
+String name = prefs.getString(&quot;display_name&quot;, &quot;&quot;);
+boolean notificationsEnabled = prefs.getBoolean(&quot;notifications_enabled&quot;, true);
+int fontSize = prefs.getInt(&quot;font_size&quot;, 16);
+
+// Ghi — phải qua Editor
+SharedPreferences.Editor editor = prefs.edit();
+editor.putString(&quot;display_name&quot;, &quot;Chi&quot;);
+editor.putBoolean(&quot;notifications_enabled&quot;, true);
+editor.apply();
+</code></pre>
+<p><code>Context.MODE_PRIVATE</code> là chế độ <strong>duy nhất nên dùng</strong> — chỉ app của mình đọc/ghi được file này (các mode khác cho phép app khác đọc/ghi đã bị Android loại bỏ từ lâu vì lý do bảo mật).</p>
+<h2>12.3 <code>apply()</code> và <code>commit()</code> — khác nhau ở đâu?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    Editor[&quot;editor.putString(...)&quot;] --&gt; Choice{&quot;apply() hay commit()?&quot;}
+    Choice --&gt;|&quot;apply()&quot;| Async[&quot;Ghi xuống đĩa BẤT ĐỒNG BỘ&lt;br/&gt;trả về ngay, không chặn thread gọi&quot;]
+    Choice --&gt;|&quot;commit()&quot;| Sync[&quot;Ghi xuống đĩa ĐỒNG BỘ&lt;br/&gt;chặn thread tới khi xong,&lt;br/&gt;trả về boolean thành công/thất bại&quot;]
+</pre></div>
+<p><strong>Mặc định luôn dùng <code>apply()</code></strong> — code mẫu chương này dùng <code>apply()</code> cho mọi trường hợp. Chỉ cân nhắc <code>commit()</code> khi bạn thật sự cần biết ngay lập tức việc ghi đã thành công hay chưa trước khi làm bước tiếp theo (hiếm gặp, và gọi trên main thread có thể gây giật UI vì bị chặn).</p>
+<h2>12.4 Gom logic vào một class quản lý riêng</h2>
+<p>Rải chuỗi key (<code>&quot;display_name&quot;</code>, <code>&quot;font_size&quot;</code>...) khắp các Activity là nguồn lỗi gõ sai (typo) rất khó phát hiện — sai một ký tự, <code>getString()</code> âm thầm trả về giá trị mặc định thay vì báo lỗi. Cách làm tốt hơn — class <code>PrefsManager</code> bọc toàn bộ:</p>
+<pre><code class="language-java">public class PrefsManager {
+    private static final String PREFS_NAME = &quot;app_settings&quot;;
+    private static final String KEY_DISPLAY_NAME = &quot;display_name&quot;;
+    private final SharedPreferences prefs;
+
+    public PrefsManager(Context context) {
+        prefs = context.getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    }
+
+    public String getDisplayName(String defaultValue) {
+        return prefs.getString(KEY_DISPLAY_NAME, defaultValue);
+    }
+    // ...
+}
+</code></pre>
+<p>Lưu ý dùng <code>context.getApplicationContext()</code> khi lấy <code>SharedPreferences</code> bên trong một class không phải Activity — tránh giữ tham chiếu tới <code>Context</code> của Activity (rò rỉ bộ nhớ nếu <code>PrefsManager</code> sống lâu hơn Activity tạo ra nó).</p>
+<h2>12.5 Lắng nghe thay đổi</h2>
+<pre><code class="language-java">private final SharedPreferences.OnSharedPreferenceChangeListener changeListener =
+        (sharedPreferences, key) -&gt; Log.d(TAG, &quot;Preference đã đổi: &quot; + key);
+
+@Override
+protected void onStart() {
+    super.onStart();
+    prefsManager.registerOnChangeListener(changeListener);
+}
+
+@Override
+protected void onStop() {
+    super.onStop();
+    prefsManager.unregisterOnChangeListener(changeListener);  // bắt buộc, xem 12.6
+}
+</code></pre>
+<p>Hữu ích khi nhiều màn hình cùng cần biết một cấu hình vừa đổi (ví dụ đổi ngôn ngữ ở màn hình cài đặt, màn hình khác cần refresh lại UI ngay).</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, lưu vài giá trị, đóng hẳn app rồi mở lại — xác nhận dữ liệu còn nguyên.</li>
+<li>Thêm một <code>CheckBox</code> mới (ví dụ &quot;Tự động đồng bộ&quot;), lưu và đọc lại giá trị boolean tương ứng qua <code>PrefsManager</code>.</li>
+<li>Thử comment dòng <code>unregisterOnChangeListener</code> trong <code>onStop()</code>, xoay màn hình nhiều lần (tạo lại Activity nhiều lần) — dùng Android Studio Profiler (Memory) quan sát số lượng Activity instance không được giải phóng tăng dần.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Quên <code>unregisterOnChangeListener</code></strong>: mỗi Activity mới đăng ký thêm một listener nhưng listener cũ (trỏ tới Activity đã destroy) không bao giờ được gỡ — rò rỉ bộ nhớ tích luỹ dần.</li>
+<li><strong>Dùng <code>SharedPreferences</code> cho danh sách lớn</strong> (ví dụ tự chuyển một <code>List&lt;Note&gt;</code> thành JSON rồi nhét vào một key string): hoạt động được ở quy mô nhỏ nhưng không truy vấn/lọc được, không hiệu quả khi dữ liệu lớn dần — nên chuyển sang Room (Chương 13) ngay khi có dấu hiệu này.</li>
+<li><strong>Rải key trực tiếp trong nhiều Activity thay vì qua một class quản lý</strong>: chỉ cần gõ sai <code>&quot;display_name&quot;</code> thành <code>&quot;displayname&quot;</code> ở một chỗ, dữ liệu coi như &quot;biến mất&quot; (thực ra vẫn nằm ở key cũ) mà không có lỗi nào báo.</li>
+<li><strong>Đọc SharedPreferences trên main thread trong vòng lặp lớn</strong>: bản thân việc đọc/ghi thường nhanh, nhưng thao tác dồn dập không cần thiết trên main thread vẫn nên tránh — cân nhắc thực hiện trên thread nền nếu logic phức tạp hơn ví dụ trong chương này.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết lưu cấu hình đơn giản bền vững qua các lần mở app. Chương 13 chuyển sang bài toán lớn hơn: lưu trữ danh sách bản ghi có cấu trúc, truy vấn được — bằng SQLite thông qua thư viện Room.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">&larr; 11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a><a class="next" href="./ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ) &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

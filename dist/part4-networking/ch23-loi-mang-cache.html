@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>23. Xử lý lỗi mạng, retry, cache offline-first cơ bản — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="./ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="./ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class="active"><a href="./ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 23: Xử lý lỗi mạng, retry, cache offline-first cơ bản</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Thiết kế màn hình theo tư duy <strong>offline-first</strong>: luôn hiển thị dữ liệu cục bộ trước, mạng chỉ để làm mới.</li>
+<li>Kết hợp Room (Chương 13) và Retrofit (Chương 22) qua một <code>Repository</code> gọn gàng.</li>
+<li>Viết cơ chế retry đơn giản, biết phân biệt lỗi nên thử lại và lỗi không nên.</li>
+<li>Hiển thị lỗi mạng mà không phá hỏng trải nghiệm người dùng đang có.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch23-network-cache/</code> — capstone của Phần 4, ghép lại toàn bộ kỹ năng từ Chương 13, 21, 22.</p>
+</blockquote>
+<h2>23.1 Offline-first là gì, vì sao quan trọng?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    subgraph Bad[&quot;Cách làm THÔNG THƯỜNG (network-first)&quot;]
+        B1[&quot;Mở màn hình&quot;] --&gt; B2[&quot;Gọi API&quot;]
+        B2 --&gt;|&quot;Thành công&quot;| B3[&quot;Hiển thị dữ liệu&quot;]
+        B2 --&gt;|&quot;Mất mạng&quot;| B4[&quot;Màn hình TRỐNG hoặc lỗi to đùng&quot;]
+    end
+    subgraph Good[&quot;Offline-first (chương này)&quot;]
+        G1[&quot;Mở màn hình&quot;] --&gt; G2[&quot;Hiển thị NGAY dữ liệu cache&lt;br/&gt;(Room, có sẵn từ trước)&quot;]
+        G2 --&gt; G3[&quot;Đồng thời gọi API làm mới nền&quot;]
+        G3 --&gt;|&quot;Thành công&quot;| G4[&quot;Cache cập nhật →&lt;br/&gt;UI tự đổi theo (LiveData)&quot;]
+        G3 --&gt;|&quot;Thất bại&quot;| G5[&quot;Chỉ báo lỗi nhỏ,&lt;br/&gt;dữ liệu cũ VẪN CÒN hiển thị&quot;]
+    end
+</pre></div>
+<p>Phần lớn ứng dụng thực tế (mạng xã hội, ghi chú, email...) đều áp dụng tư duy này: <strong>mất mạng không nên đồng nghĩa với &quot;app không dùng được&quot;</strong>. Đây cũng là lý do Chương 13 dạy Room từ rất sớm — nó chính là nền tảng lưu cache cho chương này.</p>
+<h2>23.2 <code>Repository</code> — gộp hai nguồn dữ liệu thành một API</h2>
+<pre><code class="language-java">public class PostRepository {
+
+    public LiveData&lt;List&lt;Post&gt;&gt; getCachedPosts() {
+        return dao.getAll();          // luôn đọc từ Room
+    }
+
+    public void refresh(RefreshCallback callback) {
+        fetchWithRetry(1, callback);  // gọi mạng, kết quả ghi ngược lại vào Room
+    }
+}
+</code></pre>
+<p>UI chỉ cần biết hai việc: <strong>quan sát</strong> <code>getCachedPosts()</code> để luôn có dữ liệu hiển thị, và <strong>gọi</strong> <code>refresh()</code> khi muốn làm mới — không cần tự phối hợp giữa Room và Retrofit. Đây là bước đệm nhẹ cho khái niệm &quot;Repository pattern&quot; sẽ chính thức xuất hiện trong kiến trúc MVVM ở Chương 28.</p>
+<pre><code class="language-java">repository.getCachedPosts().observe(this, adapter::submitList);
+repository.refresh(callback);
+</code></pre>
+<p>Vòng khép kín quan trọng nhất: khi <code>refresh()</code> thành công, nó <strong>ghi dữ liệu mới vào Room</strong>, và vì UI đang <code>observe()</code> trực tiếp Room (không phải kết quả API), UI <strong>tự động cập nhật</strong> — không cần code nào nối trực tiếp &quot;API trả về&quot; với &quot;adapter.submitList()&quot; như Chương 22 đã làm.</p>
+<h2>23.3 Retry — thử lại khi nào, và khi nào không nên</h2>
+<pre><code class="language-java">private void handleFailure(int attempt, String message, RefreshCallback callback) {
+    if (attempt &lt; MAX_ATTEMPTS) {
+        mainHandler.postDelayed(() -&gt; fetchWithRetry(attempt + 1, callback), RETRY_DELAY_MS);
+    } else {
+        callback.onError(message);
+    }
+}
+</code></pre>
+<p>Nguyên tắc quan trọng hay bị bỏ qua: <strong>không phải lỗi nào cũng nên thử lại</strong>. Lỗi mạng thoáng qua (timeout, mất sóng tạm thời) hợp lý để thử lại. Nhưng lỗi HTTP 4xx (ví dụ 401 Unauthorized, 404 Not Found) là lỗi <strong>do bản chất request sai</strong> — thử lại y hệt sẽ luôn nhận cùng kết quả, chỉ tổ tốn pin/dữ liệu di động. Code mẫu đơn giản hoá bằng cách thử lại mọi loại lỗi một lần duy nhất — đủ dùng cho quy mô sách, nhưng trong hệ thống thực tế nên kiểm tra <code>response.code()</code> để chỉ retry với lỗi 5xx/lỗi mạng, không retry với 4xx.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Error[&quot;Gặp lỗi khi gọi API&quot;] --&gt; Q{&quot;Loại lỗi?&quot;}
+    Q --&gt;|&quot;IOException (mất mạng, timeout)&quot;| Retry[&quot;Nên thử lại&lt;br/&gt;(có thể chỉ là tạm thời)&quot;]
+    Q --&gt;|&quot;HTTP 5xx (server lỗi)&quot;| Retry
+    Q --&gt;|&quot;HTTP 4xx (request sai)&quot;| NoRetry[&quot;KHÔNG nên thử lại&lt;br/&gt;— báo lỗi ngay&quot;]
+</pre></div>
+<h2>23.4 Hiển thị lỗi mà không phá dữ liệu đang có</h2>
+<pre><code class="language-java">@Override
+public void onError(String message) {
+    binding.progressBar.setVisibility(View.GONE);
+    binding.textError.setVisibility(View.VISIBLE);
+    binding.textError.setText(getString(R.string.error_refresh_kept_cache, message));
+    // KHÔNG gọi adapter.submitList(emptyList()) hay bất kỳ thao tác nào xoá dữ liệu
+}
+</code></pre>
+<p>Sai lầm thường gặp: khi <code>refresh()</code> thất bại, nhiều người có phản xạ xoá danh sách hoặc hiện toàn màn hình lỗi — xoá mất dữ liệu vẫn còn giá trị sử dụng được. Code mẫu chỉ hiện một dòng thông báo nhỏ, <strong>giữ nguyên</strong> danh sách cache đang hiển thị.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu với mạng bình thường, đóng app, bật chế độ máy bay, mở lại — xác nhận danh sách vẫn đầy đủ.</li>
+<li>Tắt máy bay, bấm <strong>Làm mới</strong>, xác nhận thông báo lỗi biến mất và dữ liệu (nếu đổi ở server) được cập nhật.</li>
+<li>Sửa <code>PostRepository</code> để phân biệt lỗi HTTP 4xx (không retry, báo lỗi ngay) với lỗi mạng/5xx (giữ nguyên cơ chế retry hiện tại) — dựa vào gợi ý ở mục 23.3.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Chỉ hiển thị dữ liệu khi API thành công, bỏ qua Room hoàn toàn</strong>: quay lại đúng vấn đề &quot;network-first&quot; ở mục 23.1 — mất mạng là màn hình trống.</li>
+<li><strong>Retry vô hạn lần không giới hạn</strong>: có thể khiến app gọi API liên tục, tốn pin/dữ liệu di động nghiêm trọng nếu server đang gặp sự cố kéo dài — luôn giới hạn số lần thử (<code>MAX_ATTEMPTS</code> trong code mẫu).</li>
+<li><strong>Xoá sạch dữ liệu hiển thị mỗi khi có lỗi mạng</strong>: trải nghiệm tệ hơn nhiều so với việc chỉ báo lỗi nhỏ và giữ dữ liệu cũ, như đã bàn ở mục 23.4.</li>
+<li><strong>Insert dữ liệu mới vào Room trên main thread</strong> (quên bọc qua <code>dbExecutor</code> như Chương 13 đã dạy): dễ bỏ sót khi code đã &quot;quen tay&quot; gọi trực tiếp sau một chuỗi callback dài.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã khép lại <strong>Phần 4 — Mạng &amp; API</strong>: từ gọi HTTP thô, tự động hoá bằng Retrofit/Gson, tới thiết kế offline-first hoàn chỉnh kết hợp với Room. Phần 5 chuyển hướng sang chủ đề kiểm thử và bảo mật — bắt đầu với Unit test bằng JUnit ở Chương 24.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch22-json-parsing.html">&larr; 22. Parse JSON (Gson/Moshi), mapping dữ liệu</a><a class="next" href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

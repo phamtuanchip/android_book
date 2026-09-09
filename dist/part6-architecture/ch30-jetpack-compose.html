@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>30. Giới thiệu Jetpack Compose — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="./ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="./ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class="active"><a href="./ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="./ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 30: Giới thiệu Jetpack Compose</h1>
+<blockquote>
+<p><strong>Lưu ý quan trọng trước khi đọc</strong>: toàn bộ sách dùng Java, nhưng <strong>Jetpack Compose chỉ hoạt động với Kotlin</strong> — không có API Compose nào cho Java. Code mẫu chương này (<code>code/ch30-jetpack-compose/</code>) là <strong>project Kotlin duy nhất trong sách</strong>, viết ra để bạn đọc hiểu và so sánh, không nhằm dạy Kotlin đầy đủ. Đây là chương <strong>giới thiệu khái niệm</strong> (đúng như tên chương), không phải chương thực hành sâu như các chương khác.</p>
+</blockquote>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu Compose khác gì về bản chất so với XML layout (Chương 7) — lập trình khai báo (declarative) so với mệnh lệnh (imperative).</li>
+<li>Đọc hiểu được một đoạn code Compose đơn giản, dù không viết thạo Kotlin.</li>
+<li>Biết khi nào một project Android hiện đại chọn Compose, khi nào vẫn hợp lý dùng View/XML.</li>
+</ul>
+<h2>30.1 Hai triết lý xây UI</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    subgraph Imperative[&quot;View/XML (mệnh lệnh — Chương 7-11)&quot;]
+        I1[&quot;Bấm nút&quot;] --&gt; I2[&quot;onClickListener chạy&quot;]
+        I2 --&gt; I3[&quot;TỰ TAY gọi&lt;br/&gt;binding.textResult.setText(...)&quot;]
+        I3 --&gt; I4[&quot;View tự cập nhật&quot;]
+    end
+    subgraph Declarative[&quot;Compose (khai báo)&quot;]
+        D1[&quot;Bấm nút&quot;] --&gt; D2[&quot;Cập nhật một BIẾN TRẠNG THÁI&lt;br/&gt;(state)&quot;]
+        D2 --&gt; D3[&quot;Compose TỰ ĐỘNG vẽ lại&lt;br/&gt;('recompose') mọi phần UI&lt;br/&gt;phụ thuộc vào state đó&quot;]
+    end
+</pre></div>
+<p>Với View/XML (Chương 7), bạn viết code <strong>ra lệnh từng bước</strong>: &quot;tìm view này, đổi text của nó thành X&quot;. Với Compose, bạn chỉ mô tả <strong>UI trông như thế nào ỨNG VỚI một trạng thái cho trước</strong> — khi trạng thái đổi, Compose tự tính toán lại và vẽ lại phần cần thiết, bạn không tự tay gọi <code>setText()</code>/<code>setVisibility()</code> ở bất kỳ đâu.</p>
+<h2>30.2 So sánh trực tiếp: cùng một tính năng, hai cách viết</h2>
+<p>Bản XML + ViewBinding (Chương 7, Java):</p>
+<pre><code class="language-java">binding.buttonGreet.setOnClickListener(v -&gt; {
+    String name = binding.editName.getText().toString().trim();
+    binding.textResult.setText(name.isEmpty()
+        ? getString(R.string.result_empty_name)
+        : getString(R.string.result_greeting, name));
+});
+</code></pre>
+<p>Bản Compose (chương này, Kotlin):</p>
+<pre><code class="language-kotlin">@Composable
+fun GreetingScreen() {
+    var name by remember { mutableStateOf(&quot;&quot;) }
+    var greeting by remember { mutableStateOf(&quot;&quot;) }
+
+    Column(modifier = Modifier.padding(24.dp)) {
+        TextField(value = name, onValueChange = { name = it }, ...)
+
+        Button(onClick = {
+            greeting = if (name.isBlank()) &quot;Bạn chưa nhập tên.&quot; else &quot;Xin chào, $name!&quot;
+        }) {
+            Text(&quot;Chào&quot;)
+        }
+
+        Text(text = greeting)
+    }
+}
+</code></pre>
+<p>Vài điểm đọc hiểu quan trọng dù bạn chưa biết Kotlin:</p>
+<ul>
+<li><code>@Composable</code> đánh dấu một hàm &quot;biết cách vẽ UI&quot; — tương đương khái niệm một đoạn XML layout, nhưng là <strong>code</strong>, không phải file XML riêng.</li>
+<li><code>remember { mutableStateOf(...) }</code> khai báo một <strong>biến trạng thái</strong> — Compose tự theo dõi, hễ giá trị đổi (<code>name = it</code>, <code>greeting = ...</code>) thì tự vẽ lại đúng những <code>Text</code>/<code>Button</code> phụ thuộc vào nó.</li>
+<li>Không có <code>findViewById</code>, không có <code>binding.xxx.setText(...)</code> ở bất kỳ đâu — toàn bộ giao diện là hệ quả trực tiếp của giá trị các biến trạng thái tại một thời điểm.</li>
+</ul>
+<h2>30.3 Không còn file XML layout riêng</h2>
+<p>Khác mọi chương trước (nơi UI luôn tách thành file <code>.xml</code> riêng trong <code>res/layout/</code>), Compose viết UI <strong>ngay trong code Kotlin</strong> — không có <code>activity_main.xml</code> nào cả. <code>setContent { ... }</code> trong <code>MainActivity.kt</code> thay thế hoàn toàn <code>setContentView(R.layout.activity_main)</code> đã dùng xuyên suốt từ Chương 4.</p>
+<pre><code class="language-kotlin">class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MaterialTheme {
+                Surface {
+                    GreetingScreen()
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<h2>30.4 Khi nào chọn Compose, khi nào vẫn hợp lý dùng View/XML?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Q1{&quot;Project mới hoàn toàn?&quot;}
+    Q1 --&gt;|&quot;Có, và team đã/sẵn sàng dùng Kotlin&quot;| Compose[&quot;Compose — hướng đi&lt;br/&gt;Google khuyến nghị cho project mới&quot;]
+    Q1 --&gt;|&quot;Không — project đã có sẵn&lt;br/&gt;rất nhiều code View/XML (như sách này)&quot;| View[&quot;Tiếp tục View/XML,&lt;br/&gt;có thể xen kẽ Compose từng phần nhỏ&quot;]
+    Q1 --&gt;|&quot;Team/tài liệu nội bộ&lt;br/&gt;gắn chặt với Java&quot;| ViewJava[&quot;View/XML — Compose&lt;br/&gt;không phải lựa chọn (cần Kotlin)&quot;]
+</pre></div>
+<p>Compose và View/XML <strong>có thể tồn tại xen kẽ trong cùng một project</strong> (Google cung cấp cầu nối <code>ComposeView</code> để nhúng Compose vào layout XML và ngược lại) — không nhất thiết phải chọn một, bỏ hẳn cái kia ngay lập tức. Với một codebase Java lâu năm, hướng đi thực dụng thường là: giữ nguyên phần lớn View/XML, chỉ viết màn hình MỚI bằng Compose (kèm chuyển phần đó sang Kotlin) khi có lý do rõ ràng.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, xác nhận hành vi giống hệt bản XML ở Chương 7.</li>
+<li>Không cần viết code — chỉ đọc lại <code>MainActivity.kt</code>, thử tự giải thích bằng lời từng dòng cho một người bạn tưởng tượng chưa biết Compose, dựa vào chú thích trong file.</li>
+<li>So sánh số dòng code và số file cần thiết giữa hai cách tiếp cận (Chương 7 cần <code>activity_main.xml</code> + <code>MainActivity.java</code>; chương này chỉ cần một file <code>.kt</code>) — tự rút ra nhận xét về đánh đổi giữa hai phong cách.</li>
+</ol>
+<h2>Lỗi thường gặp (khi tự tìm hiểu thêm ngoài sách)</h2>
+<ul>
+<li><strong>Cố viết Compose bằng Java</strong>: không thể — Compose Compiler chỉ xử lý code Kotlin, đây không phải giới hạn tạm thời mà là quyết định thiết kế cốt lõi của Compose.</li>
+<li><strong>Quên <code>remember</code>, chỉ dùng <code>mutableStateOf(...)</code> trực tiếp</strong>: giá trị bị khởi tạo lại mỗi lần hàm <code>@Composable</code> được gọi lại (recompose), mất trạng thái liên tục — lỗi rất phổ biến với người mới học Compose.</li>
+<li><strong>Nhầm tưởng phải bỏ hết code View/XML đã có để &quot;nâng cấp&quot; lên Compose</strong>: không cần thiết và thường không thực dụng cho codebase lớn đã ổn định.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có cái nhìn khái quát về Compose — đủ để đọc hiểu, biết khi nào nên tìm hiểu sâu hơn, và tại sao nó đòi hỏi Kotlin. Chương 31 quay lại hoàn toàn với Java, khép lại Phần 6 bằng tư duy Clean Architecture — tổ chức code ở quy mô lớn hơn một app đơn giản.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch29-di-hilt.html">&larr; 29. Dependency Injection với Hilt</a><a class="next" href="./ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

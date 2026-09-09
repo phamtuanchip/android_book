@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>39. Đưa ứng dụng lên Google Play Console — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="./ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class="active"><a href="./ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="./ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 39: Đưa ứng dụng lên Google Play Console</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Nắm được quy trình tổng quát để đưa một app từ file <code>.aab</code> (Chương 38) tới tay người dùng thật qua Google Play.</li>
+<li>Chuẩn bị đúng nội dung mô tả cửa hàng (store listing), đúng giới hạn ký tự của Play Console.</li>
+<li>Hiểu khái niệm &quot;release track&quot; (Internal/Closed/Open testing, Production) và vì sao nên đi qua từng bước thay vì phát hành thẳng.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch39-google-play-console/</code> — chương này không có logic Android chạy trên thiết bị, thay vào đó là cấu trúc quản lý nội dung cửa hàng kèm script tự kiểm tra giới hạn ký tự trước khi đăng.</p>
+</blockquote>
+<h2>39.1 Toàn cảnh quy trình phát hành</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Build[&quot;File .aab đã ký&lt;br/&gt;(Chương 38)&quot;] --&gt; Account[&quot;Tạo tài khoản Google Play&lt;br/&gt;Console Developer (trả phí một lần)&quot;]
+    Account --&gt; AppInfo[&quot;Tạo app mới trong Console:&lt;br/&gt;tên, package name, danh mục&quot;]
+    AppInfo --&gt; StoreListing[&quot;Điền Store Listing:&lt;br/&gt;mô tả, ảnh chụp màn hình, icon&quot;]
+    StoreListing --&gt; Content[&quot;Khai báo nội dung:&lt;br/&gt;Content rating, Data safety, quyền riêng tư&quot;]
+    Content --&gt; Track[&quot;Chọn Release Track:&lt;br/&gt;Internal → Closed → Open → Production&quot;]
+    Track --&gt; Upload[&quot;Tải file .aab lên track đã chọn&quot;]
+    Upload --&gt; Review[&quot;Google xét duyệt&lt;br/&gt;(vài giờ tới vài ngày)&quot;]
+    Review --&gt; Live[&quot;App xuất hiện trên Play Store&quot;]
+</pre></div>
+<p>Chương này tập trung vào hai bước dễ chuẩn bị trước và dễ mắc lỗi vặt nhất: <strong>Store Listing</strong> (mục 39.2) và <strong>Release Track</strong> (mục 39.3) — các bước còn lại (tạo tài khoản, khai báo Content rating/Data safety) là các form khai báo tuần tự trên giao diện Console, không có nhiều logic kỹ thuật để trình bày sâu hơn ở đây.</p>
+<h2>39.2 Store Listing — chuẩn bị trước, tránh sửa đi sửa lại trên form</h2>
+<p>Google Play giới hạn nghiêm ngặt độ dài từng trường:</p>
+<table>
+<thead>
+<tr>
+<th>Trường</th>
+<th>Giới hạn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tiêu đề (Title)</td>
+<td>30 ký tự</td>
+</tr>
+<tr>
+<td>Mô tả ngắn (Short description)</td>
+<td>80 ký tự</td>
+</tr>
+<tr>
+<td>Mô tả đầy đủ (Full description)</td>
+<td>4000 ký tự</td>
+</tr>
+<tr>
+<td>Thông tin phiên bản mới (Release notes)</td>
+<td>500 ký tự mỗi ngôn ngữ</td>
+</tr>
+</tbody>
+</table>
+<p>Thay vì soạn trực tiếp trên form Console (dễ mất nội dung nếu mất kết nối, khó version-control), code mẫu tổ chức nội dung thành file text riêng theo ngôn ngữ, kiểm tra bằng script trước:</p>
+<pre><code>store-listing/vi-VN/title.txt
+store-listing/vi-VN/short_description.txt
+store-listing/vi-VN/full_description.txt
+release-notes/vi-VN/default.txt
+</code></pre>
+<pre><code class="language-bash">node tools/validate-store-listing.js
+</code></pre>
+<pre><code>OK       store-listing/vi-VN/title.txt (24/30 ký tự)
+OK       store-listing/vi-VN/short_description.txt (77/80 ký tự)
+OK       store-listing/vi-VN/full_description.txt (486/4000 ký tự)
+OK       release-notes/vi-VN/default.txt (147/500 ký tự)
+
+Tất cả mục đều hợp lệ.
+</code></pre>
+<p>Cách làm này còn có lợi ích phụ: nội dung mô tả app được <strong>quản lý phiên bản cùng mã nguồn</strong> (commit vào Git), dễ đối chiếu lịch sử thay đổi, và <strong>tái sử dụng được cho CI/CD</strong> — nhiều đội phát triển dùng công cụ tương tự (phổ biến nhất là Fastlane) để tự động hoá toàn bộ quy trình tải bản build + nội dung mô tả lên Play Console mà không cần thao tác tay trên giao diện web mỗi lần phát hành.</p>
+<h2>39.3 Release Track — vì sao không phát hành thẳng lên Production?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    Internal[&quot;Internal testing&lt;br/&gt;(vài người, gần như tức thời)&quot;] --&gt; Closed[&quot;Closed testing&lt;br/&gt;(nhóm nhỏ đã đăng ký,&lt;br/&gt;vài giờ xét duyệt)&quot;]
+    Closed --&gt; Open[&quot;Open testing&lt;br/&gt;(công khai nhưng gắn nhãn 'thử nghiệm')&quot;]
+    Open --&gt; Production[&quot;Production&lt;br/&gt;(công khai đầy đủ, xét duyệt kỹ nhất)&quot;]
+</pre></div>
+<p>Mỗi track có mức độ xét duyệt và phạm vi tiếp cận khác nhau. Quy trình khuyến nghị: <strong>luôn đi qua Internal testing trước</strong> (phát hiện lỗi hiển nhiên trong vài phút, không cần chờ xét duyệt lâu), rồi Closed/Open testing với nhóm nhỏ người dùng thật trước khi đẩy lên Production. Bỏ qua các bước này và phát hành thẳng Production tăng rủi ro một lỗi nghiêm trọng (crash ngay khi mở app) tới tay hàng loạt người dùng thật trước khi kịp phát hiện.</p>
+<p><strong>Điểm quan trọng liên quan trực tiếp tới Chương 38</strong>: mọi track đều yêu cầu <code>versionCode</code> tăng dần — một bản đã tải lên Internal testing với <code>versionCode 3</code> thì bản tiếp theo (dù ở track nào) phải có <code>versionCode</code> lớn hơn 3, không thể quay lại dùng số cũ.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy <code>node tools/validate-store-listing.js</code> trong code mẫu, xác nhận toàn bộ hợp lệ.</li>
+<li>Cố tình sửa <code>full_description.txt</code> dài vượt 4000 ký tự (copy lặp lại nội dung nhiều lần), chạy lại script — xác nhận bắt đúng lỗi trước khi bạn kịp dán nhầm vào Play Console thật.</li>
+<li>Tự phác thảo (chỉ viết ra giấy/text, không cần Console thật) nội dung Store Listing tiếng Việt cho MỘT trong các app mẫu đã xây trong sách (ví dụ app Room ở Chương 13) — thực hành đúng giới hạn ký tự.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Soạn mô tả app trực tiếp trên form Console, không lưu bản nháp</strong>: dễ mất công soạn lại nếu phiên làm việc bị gián đoạn — nên soạn trong file text trước, dán vào sau cùng.</li>
+<li><strong>Bỏ qua Internal/Closed testing, phát hành thẳng Production</strong>: rủi ro lỗi nghiêm trọng tới tay số đông người dùng ngay từ lần đầu, thay vì phát hiện sớm trong nhóm nhỏ.</li>
+<li><strong>Quên rằng <code>versionCode</code> phải tăng dần XUYÊN SUỐT mọi track</strong>, không riêng Production: tải lên track testing với số cũ hơn bản production hiện tại cũng bị từ chối.</li>
+<li><strong>Không kiểm tra kỹ Content rating/Data safety trước khi nộp</strong>: khai sai (dù vô ý) thông tin về việc app có thu thập dữ liệu gì có thể khiến app bị gỡ hoặc tài khoản bị cảnh cáo sau khi phát hành — cần khai chính xác dựa trên những gì app THẬT SỰ làm (quyền đã xin ở Chương 26, 35, 37 là manh mối để tự rà soát).</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có bức tranh đầy đủ để đưa một app từ file build tới tay người dùng thật trên Google Play. Chương 40 khép lại sách với việc theo dõi ứng dụng sau khi phát hành — thu thập crash report và số liệu sử dụng cơ bản.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch38-release-build.html">&larr; 38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a><a class="next" href="./ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

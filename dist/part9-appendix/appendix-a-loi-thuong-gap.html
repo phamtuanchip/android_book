@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class="active"><a href="./appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="./appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Phụ lục A: Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</h1>
+<p>Bảng tra cứu nhanh — mỗi dòng tóm tắt một lỗi đã giải thích chi tiết trong chương tương ứng.
+Dùng Ctrl+F tìm theo thông báo lỗi hoặc từ khoá khi gặp sự cố, rồi quay lại đúng chương để đọc
+phần giải thích đầy đủ.</p>
+<h2>Cài đặt &amp; build</h2>
+<table>
+<thead>
+<tr>
+<th>Triệu chứng</th>
+<th>Nguyên nhân thường gặp</th>
+<th>Xem lại</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'adb' is not recognized</code></td>
+<td><code>Path</code> chưa trỏ tới <code>platform-tools</code>, hoặc terminal mở trước khi cập nhật biến môi trường</td>
+<td>Chương 2</td>
+</tr>
+<tr>
+<td>Máy ảo chạy cực chậm/treo lúc khởi động</td>
+<td>Chưa bật ảo hoá phần cứng (VT-x/AMD-V), hoặc xung đột Hyper-V/WSL2</td>
+<td>Chương 3</td>
+</tr>
+<tr>
+<td><code>INSTALL_FAILED_UPDATE_INCOMPATIBLE</code></td>
+<td>App cũ trên máy ký bằng key khác bản đang cài — gỡ cài đặt cũ trước</td>
+<td>Chương 5</td>
+</tr>
+<tr>
+<td>Thiếu <code>android:exported</code> trên Activity/Service/Receiver có intent-filter</td>
+<td>Bắt buộc khai báo tường minh từ Android 12 (API 31)</td>
+<td>Chương 4, 8, 32, 34</td>
+</tr>
+<tr>
+<td>Build release crash/<code>null</code> dữ liệu dù debug chạy tốt</td>
+<td>R8 đổi tên field mà Gson/reflection cần đúng tên gốc — thiếu rule <code>-keep</code></td>
+<td>Chương 27</td>
+</tr>
+</tbody>
+</table>
+<h2>Vòng đời &amp; UI</h2>
+<table>
+<thead>
+<tr>
+<th>Triệu chứng</th>
+<th>Nguyên nhân thường gặp</th>
+<th>Xem lại</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dữ liệu mất khi xoay màn hình</td>
+<td>Không lưu trong <code>onSaveInstanceState</code>, hoặc tưởng nhầm nó là lưu trữ lâu dài</td>
+<td>Chương 6</td>
+</tr>
+<tr>
+<td>Giữ <code>Activity</code>/<code>Context</code> trong biến <code>static</code> hoặc trong ViewModel</td>
+<td>Rò rỉ bộ nhớ — Activity không bao giờ được giải phóng</td>
+<td>Chương 6, 28</td>
+</tr>
+<tr>
+<td>View &quot;biến mất&quot;/lệch vị trí dù XML trông đúng</td>
+<td>Thiếu ràng buộc <code>ConstraintLayout</code> theo một chiều (ngang hoặc dọc)</td>
+<td>Chương 7</td>
+</tr>
+<tr>
+<td><code>NoMatchingViewException</code> khi test Espresso</td>
+<td>Sai ID, hoặc bàn phím ảo che View cần thao tác (quên <code>closeSoftKeyboard()</code>)</td>
+<td>Chương 25</td>
+</tr>
+</tbody>
+</table>
+<h2>Dữ liệu &amp; mạng</h2>
+<table>
+<thead>
+<tr>
+<th>Triệu chứng</th>
+<th>Nguyên nhân thường gặp</th>
+<th>Xem lại</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IllegalStateException: Cannot access database on the main thread</code></td>
+<td>Gọi Room trực tiếp trong <code>onClickListener</code>, quên bọc qua <code>Executor</code></td>
+<td>Chương 13</td>
+</tr>
+<tr>
+<td><code>NetworkOnMainThreadException</code></td>
+<td>Gọi <code>OkHttpClient.execute()</code> (đồng bộ) trên main thread thay vì <code>enqueue()</code></td>
+<td>Chương 21</td>
+</tr>
+<tr>
+<td>Field JSON map ra <code>null</code> dù tên đúng chính tả trông giống</td>
+<td>Gõ sai <code>@SerializedName</code>, hoặc lệch kiểu dữ liệu</td>
+<td>Chương 22</td>
+</tr>
+<tr>
+<td>Mất mạng khiến màn hình trống trơn</td>
+<td>Thiết kế &quot;network-first&quot; thay vì offline-first (luôn đọc cache trước)</td>
+<td>Chương 23</td>
+</tr>
+</tbody>
+</table>
+<h2>Chạy nền &amp; thông báo</h2>
+<table>
+<thead>
+<tr>
+<th>Triệu chứng</th>
+<th>Nguyên nhân thường gặp</th>
+<th>Xem lại</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ForegroundServiceDidNotStartInTimeException</code></td>
+<td>Gọi <code>startForeground()</code> quá trễ sau <code>startForegroundService()</code></td>
+<td>Chương 16</td>
+</tr>
+<tr>
+<td>Broadcast tự định nghĩa không tới nơi</td>
+<td>Thiếu <code>setPackage()</code>, hoặc kỳ vọng receiver khai báo tĩnh vẫn nhận được (không còn đúng từ Android 8+)</td>
+<td>Chương 17</td>
+</tr>
+<tr>
+<td><code>PeriodicWorkRequest</code> &quot;chạy chậm hơn khai báo&quot;</td>
+<td>Chu kỳ tối thiểu 15 phút — WorkManager tự nâng lên, không phải lỗi</td>
+<td>Chương 18</td>
+</tr>
+<tr>
+<td>Bấm Huỷ tác vụ nhưng vẫn chạy tới hết</td>
+<td><code>Future.cancel(true)</code> chỉ đặt cờ interrupted — code phải tự kiểm tra <code>isInterrupted()</code></td>
+<td>Chương 19</td>
+</tr>
+<tr>
+<td>Notification không hiện ra, không báo lỗi</td>
+<td>Thiếu <code>NotificationChannel</code> (Android 8+), hoặc thiếu quyền <code>POST_NOTIFICATIONS</code> (Android 13+)</td>
+<td>Chương 20</td>
+</tr>
+</tbody>
+</table>
+<h2>Quyền &amp; bảo mật</h2>
+<table>
+<thead>
+<tr>
+<th>Triệu chứng</th>
+<th>Nguyên nhân thường gặp</th>
+<th>Xem lại</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SecurityException</code> dù đã khai báo <code>&lt;uses-permission&gt;</code></td>
+<td>Quyền thuộc nhóm &quot;dangerous&quot; — phải xin thêm ở runtime, khai báo manifest chỉ là điều kiện cần</td>
+<td>Chương 26</td>
+</tr>
+<tr>
+<td>Xin lại quyền không có tác dụng, không hiện hộp thoại</td>
+<td>Người dùng đã chọn &quot;Không hỏi lại&quot; — chỉ còn cách hướng dẫn vào Settings</td>
+<td>Chương 26</td>
+</tr>
+<tr>
+<td>Quét Bluetooth thất bại âm thầm trên Android 12+</td>
+<td>Xin <code>ACCESS_FINE_LOCATION</code> thay vì <code>BLUETOOTH_SCAN</code> — hai quyền phục vụ hai nhóm phiên bản khác nhau</td>
+<td>Chương 35, 37</td>
+</tr>
+<tr>
+<td>Xin quyền vị trí nền bị từ chối ngay lập tức</td>
+<td>Cố xin <code>ACCESS_BACKGROUND_LOCATION</code> cùng lúc với quyền foreground — phải tách hai bước</td>
+<td>Chương 37</td>
+</tr>
+</tbody>
+</table>
+<h2>Liên ứng dụng &amp; phần cứng</h2>
+<table>
+<thead>
+<tr>
+<th>Triệu chứng</th>
+<th>Nguyên nhân thường gặp</th>
+<th>Xem lại</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App khác không đọc được <code>ContentProvider</code>/<code>Service</code> của bạn</td>
+<td>Thiếu <code>android:exported=&quot;true&quot;</code></td>
+<td>Chương 32, 34</td>
+</tr>
+<tr>
+<td><code>bindService()</code> sang app khác không tìm thấy gì (API 30+)</td>
+<td>Thiếu khai báo <code>&lt;queries&gt;</code> (package visibility) trong manifest</td>
+<td>Chương 34</td>
+</tr>
+<tr>
+<td>Deep link không mở được từ trình duyệt/nguồn ngoài</td>
+<td>Thiếu <code>category.BROWSABLE</code> trong intent-filter</td>
+<td>Chương 33</td>
+</tr>
+<tr>
+<td>Kết nối Bluetooth/đọc NFC làm đứng UI</td>
+<td>Gọi <code>connect()</code>/<code>accept()</code>/<code>read()</code> (đều CHẶN thread) trực tiếp trên main thread</td>
+<td>Chương 35, 36</td>
+</tr>
+</tbody>
+</table>
+<h2>Xuất bản</h2>
+<table>
+<thead>
+<tr>
+<th>Triệu chứng</th>
+<th>Nguyên nhân thường gặp</th>
+<th>Xem lại</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Play từ chối bản tải lên</td>
+<td><code>versionCode</code> không tăng so với bản trước đó</td>
+<td>Chương 38, 39</td>
+</tr>
+<tr>
+<td>Không đọc được crash log từ bản release đã phát hành</td>
+<td>Thiếu <code>mapping.txt</code> đúng phiên bản để dịch ngược tên đã bị R8 làm rối</td>
+<td>Chương 27, 40</td>
+</tr>
+<tr>
+<td>Mất khả năng phát hành bản cập nhật cho app cũ</td>
+<td>Làm mất file keystore release và không dùng Google Play App Signing</td>
+<td>Chương 27, 38</td>
+</tr>
+</tbody>
+</table>
+
+</article>
+<div class="prev-next"><a class="prev" href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">&larr; 40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a><a class="next" href="./appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>15. Jetpack DataStore (thay thế SharedPreferences hiện đại) — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="./ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="./ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="./ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class="active"><a href="./ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 15: Jetpack DataStore (thay thế SharedPreferences hiện đại)</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu những giới hạn của <code>SharedPreferences</code> mà <code>DataStore</code> được thiết kế để khắc phục.</li>
+<li>Đọc/ghi được dữ liệu qua Preferences DataStore trong project Java (dùng cầu nối RxJava3 chính thức).</li>
+<li>Hiểu khái niệm cập nhật có tính giao dịch (transactional update) qua <code>updateDataAsync</code>.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch15-datastore/</code> — cùng chức năng với Chương 12 để dễ so sánh trực tiếp.</p>
+</blockquote>
+<h2>15.1 SharedPreferences có vấn đề gì?</h2>
+<p><code>SharedPreferences</code> (Chương 12) hoạt động tốt cho phần lớn trường hợp đơn giản, nhưng có vài giới hạn Google chỉ ra làm lý do ra đời <code>DataStore</code>:</p>
+<ul>
+<li><code>getString()</code>/<code>getBoolean()</code>... chạy <strong>đồng bộ trên thread gọi nó</strong> — nếu file preferences lớn hoặc bị chặn I/O, có thể làm giật main thread mà không có cảnh báo nào (khác Room ở Chương 13, vốn chủ động chặn hành vi sai).</li>
+<li><code>commit()</code> đồng bộ có thể <strong>âm thầm thất bại</strong> mà code gọi không kiểm tra giá trị trả về vẫn tiếp tục chạy như không có gì.</li>
+<li>Không có cách &quot;quan sát&quot; một giá trị cụ thể đổi theo kiểu luồng dữ liệu (stream) hiện đại — phải tự đăng ký/huỷ đăng ký listener thủ công như Chương 12 đã làm.</li>
+</ul>
+<p><code>DataStore</code> (Jetpack) giải quyết bằng: <strong>mọi thao tác đều bất đồng bộ</strong>, cập nhật có tính giao dịch (đọc-sửa-ghi trọn vẹn, không bị xen ngang), và trả dữ liệu dưới dạng luồng (Kotlin <code>Flow</code>, hoặc <code>Flowable</code>/<code>Observable</code> nếu dùng cầu nối RxJava như code mẫu Java trong sách).</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    subgraph SP[&quot;SharedPreferences (Chương 12)&quot;]
+        SPRead[&quot;getString() — ĐỒNG BỘ,&lt;br/&gt;có thể chặn thread gọi&quot;]
+        SPWrite[&quot;commit() ĐỒNG BỘ / apply() bất đồng bộ&lt;br/&gt;— không có cơ chế giao dịch&quot;]
+    end
+    subgraph DS[&quot;DataStore (chương này)&quot;]
+        DSRead[&quot;data() — LUÔN bất đồng bộ,&lt;br/&gt;trả về luồng (Flow/Flowable)&quot;]
+        DSWrite[&quot;updateDataAsync() — đọc-sửa-ghi&lt;br/&gt;TRỌN VẸN trong 1 giao dịch&quot;]
+    end
+</pre></div>
+<h2>15.2 Vì sao code mẫu dùng RxJava thay vì Kotlin Flow?</h2>
+<p>Thư viện lõi <code>androidx.datastore:datastore-preferences</code> được viết dựa trên Kotlin Coroutines/<code>Flow</code> — không gọi trực tiếp thuận tiện từ Java thuần (ngôn ngữ chính của sách này). Google cung cấp cầu nối chính thức <code>datastore-preferences-rxjava3</code>, expose cùng chức năng qua kiểu <code>RxDataStore&lt;Preferences&gt;</code> với <code>Flowable</code>/<code>Single</code> — quen thuộc hơn với lập trình viên Java, dùng trong toàn bộ chương này.</p>
+<pre><code class="language-groovy">implementation 'androidx.datastore:datastore-preferences-rxjava3:1.1.1'
+implementation 'io.reactivex.rxjava3:rxjava:3.1.8'
+implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+</code></pre>
+<h2>15.3 Đọc dữ liệu — luôn là một luồng (stream)</h2>
+<pre><code class="language-java">RxDataStore&lt;Preferences&gt; dataStore = SettingsDataStore.getInstance(this);
+
+dataStore.data()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(prefs -&gt; {
+            String name = prefs.get(SettingsKeys.DISPLAY_NAME);
+            binding.editDisplayName.setText(name != null ? name : &quot;&quot;);
+        });
+</code></pre>
+<p><code>dataStore.data()</code> trả về <code>Flowable&lt;Preferences&gt;</code>: phát ngay giá trị hiện tại lúc <code>subscribe()</code>, rồi tiếp tục phát mỗi khi dữ liệu đổi — không cần tự đăng ký/huỷ đăng ký listener thủ công như <code>OnSharedPreferenceChangeListener</code> ở Chương 12 (dù bản chất vẫn phải <code>dispose()</code> subscription đúng lúc, xem mục 15.5).</p>
+<h2>15.4 Ghi dữ liệu có tính giao dịch</h2>
+<pre><code class="language-java">Single&lt;Preferences&gt; update = dataStore.updateDataAsync(prefsIn -&gt; {
+    MutablePreferences mutablePrefs = prefsIn.toMutablePreferences();
+    mutablePrefs.set(SettingsKeys.DISPLAY_NAME, name);
+    mutablePrefs.set(SettingsKeys.NOTIFICATIONS_ENABLED, notificationsEnabled);
+    return Single.just(mutablePrefs);
+});
+
+update.subscribe(
+        prefs -&gt; { /* thành công */ },
+        throwable -&gt; { /* thất bại — DataStore CÓ báo lỗi rõ ràng, khác commit() im lặng */ });
+</code></pre>
+<p><code>updateDataAsync</code> nhận vào giá trị <strong>hiện tại</strong> (<code>prefsIn</code>), bạn sửa nó và trả về giá trị <strong>mới</strong> — toàn bộ diễn ra như một giao dịch duy nhất. Nếu hai nơi trong app cùng gọi cập nhật gần như đồng thời, DataStore đảm bảo chúng không ghi đè mất dữ liệu của nhau (khác nguy cơ tiềm ẩn khi tự đọc rồi tự ghi hai bước riêng với <code>SharedPreferences.Editor</code>).</p>
+<p>Lưu ý quan trọng: <code>updateDataAsync</code> trả về một <code>Single</code> — theo đúng bản chất &quot;lazy&quot; của RxJava, <strong>nếu không gọi <code>.subscribe()</code>, việc ghi sẽ không bao giờ thực sự xảy ra</strong>. Đây là lỗi rất dễ mắc khi mới làm quen RxJava.</p>
+<h2>15.5 Quản lý subscription bằng <code>CompositeDisposable</code></h2>
+<pre><code class="language-java">private final CompositeDisposable disposables = new CompositeDisposable();
+
+@Override
+protected void onStart() {
+    super.onStart();
+    disposables.add(dataStore.data().subscribe(this::applyToUi));
+}
+
+@Override
+protected void onStop() {
+    super.onStop();
+    disposables.clear();  // huỷ TẤT CẢ subscription đã add, cùng lúc
+}
+</code></pre>
+<p>Nguyên tắc giống hệt lý do phải <code>unregisterOnChangeListener</code> ở Chương 12: một <code>subscribe()</code> không được huỷ đúng lúc sẽ tiếp tục giữ tham chiếu và chạy callback vào một Activity đã không còn hiển thị (thậm chí đã bị huỷ) — rò rỉ bộ nhớ. <code>CompositeDisposable</code> chỉ là công cụ gom nhiều subscription lại để huỷ một lượt cho gọn.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, lưu vài giá trị, đóng hẳn app và mở lại — xác nhận dữ liệu còn nguyên, tương tự Chương 12.</li>
+<li>So sánh trực tiếp file <code>MainActivity.java</code> của <code>ch12-shared-preferences</code> và <code>ch15-datastore</code> — liệt kê ra 3 điểm khác nhau rõ nhất trong cách viết code.</li>
+<li>Thử bỏ dòng <code>.subscribe(...)</code> sau <code>dataStore.updateDataAsync(...)</code>, build và chạy lại — bấm Lưu và xác nhận dữ liệu <strong>không</strong> thực sự được ghi (minh chứng cho tính &quot;lazy&quot; nói ở mục 15.4).</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Gọi <code>updateDataAsync()</code> mà quên <code>.subscribe()</code></strong>: không có lỗi nào hiện ra, chỉ đơn giản là việc ghi không xảy ra — rất khó phát hiện nếu không biết trước (xem bài tập 3).</li>
+<li><strong>Không <code>dispose()</code> subscription từ <code>dataStore.data()</code></strong>: rò rỉ bộ nhớ tương tự quên <code>unregisterOnChangeListener</code> ở Chương 12.</li>
+<li><strong>Trộn lẫn cả <code>SharedPreferences</code> lẫn <code>DataStore</code> cho cùng một loại dữ liệu trong cùng một app</strong>: gây khó hiểu, chọn một trong hai cho mỗi loại cấu hình và nhất quán trong toàn bộ codebase.</li>
+<li><strong>Cập nhật UI trực tiếp trong callback của <code>subscribe()</code> mà quên <code>observeOn(AndroidSchedulers.mainThread())</code></strong>: một số thao tác I/O của DataStore chạy trên thread nền — callback mặc định có thể không nằm trên main thread, gây crash khi đụng tới View.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã khép lại <strong>Phần 2 — Lưu trữ dữ liệu</strong>: từ cấu hình đơn giản (SharedPreferences/DataStore), dữ liệu có cấu trúc (Room), tới file thô (internal/external storage). Phần 3 chuyển hướng sang một chủ đề hoàn toàn khác: cách Android xử lý các tác vụ chạy ngầm, bắt đầu bằng <code>Service</code> ở Chương 16.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch14-file-storage.html">&larr; 14. File storage: internal vs external, scoped storage</a><a class="next" href="../part3-background/ch16-service.html">16. Service &amp; foreground service &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

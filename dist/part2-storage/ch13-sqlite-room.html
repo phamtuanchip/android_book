@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13. SQLite &amp; Room (cơ sở dữ liệu quan hệ) — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="./ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class="active"><a href="./ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="./ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="./ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 13: SQLite &amp; Room (cơ sở dữ liệu quan hệ)</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu vì sao Room ra đời để thay thế việc dùng SQLite trực tiếp bằng tay.</li>
+<li>Định nghĩa được bảng dữ liệu (<code>@Entity</code>), câu truy vấn (<code>@Dao</code>), và điểm truy cập database (<code>RoomDatabase</code>).</li>
+<li>Hiểu vì sao Room bắt buộc thao tác off main thread, và cách xử lý bằng <code>Executor</code>.</li>
+<li>Dùng <code>LiveData</code> để UI tự cập nhật mỗi khi dữ liệu trong database thay đổi.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch13-sqlite-room/</code>.</p>
+</blockquote>
+<h2>13.1 Vì sao không viết SQL tay như trước đây?</h2>
+<p>Android có sẵn <code>SQLiteOpenHelper</code> để làm việc trực tiếp với SQLite — cách làm truyền thống, nhưng có ba vấn đề:</p>
+<ul>
+<li>Phải tự viết chuỗi SQL (<code>&quot;CREATE TABLE notes (id INTEGER PRIMARY KEY, title TEXT)&quot;</code>) — gõ sai chỉ phát hiện lúc chạy.</li>
+<li>Phải tự map thủ công giữa <code>Cursor</code> (kết quả truy vấn) và object Java — code lặp lại, dễ quên field.</li>
+<li>Phải tự quản lý version migration khi đổi cấu trúc bảng.</li>
+</ul>
+<p><strong>Room</strong> (thư viện chính thức của Google, thuộc Jetpack) giải quyết cả ba: bạn khai báo bảng bằng annotation trên class Java, Room tự sinh SQL và code map dữ liệu lúc build, <strong>kiểm tra câu truy vấn ngay lúc biên dịch</strong> (gõ sai tên cột sẽ báo lỗi compile, không phải runtime).</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    Entity[&quot;@Entity class Note&lt;br/&gt;(định nghĩa bảng)&quot;] --&gt; Room[&quot;Room (lúc build)&quot;]
+    Dao[&quot;@Dao interface NoteDao&lt;br/&gt;(khai báo câu lệnh)&quot;] --&gt; Room
+    Room --&gt; Generated[&quot;Code Java được sinh ra:&lt;br/&gt;SQL thật + logic map Cursor↔Object&quot;]
+    Generated --&gt; SQLite[&quot;File SQLite thật&lt;br/&gt;trên bộ nhớ trong thiết bị&quot;]
+</pre></div>
+<h2>13.2 <code>@Entity</code> — định nghĩa một bảng</h2>
+<pre><code class="language-java">@Entity(tableName = &quot;notes&quot;)
+public class Note {
+
+    @PrimaryKey(autoGenerate = true)
+    public long id;
+
+    @NonNull
+    @ColumnInfo(name = &quot;title&quot;)
+    public String title;
+
+    @ColumnInfo(name = &quot;created_at&quot;)
+    public long createdAt;
+
+    public Note(@NonNull String title, long createdAt) {
+        this.title = title;
+        this.createdAt = createdAt;
+    }
+}
+</code></pre>
+<p><code>@PrimaryKey(autoGenerate = true)</code> tương đương <code>INTEGER PRIMARY KEY AUTOINCREMENT</code> trong SQL thuần — Room tự gán <code>id</code> khi insert, bạn không cần tự sinh giá trị.</p>
+<h2>13.3 <code>@Dao</code> — khai báo câu lệnh, không viết logic</h2>
+<pre><code class="language-java">@Dao
+public interface NoteDao {
+
+    @Query(&quot;SELECT * FROM notes ORDER BY id DESC&quot;)
+    LiveData&lt;List&lt;Note&gt;&gt; getAll();
+
+    @Insert
+    void insert(Note note);
+
+    @Delete
+    void delete(Note note);
+}
+</code></pre>
+<p>Đây là điểm khác biệt lớn nhất so với JDBC/SQLiteOpenHelper truyền thống: bạn <strong>chỉ khai báo interface</strong>, không viết thân hàm. Room đọc annotation (<code>@Query</code>, <code>@Insert</code>, <code>@Delete</code>) lúc build, tự sinh class triển khai thật (<code>NoteDao_Impl</code>) — kiểm tra được ngay lúc biên dịch nếu câu SQL trong <code>@Query</code> tham chiếu sai tên cột/bảng.</p>
+<h2>13.4 <code>RoomDatabase</code> — điểm truy cập duy nhất</h2>
+<pre><code class="language-java">@Database(entities = {Note.class}, version = 1, exportSchema = false)
+public abstract class AppDatabase extends RoomDatabase {
+
+    public abstract NoteDao noteDao();
+
+    private static volatile AppDatabase instance;
+
+    public static AppDatabase getInstance(Context context) {
+        if (instance == null) {
+            synchronized (AppDatabase.class) {
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                                    context.getApplicationContext(), AppDatabase.class, &quot;notes.db&quot;)
+                            .build();
+                }
+            }
+        }
+        return instance;
+    }
+}
+</code></pre>
+<p><strong>Luôn dùng một instance <code>RoomDatabase</code> duy nhất cho cả app</strong> (mẫu singleton như trên) — tạo nhiều instance trỏ tới cùng file <code>.db</code> gây tốn tài nguyên và có thể xung đột khoá file.</p>
+<h2>13.5 Vì sao Room cấm chạy trên main thread?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Click[&quot;Người dùng bấm 'Thêm'&quot;] --&gt; MainThread{&quot;Insert chạy ở đâu?&quot;}
+    MainThread --&gt;|&quot;Main thread (SAI)&quot;| Crash[&quot;Room ném IllegalStateException&lt;br/&gt;ngay lập tức — chặn trước khi kịp gây lag&quot;]
+    MainThread --&gt;|&quot;Background thread (ĐÚNG)&quot;| DB[&quot;Ghi xuống SQLite&lt;br/&gt;(có thể mất vài–vài chục ms)&quot;]
+    DB --&gt; LiveDataUpdate[&quot;LiveData tự phát giá trị mới&quot;]
+    LiveDataUpdate --&gt; UIThread[&quot;Callback observe() luôn chạy&lt;br/&gt;lại trên MAIN thread — an toàn cập nhật UI&quot;]
+</pre></div>
+<p>I/O đĩa (đọc/ghi file <code>.db</code>) có thể mất từ vài đến vài chục mili-giây — đủ để làm khung hình bị giật nếu chạy trên main thread, nặng hơn có thể gây ANR (Application Not Responding). Room <strong>chủ động chặn</strong> việc này bằng cách ném lỗi ngay lúc gọi nhầm, thay vì để bạn tự phát hiện qua hiện tượng giật lag mơ hồ. Code mẫu dùng <code>ExecutorService</code> riêng cho việc này:</p>
+<pre><code class="language-java">private final ExecutorService dbExecutor = Executors.newSingleThreadExecutor();
+
+binding.buttonAdd.setOnClickListener(v -&gt; {
+    Note note = new Note(title, System.currentTimeMillis());
+    dbExecutor.execute(() -&gt; database.noteDao().insert(note));
+});
+</code></pre>
+<p>Chương 19 sẽ bàn kỹ hơn về các lựa chọn xử lý bất đồng bộ trong Android — <code>Executor</code> ở đây là cách đơn giản nhất phù hợp với những gì đã học tới thời điểm này.</p>
+<h2>13.6 <code>LiveData</code> — UI tự cập nhật khi dữ liệu đổi</h2>
+<pre><code class="language-java">database.noteDao().getAll().observe(this, adapter::submitList);
+</code></pre>
+<p>Khi <code>NoteDao.getAll()</code> trả về <code>LiveData&lt;List&lt;Note&gt;&gt;</code>, Room tự động theo dõi bảng <code>notes</code> — <strong>bất kỳ lúc nào</strong> có insert/update/delete (kể cả từ một đoạn code khác trong cùng app), <code>observe()</code> callback sẽ tự chạy lại với danh sách mới nhất, luôn đảm bảo chạy trên main thread nên gọi thẳng <code>adapter::submitList</code> (từ Chương 10) an toàn, không cần tự runOnUiThread.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, thêm vài ghi chú, xoá thử một ghi chú, đóng hẳn app và mở lại — xác nhận dữ liệu còn nguyên trong SQLite thật (khác <code>SharedPreferences</code> ở chỗ đây là dữ liệu có cấu trúc, truy vấn được).</li>
+<li>Thêm một cột mới vào <code>Note</code> (ví dụ <code>boolean isPinned</code>), thêm một <code>@Query</code> mới trong <code>NoteDao</code> để lấy riêng các ghi chú đã ghim (<code>WHERE is_pinned = 1</code>).</li>
+<li>Mở <strong>Database Inspector</strong> trong Android Studio khi app đang chạy, tự viết một câu <code>SELECT</code> để kiểm tra dữ liệu trực tiếp trong bảng <code>notes</code>.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong><code>IllegalStateException: Cannot access database on the main thread</code></strong>: gọi trực tiếp <code>dao.insert(...)</code> trong <code>onClickListener</code> mà không bọc qua <code>Executor</code>/thread nền — đúng như thiết kế bảo vệ của Room ở mục 13.5.</li>
+<li><strong>Đổi cấu trúc <code>@Entity</code> (thêm/xoá cột) mà không tăng <code>version</code> trong <code>@Database</code></strong>: app cũ cài trên máy thật sẽ crash khi mở vì Room phát hiện schema không khớp — cần tăng <code>version</code> và cung cấp <code>Migration</code> (nằm ngoài phạm vi chương này, nhưng bắt buộc phải biết tồn tại trước khi phát hành bản cập nhật đổi schema).</li>
+<li><strong>Tạo nhiều instance <code>RoomDatabase</code> thay vì dùng singleton</strong>: lãng phí tài nguyên, có thể gây lỗi khoá file khó debug.</li>
+<li><strong>Quên <code>@NonNull</code> trên field kiểu tham chiếu bắt buộc có giá trị</strong> (như <code>title</code>): Room cho phép cột đó nhận <code>NULL</code> trong SQL dù ý định của bạn là bắt buộc — khai báo rõ ràng giúp Room sinh đúng ràng buộc <code>NOT NULL</code>.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có một database SQLite thật hoạt động qua Room — đủ để lưu trữ danh sách dữ liệu có cấu trúc, truy vấn được, tự động cập nhật UI. Chương 14 chuyển sang một dạng lưu trữ khác: làm việc trực tiếp với file (văn bản, nhị phân) trên bộ nhớ trong và bộ nhớ ngoài của thiết bị.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch12-shared-preferences.html">&larr; 12. SharedPreferences (cấu hình, trạng thái đơn giản)</a><a class="next" href="./ch14-file-storage.html">14. File storage: internal vs external, scoped storage &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

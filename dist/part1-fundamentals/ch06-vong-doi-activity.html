@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6. Vòng đời Activity &amp; Application — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class="active"><a href="./ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="./ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="./ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="./ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="./ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="./ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 6: Vòng đời Activity &amp; Application</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Gọi tên chính xác và đúng thứ tự các callback vòng đời của Activity.</li>
+<li>Phân biệt &quot;activity bị che khuất tạm thời&quot; với &quot;activity bị huỷ hẳn&quot; — và biết dùng đúng callback cho từng tình huống.</li>
+<li>Hiểu vì sao xoay màn hình lại tạo lại (recreate) Activity, và cách giữ dữ liệu qua <code>onSaveInstanceState</code>.</li>
+<li>Biết <code>Application</code> class dùng để làm gì và khi nào nên dùng.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch06-lifecycle-demo/</code> — mở bằng Android Studio, chạy và đọc Logcat song song với chương này sẽ dễ hiểu hơn nhiều so với chỉ đọc.</p>
+</blockquote>
+<h2>6.1 Sơ đồ đầy đủ</h2>
+<p>Chương 1 đã cho xem sơ đồ rút gọn. Đây là bản đầy đủ với tên callback thật:</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+stateDiagram-v2
+    [*] --&gt; Created: onCreate()
+    Created --&gt; Started: onStart()
+    Started --&gt; Resumed: onResume()
+    Resumed --&gt; Started: onPause()
+    Started --&gt; Created: onStop()
+    Created --&gt; Started: onRestart() + onStart()
+    Created --&gt; Destroyed: onDestroy()
+    Destroyed --&gt; [*]
+
+    note right of Resumed
+        Foreground — nhận tương tác
+        người dùng trực tiếp
+    end note
+    note right of Started
+        Visible nhưng không ở
+        foreground (vd bị che 1 phần)
+    end note
+</pre></div>
+<p>Vài quy tắc cần nhớ, không cần học vẹt tên hàm:</p>
+<ul>
+<li><strong><code>onPause()</code> luôn được gọi trước khi activity mất hoàn toàn tương tác</strong> — kể cả khi chỉ bị che một phần (ví dụ có dialog nổi lên). Code trong <code>onPause()</code> phải cực nhanh, vì hệ thống có thể đang chờ nó xong để cho activity khác chạy tiếp.</li>
+<li><strong><code>onStop()</code> nghĩa là activity không còn hiển thị chút nào</strong>, nhưng vẫn còn tồn tại trong bộ nhớ — bấm nút Home rồi quay lại app sẽ thấy <code>onRestart()</code> → <code>onStart()</code> → <code>onResume()</code>, KHÔNG chạy lại <code>onCreate()</code>.</li>
+<li><strong><code>onDestroy()</code> không phải lúc nào cũng được gọi</strong> trước khi hệ thống giết tiến trình (Android có quyền kill tiến trình thẳng tay khi thiếu bộ nhớ, không đảm bảo gọi <code>onDestroy()</code>). Vì vậy đừng đặt logic &quot;phải chạy&quot; (như lưu dữ liệu quan trọng) vào <code>onDestroy()</code> — dùng <code>onPause()</code>/<code>onStop()</code> cho việc đó.</li>
+</ul>
+<h2>6.2 Configuration change: vì sao xoay màn hình lại &quot;chạy lại app&quot;?</h2>
+<p>Khi xoay màn hình, đổi ngôn ngữ hệ thống, hoặc bật/tắt chế độ tối, mặc định Android <strong>huỷ và tạo lại Activity</strong> — vì layout/resource phù hợp có thể khác (ví dụ layout riêng cho màn ngang, string riêng cho ngôn ngữ mới). Thứ tự:</p>
+<pre><code>onPause() → onStop() → onSaveInstanceState() → onDestroy() → onCreate() → onStart() → onResume()
+</code></pre>
+<p><code>onSaveInstanceState(Bundle outState)</code> là nơi bạn lưu tạm dữ liệu UI (ví dụ nội dung đang gõ dở, vị trí cuộn) vào <code>Bundle</code>, để đọc lại trong <code>onCreate(Bundle savedInstanceState)</code> ngay sau đó. Đây <strong>không phải chỗ lưu dữ liệu lâu dài</strong> — chỉ sống sót qua configuration change, mất hẳn nếu người dùng thoát app hẳn (xem Chương 12–13 cho lưu trữ thật sự).</p>
+<p>Code mẫu minh hoạ đúng cặp này:</p>
+<pre><code class="language-java">@Override
+protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putInt(&quot;counter&quot;, ++counter);
+}
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    if (savedInstanceState != null) {
+        counter = savedInstanceState.getInt(&quot;counter&quot;, 0);
+    }
+    ...
+}
+</code></pre>
+<h2>6.3 Hai Activity cùng lúc: ai onPause trước, ai onResume sau?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant A as MainActivity
+    participant B as SecondActivity
+
+    Note over A: đang Resumed
+    A-&gt;&gt;A: onPause()
+    A-&gt;&gt;B: startActivity(...)
+    B-&gt;&gt;B: onCreate()
+    B-&gt;&gt;B: onStart()
+    B-&gt;&gt;B: onResume()
+    Note over B: B ở foreground
+    A-&gt;&gt;A: onStop()
+    Note over A: A chỉ Stopped,&lt;br/&gt;chưa Destroyed
+</pre></div>
+<p>Thứ tự quan trọng cần nhớ: <strong><code>A.onPause()</code> chạy xong TRƯỚC KHI <code>B.onResume()</code> được gọi</strong>, nhưng <code>A.onStop()</code> chỉ chạy SAU KHI <code>B</code> đã lên foreground. Đây là lý do việc chuyển màn hình mượt — activity cũ chưa &quot;biến mất&quot; ngay, nó chỉ dừng hẳn sau khi activity mới đã sẵn sàng.</p>
+<h2>6.4 Application class — chạy trước cả Activity đầu tiên</h2>
+<pre><code class="language-java">public class DemoApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        // Khởi tạo thư viện dùng chung toàn app ở đây
+    }
+}
+</code></pre>
+<p>Khai báo trong manifest bằng <code>android:name=&quot;.DemoApplication&quot;</code> trên thẻ <code>&lt;application&gt;</code>. <code>Application.onCreate()</code> chạy đúng <strong>một lần</strong> khi tiến trình app khởi tạo — trước cả <code>MainActivity.onCreate()</code>. Dùng để khởi tạo thư viện toàn app (ví dụ crash reporting ở Chương 40), <strong>không dùng để làm việc nặng</strong> vì nó chặn toàn bộ quá trình khởi động app.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, mở Logcat lọc tag <code>Lifecycle</code>. Bấm nút mở màn hình 2, quan sát đúng thứ tự ở sơ đồ 6.3.</li>
+<li>Bấm Home rồi mở lại app từ danh sách app gần đây — xác nhận <code>onCreate()</code> KHÔNG chạy lại, chỉ có <code>onRestart()/onStart()/onResume()</code>.</li>
+<li>Nếu máy ảo bật được auto-rotate: xoay ngang rồi xoay dọc lại — quan sát toàn bộ chuỗi callback ở mục 6.2, và giá trị <code>counter</code> được giữ nguyên nhờ <code>onSaveInstanceState</code>.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Giữ tham chiếu Activity trong biến <code>static</code></strong>: gây rò rỉ bộ nhớ (memory leak) vì Activity không bao giờ được giải phóng dù đã <code>onDestroy()</code>. Nếu cần truyền dữ liệu sống lâu hơn Activity, dùng <code>Application</code> hoặc kiến trúc <code>ViewModel</code> (Chương 28).</li>
+<li><strong>Làm việc nặng (đọc file lớn, gọi mạng đồng bộ) trong <code>onCreate()</code></strong>: làm chậm hoặc treo màn hình khởi động — chuyển sang bất đồng bộ (Chương 19).</li>
+<li><strong>Tưởng <code>onDestroy()</code> luôn chạy để &quot;dọn dẹp&quot;</strong>: sai — hệ thống có thể kill tiến trình mà không gọi <code>onDestroy()</code>. Dọn tài nguyên quan trọng (đóng kết nối, huỷ listener) nên đặt ở <code>onPause()</code>/<code>onStop()</code>.</li>
+<li><strong>Quên gọi <code>super.onXxx()</code></strong>: hầu hết callback vòng đời bắt buộc gọi <code>super</code> trước, quên sẽ gây <code>SuperNotCalledException</code> khi build debug.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Vòng đời Activity là nền tảng chi phối gần như mọi chương sau — từ chỗ lưu dữ liệu, chạy tác vụ nền, đến khi nào an toàn để cập nhật UI. Chương 7 tạm rời vòng đời để tập trung vào layout và các loại View — thứ bạn nhìn thấy trực tiếp trên màn hình.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="../part0-setup/ch05-hello-world.html">&larr; 5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a><a class="next" href="./ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup) &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="./ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class="active"><a href="./ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="./ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="./ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="./ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="./ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 33: Giao tiếp liên ứng dụng nâng cao — App Links/Deep Link, Share sheet, PendingIntent</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Làm app của mình <strong>xuất hiện</strong> trong Share sheet của app khác (nhận chia sẻ), không chỉ gửi đi.</li>
+<li>Phân biệt custom scheme deep link (luôn hoạt động) và App Link http/https có <code>autoVerify</code> (cần xác minh domain).</li>
+<li>Ôn lại <code>PendingIntent</code> (Chương 20) từ góc nhìn liên ứng dụng: ai thực thi nó, và tại sao đó lại an toàn.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch33-app-links-share/</code>. Chương 8 đã dùng implicit Intent để <strong>gửi</strong> đi (mở trình duyệt); chương này mở rộng theo cả hai chiều gửi/nhận, và thêm cơ chế deep link.</p>
+</blockquote>
+<h2>33.1 Ba cơ chế, một nền tảng chung: Intent + <code>&lt;intent-filter&gt;</code></h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    subgraph Send[&quot;App của bạn GỬI Intent&quot;]
+        S1[&quot;ACTION_SEND&lt;br/&gt;(Chia sẻ văn bản — mục 33.2)&quot;]
+        S2[&quot;ACTION_VIEW + URI&lt;br/&gt;(Mở deep link — mục 33.3)&quot;]
+    end
+    subgraph System[&quot;Hệ thống Android&quot;]
+        Match[&quot;Tìm app nào có&lt;br/&gt;&amp;lt;intent-filter&amp;gt; khớp&quot;]
+    end
+    subgraph Receive[&quot;App của bạn CÓ THỂ LÀ ĐÍCH ĐẾN&quot;]
+        R1[&quot;Khai báo intent-filter&lt;br/&gt;ACTION_SEND, mimeType text/plain&quot;]
+        R2[&quot;Khai báo intent-filter&lt;br/&gt;ACTION_VIEW, scheme/host cụ thể&quot;]
+    end
+    Send --&gt; Match --&gt; Receive
+</pre></div>
+<p>Tất cả đều dựa trên implicit Intent đã học ở Chương 8 — điểm mới ở chương này là <strong>app của bạn cũng có thể là bên nhận</strong>, không chỉ bên gửi.</p>
+<h2>33.2 Share sheet — vừa gửi, vừa nhận</h2>
+<p><strong>Gửi</strong> (mở hộp thoại &quot;Chia sẻ qua&quot;):</p>
+<pre><code class="language-java">Intent sendIntent = new Intent(Intent.ACTION_SEND);
+sendIntent.setType(&quot;text/plain&quot;);
+sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+startActivity(Intent.createChooser(sendIntent, &quot;Chia sẻ qua&quot;));
+</code></pre>
+<p><code>Intent.createChooser(...)</code> <strong>luôn</strong> hiện hộp thoại chọn app, kể cả khi chỉ có một app khớp — khác gọi thẳng <code>startActivity(sendIntent)</code> (có thể tự mở app duy nhất khớp mà không hỏi, gây bất ngờ nếu người dùng không chủ ý). Luôn dùng <code>createChooser</code> cho hành động chia sẻ.</p>
+<p><strong>Nhận</strong> — khai báo <code>&lt;intent-filter&gt;</code> để app xuất hiện trong Share sheet của <strong>app khác</strong>:</p>
+<pre><code class="language-xml">&lt;activity android:name=&quot;.MainActivity&quot; android:exported=&quot;true&quot;&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.SEND&quot; /&gt;
+        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;
+        &lt;data android:mimeType=&quot;text/plain&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;
+</code></pre>
+<p>Đọc dữ liệu được chia sẻ tới:</p>
+<pre><code class="language-java">if (Intent.ACTION_SEND.equals(intent.getAction()) &amp;&amp; intent.getType().startsWith(&quot;text/&quot;)) {
+    String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+    // hiển thị sharedText
+}
+</code></pre>
+<h2>33.3 Deep Link bằng custom scheme — luôn hoạt động, dễ test</h2>
+<pre><code class="language-xml">&lt;activity android:name=&quot;.NoteDetailActivity&quot; android:exported=&quot;true&quot;&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;
+        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;
+        &lt;category android:name=&quot;android.intent.category.BROWSABLE&quot; /&gt;
+        &lt;data android:scheme=&quot;ch33share&quot; android:host=&quot;note&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;
+</code></pre>
+<p><code>ch33share://note/42</code> khớp <code>scheme=&quot;ch33share&quot;</code> + <code>host=&quot;note&quot;</code> — phần <code>/42</code> còn lại đọc được qua <code>Uri.getLastPathSegment()</code>:</p>
+<pre><code class="language-java">Uri uri = getIntent().getData();
+String noteId = uri.getLastPathSegment();   // &quot;42&quot;
+</code></pre>
+<p><code>category.BROWSABLE</code> cho phép trình duyệt/app khác mở được link này (không chỉ code trong chính app gọi <code>startActivity</code>) — test trực tiếp từ dòng lệnh, mô phỏng một nguồn bên ngoài bất kỳ:</p>
+<pre><code class="language-powershell">adb shell am start -a android.intent.action.VIEW -d &quot;ch33share://note/99&quot;
+</code></pre>
+<p>Ưu điểm: hoạt động <strong>ngay lập tức</strong>, không cần cấu hình gì thêm. Nhược điểm: nếu chưa cài app, hệ thống không biết phải làm gì với link này (không tự động rơi về một trang web dự phòng như App Link thật).</p>
+<h2>33.4 App Link http/https — cần xác minh domain (<code>autoVerify</code>)</h2>
+<pre><code class="language-xml">&lt;intent-filter android:autoVerify=&quot;true&quot;&gt;
+    &lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;
+    &lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;
+    &lt;category android:name=&quot;android.intent.category.BROWSABLE&quot; /&gt;
+    &lt;data android:scheme=&quot;https&quot; android:host=&quot;example.com&quot; android:pathPrefix=&quot;/note&quot; /&gt;
+&lt;/intent-filter&gt;
+</code></pre>
+<div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant Store as Google Play (lúc cài app)
+    participant Domain as example.com
+    participant System as Android System
+
+    Store-&gt;&gt;Domain: Tải .well-known/assetlinks.json
+    Domain--&gt;&gt;Store: Xác nhận app này ĐƯỢC ỦY QUYỀN&lt;br/&gt;xử lý link của domain
+    Note over System: Từ giờ, bấm link https://example.com/note/42&lt;br/&gt;MỞ THẲNG APP, không hỏi &quot;Open with&quot;
+</pre></div>
+<p>Khác custom scheme, App Link thật đòi hỏi bạn <strong>sở hữu domain</strong> và host file <code>/.well-known/assetlinks.json</code> chứng minh app được uỷ quyền — hệ thống tự tải và kiểm tra file này lúc cài đặt (<code>autoVerify=&quot;true&quot;</code>). Đổi lại, một link <code>https://example.com/note/42</code> bấm từ bất kỳ đâu (tin nhắn, email, trình duyệt) sẽ <strong>mở thẳng app</strong>, không hiện hộp thoại &quot;Open with&quot; như custom scheme có thể gặp khi nhiều app cùng khai báo trùng scheme. Code mẫu khai báo cấu hình này chỉ để bạn thấy đúng cú pháp — không hoạt động thật trên máy bạn vì <code>example.com</code> không phải domain bạn sở hữu.</p>
+<h2>33.5 <code>PendingIntent</code> nhìn lại từ góc độ liên ứng dụng</h2>
+<p>Chương 20 đã dùng <code>PendingIntent</code> để notification &quot;biết cách&quot; mở Activity dù app không đang chạy. Nhìn từ góc độ chương này: <code>PendingIntent</code> chính là cách an toàn để <strong>trao quyền thực thi một Intent cho một thành phần bên ngoài</strong> (ở đó là hệ thống Notification) — tương tự tinh thần Provider (Chương 32) trao quyền truy cập dữ liệu có kiểm soát, thay vì mở toang. <code>FLAG_IMMUTABLE</code> (đã dùng ở Chương 20) đảm bảo bên nhận <code>PendingIntent</code> không thể chỉnh sửa nội dung Intent bên trong trước khi thực thi — một biện pháp an toàn khi trao quyền cho bên ngoài.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, thử luồng chia sẻ cả hai chiều (gửi đi và nhận từ app khác) như mô tả trong README.</li>
+<li>Mở deep link bằng nút trong app, rồi thử lại bằng lệnh <code>adb</code> — xác nhận cả hai cách đều tới đúng <code>NoteDetailActivity</code> với đúng ID.</li>
+<li>Thử đổi <code>android:pathPrefix=&quot;/note&quot;</code> thành <code>/notes</code> (thêm &quot;s&quot;) trong intent-filter App Link — không cần test thật (vì không sở hữu domain), chỉ giải thích bằng lời tại sao link <code>https://example.com/note/42</code> sẽ không còn khớp nữa nếu áp dụng thay đổi này cho app thật.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Quên <code>category.BROWSABLE</code></strong>: trình duyệt/nguồn bên ngoài không mở được link, dù <code>category.DEFAULT</code> đã có — cả hai category đều cần thiết cho deep link mở từ nguồn ngoài app.</li>
+<li><strong>Dùng <code>startActivity()</code> trực tiếp thay vì <code>Intent.createChooser()</code></strong> cho hành động chia sẻ: có thể tự mở thẳng một app cụ thể mà không hỏi, gây trải nghiệm khó lường nếu máy chỉ cài đúng một app khớp.</li>
+<li><strong>Nhầm lẫn custom scheme với App Link thật</strong>: tưởng chỉ cần khai báo <code>autoVerify=&quot;true&quot;</code> là xong — thực chất phải sở hữu domain và host đúng file xác minh, nếu không hệ thống âm thầm không xác minh được và rơi về hành vi hỏi &quot;Open with&quot; như custom scheme thường.</li>
+<li><strong>Đọc <code>Intent.EXTRA_TEXT</code> mà không kiểm tra <code>intent.getType()</code></strong>: một app khác có thể gửi <code>ACTION_SEND</code> với kiểu dữ liệu khác (ảnh, file) — luôn kiểm tra đúng mimeType mong đợi trước khi xử lý.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết đầy đủ các cơ chế giao tiếp liên ứng dụng ở tầng Intent — gửi/nhận chia sẻ, mở màn hình qua deep link. Chương 34 đi sâu hơn nữa: giao tiếp liên tiến trình (IPC) thật sự bằng AIDL và Bound Service, cho phép hai app gọi thẳng phương thức của nhau, không chỉ trao đổi dữ liệu qua Intent.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch32-content-provider.html">&larr; 32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a><a class="next" href="./ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="./ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="./ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="./ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class="active"><a href="./ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="./ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 4: Tạo project đầu tiên — cấu trúc project, Gradle, AndroidManifest.xml</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Tạo được một project Android mới trong Android Studio.</li>
+<li>Đọc hiểu cấu trúc thư mục mặc định của project — biết file nào để làm gì.</li>
+<li>Hiểu vai trò của <code>build.gradle</code> (cấp project và cấp module) trong việc build ứng dụng.</li>
+<li>Đọc hiểu sâu hơn <code>AndroidManifest.xml</code> so với cái nhìn sơ bộ ở Chương 1.</li>
+</ul>
+<blockquote>
+<p>Code mẫu đầy đủ của chương này (và Chương 5) nằm ở <code>code/ch04-05-hello-world/</code> trong repo — mở
+bằng Android Studio để chạy trực tiếp thay vì gõ lại từng file.</p>
+</blockquote>
+<h2>4.1 Tạo project mới</h2>
+<p>Trong Android Studio: <strong>File → New → New Project → Empty Views Activity</strong>, sau đó điền:</p>
+<ul>
+<li><strong>Name</strong>: <code>HelloAndroid</code></li>
+<li><strong>Package name</strong>: <code>vn.example.helloandroid</code> (định danh duy nhất, xem lại 1.5)</li>
+<li><strong>Language</strong>: Java</li>
+<li><strong>Minimum SDK</strong>: API 24 trở lên (đủ để dùng gần hết API hiện đại mà vẫn tương thích máy cũ)</li>
+</ul>
+<p>Android Studio sinh ra project theo đúng cấu trúc chuẩn dưới đây.</p>
+<h2>4.2 Cấu trúc thư mục project</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Root[&quot;HelloAndroid/ (project gốc)&quot;] --&gt; Settings[&quot;settings.gradle&lt;br/&gt;khai báo module nào thuộc project&quot;]
+    Root --&gt; RootBuild[&quot;build.gradle (cấp project)&lt;br/&gt;khai báo plugin dùng chung&quot;]
+    Root --&gt; GradleProps[&quot;gradle.properties&lt;br/&gt;cấu hình cho Gradle daemon&quot;]
+    Root --&gt; App[&quot;app/ (module chính)&quot;]
+
+    App --&gt; AppBuild[&quot;build.gradle (cấp module)&lt;br/&gt;compileSdk, minSdk, dependencies...&quot;]
+    App --&gt; Manifest[&quot;src/main/AndroidManifest.xml&quot;]
+    App --&gt; Java[&quot;src/main/java/vn/example/helloandroid/&lt;br/&gt;MainActivity.java&quot;]
+    App --&gt; Res[&quot;src/main/res/&quot;]
+
+    Res --&gt; Layout[&quot;layout/activity_main.xml&lt;br/&gt;(giao diện XML)&quot;]
+    Res --&gt; Values[&quot;values/strings.xml, themes.xml&lt;br/&gt;(tài nguyên: chuỗi, màu, style)&quot;]
+</pre></div>
+<p>Ba điều quan trọng cần phân biệt ngay:</p>
+<ol>
+<li><strong><code>build.gradle</code> cấp project</strong> (nằm ở thư mục gốc) khai báo plugin dùng chung cho toàn bộ project — bạn hiếm khi sửa file này.</li>
+<li><strong><code>build.gradle</code> cấp module</strong> (<code>app/build.gradle</code>) mới là nơi bạn thường sửa: thêm dependency (thư viện), đổi <code>minSdk</code>/<code>targetSdk</code>, cấu hình build type (debug/release).</li>
+<li><strong><code>settings.gradle</code></strong> khai báo project gồm những module nào (<code>include ':app'</code>) — một app lớn có thể tách nhiều module, sách này dùng 1 module <code>app</code> xuyên suốt cho đơn giản.</li>
+</ol>
+<h2>4.3 Đọc <code>app/build.gradle</code></h2>
+<pre><code class="language-groovy">android {
+    namespace 'vn.example.helloandroid'
+    compileSdk 34              // phiên bản SDK dùng để BIÊN DỊCH code
+
+    defaultConfig {
+        applicationId &quot;vn.example.helloandroid&quot;  // ID duy nhất khi phát hành (Chương 39)
+        minSdk 24                                 // phiên bản THẤP NHẤT máy người dùng cần có
+        targetSdk 34                               // phiên bản bạn đã test hành vi
+        versionCode 1                              // số nguyên tăng dần mỗi lần phát hành
+        versionName &quot;1.0&quot;                          // chuỗi hiển thị cho người dùng
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+}
+</code></pre>
+<p><code>compileSdk</code> khác <code>minSdk</code>/<code>targetSdk</code> — đây là điểm hay gây nhầm cho người mới:</p>
+<ul>
+<li><code>compileSdk</code>: bộ API bạn được PHÉP DÙNG khi viết code (luôn nên là bản mới nhất bạn có).</li>
+<li><code>minSdk</code>/<code>targetSdk</code>: hành vi RUNTIME trên máy người dùng (đã nói ở 1.3).</li>
+</ul>
+<p>Phần <code>dependencies</code> khai báo thư viện ngoài — cú pháp <code>implementation 'group:artifact:version'</code>. Các chương sau (Room, Retrofit, Hilt...) đều thêm dòng vào đúng khối này.</p>
+<h2>4.4 Đọc lại <code>AndroidManifest.xml</code> — sâu hơn Chương 1</h2>
+<pre><code class="language-xml">&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+
+    &lt;application
+        android:allowBackup=&quot;true&quot;
+        android:icon=&quot;@android:drawable/sym_def_app_icon&quot;
+        android:label=&quot;@string/app_name&quot;
+        android:theme=&quot;@style/Theme.HelloAndroid&quot;&gt;
+
+        &lt;activity
+            android:name=&quot;.MainActivity&quot;
+            android:exported=&quot;true&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</code></pre>
+<p>Chú ý <code>android:exported=&quot;true&quot;</code> trên <code>&lt;activity&gt;</code> — <strong>bắt buộc phải khai báo rõ từ Android 12 (API 31)</strong> cho bất kỳ Activity/Service/Receiver nào có <code>&lt;intent-filter&gt;</code>, nếu không app sẽ không build được. Đây là ví dụ cụ thể của việc &quot;API level ảnh hưởng tới cách bạn viết manifest&quot; đã nói ở Chương 1.</p>
+<p><code>android:label</code> và các chuỗi hiển thị không viết cứng trong manifest mà tham chiếu tới <code>@string/...</code> — định nghĩa trong <code>res/values/strings.xml</code>. Đây là quy ước bắt buộc cho đa ngôn ngữ (chi tiết Chương 11), nên làm quen từ bây giờ thay vì viết chuỗi cứng.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Mở code mẫu <code>code/ch04-05-hello-world/</code> bằng Android Studio, để Gradle sync xong (chưa cần Run).</li>
+<li>Trong <code>app/build.gradle</code>, thử đổi <code>minSdk</code> xuống 21 rồi sync lại — quan sát Android Studio có cảnh báo API nào không dùng được ở API 21 không (thử nếu có dùng API mới trong code, ở đây có thể chưa thấy vì code còn đơn giản).</li>
+<li>Mở <code>AndroidManifest.xml</code>, thử xoá <code>android:exported=&quot;true&quot;</code> rồi build — đọc thông báo lỗi Gradle đưa ra, đối chiếu với giải thích ở mục 4.4.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>&quot;SDK location not found&quot;</strong>: thiếu file <code>local.properties</code> (Android Studio tự tạo khi mở project lần đầu, không nên xoá hay commit file này lên git vì nó chứa đường dẫn máy cá nhân).</li>
+<li><strong>Gradle sync failed do version plugin không khớp</strong>: phiên bản Android Gradle Plugin (khai báo ở <code>build.gradle</code> cấp project) cần tương thích với phiên bản Android Studio đang dùng — Android Studio thường tự đề xuất bản phù hợp khi mở project cũ.</li>
+<li><strong>Quên <code>android:exported</code></strong>: build lỗi ngay với thông báo rõ ràng tên Activity thiếu khai báo — đọc kỹ thông báo lỗi Gradle thay vì đoán, phần lớn lỗi manifest đều chỉ đúng dòng.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã hiểu cấu trúc project, vai trò từng file Gradle, và đọc sâu hơn AndroidManifest.xml. Chương 5 sẽ dùng chính project này: sửa giao diện, chạy lên máy ảo/thiết bị thật, và build APK bằng dòng lệnh.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch03-may-ao-thiet-bi-that.html">&larr; 3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a><a class="next" href="./ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

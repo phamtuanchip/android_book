@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>28. MVVM, ViewModel &amp; LiveData — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class="active"><a href="./ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="./ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="./ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="./ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 28: MVVM, ViewModel &amp; LiveData</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu vấn đề cụ thể <code>ViewModel</code> giải quyết: dữ liệu sống sót qua configuration change (Chương 6) mà không cần <code>onSaveInstanceState</code>.</li>
+<li>Tách Activity thành ba lớp trách nhiệm theo mô hình MVVM: View, ViewModel, Model (Repository — đã có từ Chương 23).</li>
+<li>Biết <code>ViewModelProvider</code> cấp phát instance đúng cách, và vòng đời <code>ViewModel</code> khác vòng đời Activity ra sao.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch28-mvvm-livedata/</code> — chính thức hoá kiến trúc cho app đã xây từ Chương 13/22/23.</p>
+</blockquote>
+<h2>28.1 Vấn đề cụ thể: xoay màn hình làm mất gì?</h2>
+<p>Nhớ lại Chương 6: xoay màn hình huỷ và tạo lại Activity. Ở bản Chương 23, nếu <code>MainActivity</code> đang tự giữ một <code>PostRepository</code> và đang chờ kết quả <code>refresh()</code>, xoay màn hình giữa chừng sẽ <strong>huỷ luôn cả Activity đang giữ callback đó</strong> — kết quả trả về sau (nếu Activity cũ đã bị huỷ) rơi vào khoảng không, hoặc tệ hơn, Activity mới lại tự gọi <code>refresh()</code> từ đầu, gây gọi mạng trùng lặp lãng phí.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    subgraph Before[&quot;Không có ViewModel (Chương 23)&quot;]
+        B1[&quot;Activity tạo Repository&lt;br/&gt;trong onCreate()&quot;] --&gt; B2[&quot;Gọi refresh(), đang chờ...&quot;]
+        B2 --&gt; B3[&quot;Xoay màn hình →&lt;br/&gt;Activity CŨ bị huỷ&quot;]
+        B3 --&gt; B4[&quot;Activity MỚI tạo lại,&lt;br/&gt;Repository MỚI, gọi refresh() LẠI&quot;]
+    end
+    subgraph After[&quot;Có ViewModel (chương này)&quot;]
+        A1[&quot;ViewModelProvider tạo&lt;br/&gt;PostViewModel LẦN ĐẦU&quot;] --&gt; A2[&quot;Gọi refresh(), đang chờ...&quot;]
+        A2 --&gt; A3[&quot;Xoay màn hình →&lt;br/&gt;Activity bị huỷ/tạo lại&quot;]
+        A3 --&gt; A4[&quot;ViewModelProvider trả về&lt;br/&gt;CÙNG MỘT instance ViewModel&lt;br/&gt;— vẫn đang chờ đúng request cũ&quot;]
+    end
+</pre></div>
+<h2>28.2 <code>ViewModel</code> sống lâu hơn Activity như thế nào?</h2>
+<pre><code class="language-java">public class PostViewModel extends AndroidViewModel {
+    private final PostRepository repository;
+
+    public PostViewModel(@NonNull Application application) {
+        super(application);
+        repository = new PostRepository(application);
+        refresh();
+    }
+    // ...
+}
+</code></pre>
+<pre><code class="language-java">viewModel = new ViewModelProvider(this).get(PostViewModel.class);
+</code></pre>
+<p><code>ViewModelProvider(this).get(...)</code> không phải lúc nào cũng tạo instance mới — nó được gắn với một phạm vi sống (ở đây là Activity, tính luôn qua các lần bị huỷ/tạo lại do configuration change) do hệ thống Android quản lý ở tầng thấp hơn cả Activity thường thấy. Kết quả: <strong>cùng một instance <code>PostViewModel</code></strong> được trả về xuyên suốt vòng đời &quot;logic&quot; của màn hình, chỉ thật sự bị huỷ (<code>onCleared()</code>) khi Activity kết thúc hẳn (người dùng bấm Back, không phải xoay màn hình).</p>
+<p><code>AndroidViewModel</code> (thay vì <code>ViewModel</code> trần) có sẵn <code>Application</code> Context qua <code>getApplication()</code> — dùng khi ViewModel cần Context để khởi tạo thứ gì đó (ở đây là <code>PostRepository</code> cần Context cho Room, Chương 13). Lưu ý <strong>Application Context là an toàn để giữ lâu dài</strong>, khác hẳn Activity Context (nguồn rò rỉ bộ nhớ đã cảnh báo từ Chương 6) — đây là lý do <code>ViewModel</code> không bao giờ được phép giữ tham chiếu tới Activity/View.</p>
+<h2>28.3 Ba lớp trách nhiệm của MVVM</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    View[&quot;View (MainActivity)&lt;br/&gt;Hiển thị + chuyển tiếp thao tác&quot;] &lt;--&gt;|&quot;observe() LiveData&lt;br/&gt;gọi hàm ViewModel&quot;| ViewModel[&quot;ViewModel (PostViewModel)&lt;br/&gt;Trạng thái + điều phối&quot;]
+    ViewModel &lt;--&gt;|&quot;gọi Repository&quot;| Model[&quot;Model (PostRepository, Chương 23)&lt;br/&gt;Room + Retrofit&quot;]
+</pre></div>
+<pre><code class="language-java">public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(this).get(PostViewModel.class);
+
+        viewModel.getPosts().observe(this, adapter::submitList);
+        viewModel.getLoading().observe(this, isLoading -&gt; ...);
+        viewModel.getErrorMessage().observe(this, message -&gt; ...);
+
+        binding.buttonLoad.setOnClickListener(v -&gt; viewModel.refresh());
+    }
+}
+</code></pre>
+<p>So với <code>MainActivity</code> ở Chương 23, Activity giờ <strong>không còn logic nghiệp vụ nào</strong> — không tự tạo <code>PostRepository</code>, không tự viết callback xử lý thành công/thất bại. Nó chỉ làm hai việc: <strong>quan sát</strong> (<code>observe</code>) dữ liệu từ ViewModel để cập nhật UI, và <strong>chuyển tiếp</strong> thao tác người dùng (<code>refresh()</code>) vào ViewModel. Toàn bộ trạng thái loading/lỗi giờ là <code>LiveData</code> do ViewModel quản lý:</p>
+<pre><code class="language-java">private final MutableLiveData&lt;Boolean&gt; loading = new MutableLiveData&lt;&gt;(false);
+private final MutableLiveData&lt;String&gt; errorMessage = new MutableLiveData&lt;&gt;();
+
+public void refresh() {
+    loading.setValue(true);
+    repository.refresh(new PostRepository.RefreshCallback() {
+        @Override
+        public void onSuccess() {
+            loading.setValue(false);
+            errorMessage.setValue(null);
+        }
+        @Override
+        public void onError(String message) {
+            loading.setValue(false);
+            errorMessage.setValue(message);
+        }
+    });
+}
+</code></pre>
+<h2>28.4 Vì sao Activity mỏng đi lại quan trọng?</h2>
+<p>Đây không phải &quot;làm cho đẹp code&quot; thuần tuý — Activity càng ít logic, càng dễ:</p>
+<ul>
+<li><strong>Test được logic mà không cần UI thật</strong>: <code>PostViewModel</code> không đụng gì tới <code>View</code>/<code>Activity</code>, có thể viết Unit test cho nó (Chương 24) mà không cần Espresso (Chương 25).</li>
+<li><strong>Không lo rò rỉ bộ nhớ do giữ sai Context</strong>: quy tắc &quot;ViewModel không giữ Activity/View&quot; giúp tránh thẳng lỗi kinh điển đã cảnh báo từ Chương 6/12.</li>
+<li><strong>Activity/Fragment có thể thay đổi (thậm chí đổi từ Activity sang Fragment) mà không đụng tới logic nghiệp vụ</strong> — vì logic đó nằm trọn trong ViewModel, độc lập với loại &quot;View&quot; đang hiển thị nó.</li>
+</ul>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, xoay màn hình (nếu máy ảo hỗ trợ) đúng lúc ProgressBar đang chạy — xác nhận trạng thái loading không bị &quot;giật&quot; về false rồi lại true.</li>
+<li>Thêm một <code>LiveData&lt;Integer&gt;</code> mới trong <code>PostViewModel</code> đếm số lần <code>refresh()</code> đã được gọi, hiển thị nó trong <code>MainActivity</code>.</li>
+<li>Thử viết một Unit test (Chương 24) đơn giản cho <code>PostViewModel</code> mà không cần Espresso — gợi ý: dùng <code>InstantTaskExecutorRule</code> của thư viện <code>androidx.arch.core:core-testing</code> để <code>LiveData</code> phát giá trị ngay lập tức trong môi trường test (tìm hiểu thêm ngoài phạm vi sách nếu muốn thử).</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Giữ tham chiếu <code>Activity</code>/<code>View</code>/<code>Context</code> (không phải Application) bên trong ViewModel</strong>: rò rỉ bộ nhớ nghiêm trọng — ViewModel sống lâu hơn Activity, giữ Activity cũ mãi không giải phóng được.</li>
+<li><strong>Tạo <code>ViewModel</code> bằng <code>new PostViewModel(...)</code> trực tiếp thay vì qua <code>ViewModelProvider</code></strong>: mất hoàn toàn lợi ích &quot;sống sót qua configuration change&quot; — về bản chất chỉ là một object Java bình thường, bị huỷ theo Activity như cũ.</li>
+<li><strong>Đặt <code>LiveData</code> trả về kiểu <code>MutableLiveData</code> công khai</strong> (thay vì chỉ để <code>LiveData</code> không sửa được ra ngoài, giữ <code>MutableLiveData</code> <code>private</code>): View bên ngoài vô tình tự ý gọi <code>setValue()</code>, phá vỡ nguyên tắc &quot;chỉ ViewModel được sửa trạng thái của chính nó&quot;.</li>
+<li><strong>Nhồi logic hiển thị thuần UI (định dạng ngày giờ theo layout cụ thể, kích thước màn hình...) vào ViewModel</strong>: ViewModel không nên biết gì về <code>View</code>/<code>Resources</code> cụ thể của UI — ranh giới này dễ bị lạm dụng nếu không cẩn thận.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã chính thức hoá kiến trúc MVVM cho app xây dựng xuyên suốt từ Chương 13. Chương 29 giới thiệu Hilt — tự động hoá việc khởi tạo và truyền các đối tượng như <code>PostRepository</code>, <code>AppDatabase</code> (hiện đang tự tay viết singleton) thay vì làm thủ công.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="../part5-testing-security/ch27-bao-mat-co-ban.html">&larr; 27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a><a class="next" href="./ch29-di-hilt.html">29. Dependency Injection với Hilt &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

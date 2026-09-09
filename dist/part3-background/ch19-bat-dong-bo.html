@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin) — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="./ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="./ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="./ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class="active"><a href="./ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="./ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 19: Xử lý bất đồng bộ — Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hệ thống hoá lại một nguyên tắc đã lặp lại từ Chương 13: <strong>không làm việc nặng trên main thread</strong>.</li>
+<li>Hiểu vì sao dùng <code>ExecutorService</code> thay vì tự tạo <code>Thread</code> trực tiếp trong hầu hết trường hợp.</li>
+<li>Biết cách huỷ một tác vụ nền đúng cách (cooperative cancellation), không phải &quot;giết&quot; thread thô bạo.</li>
+<li>Biết <code>AsyncTask</code> đã lỗi thời, và Kotlin Coroutine tồn tại như một hướng thay thế hiện đại (ngoài phạm vi code Java của sách).</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch19-async-thread-executor/</code>.</p>
+</blockquote>
+<h2>19.1 Vì sao main thread quan trọng đến vậy?</h2>
+<p>Android vẽ lại giao diện khoảng 60 lần/giây (mỗi khung hình ~16ms) — toàn bộ việc này chạy trên <strong>một thread duy nhất gọi là main thread</strong> (cũng là thread chạy mọi callback vòng đời Activity/Fragment, mọi <code>onClickListener</code>). Bất kỳ đoạn code nào chạy quá lâu trên thread này đều làm khung hình bị bỏ lỡ (giật, lag) — và nếu chặn quá ~5 giây, hệ thống hiện hộp thoại &quot;Ứng dụng không phản hồi&quot; (ANR) rồi có thể tự đóng app.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    MainThread[&quot;Main thread&quot;] --&gt; Draw[&quot;Vẽ UI mỗi ~16ms&quot;]
+    MainThread --&gt; Click[&quot;Xử lý sự kiện chạm/click&quot;]
+    MainThread --&gt; Lifecycle[&quot;Gọi onCreate/onResume...&quot;]
+    Heavy[&quot;Việc nặng (tính toán, mạng, đĩa)&quot;] -.-&gt;|&quot;chạy nhầm ở đây&quot;| MainThread
+    MainThread -.-&gt;|&quot;bị chặn quá lâu&quot;| ANR[&quot;ANR — hệ thống hỏi có đóng app không&quot;]
+</pre></div>
+<p>Đây chính là lý do xuyên suốt sách luôn nhấn mạnh: Room (Chương 13) tự chặn bạn làm sai, file I/O (Chương 14) và giờ là mọi tính toán nặng đều cần chuyển ra khỏi main thread.</p>
+<h2>19.2 <code>Thread</code> thô — hoạt động nhưng thiếu kiểm soát</h2>
+<pre><code class="language-java">new Thread(() -&gt; {
+    int result = doHeavyWork();
+    runOnUiThread(() -&gt; textResult.setText(String.valueOf(result)));
+}).start();
+</code></pre>
+<p>Cách này <strong>đúng về nguyên tắc</strong> (việc nặng chạy ngoài main thread, cập nhật UI quay lại qua <code>runOnUiThread()</code>), nhưng có vấn đề khi dùng ở quy mô lớn hơn: mỗi <code>new Thread()</code> tạo ra một thread hệ điều hành thật (tốn tài nguyên để tạo/huỷ), không có cơ chế quản lý số lượng thread đang chạy cùng lúc, và không dễ huỷ giữa chừng một cách có tổ chức.</p>
+<h2>19.3 <code>ExecutorService</code> — quản lý thread có tổ chức</h2>
+<pre><code class="language-java">private final ExecutorService executor = Executors.newSingleThreadExecutor();
+
+currentTask = executor.submit(() -&gt; {
+    int result = PrimeCounter.countPrimes(limit, percent -&gt;
+            runOnUiThread(() -&gt; binding.progressBar.setProgress(percent)));
+    runOnUiThread(() -&gt; binding.textStatus.setText(&quot;Xong: &quot; + result));
+});
+</code></pre>
+<p><code>Executors.newSingleThreadExecutor()</code> tạo ra <strong>một thread nền duy nhất, tái sử dụng</strong> cho mọi task gửi vào qua <code>submit()</code> — task xếp hàng chạy tuần tự, không tạo/huỷ thread liên tục như cách 19.2. Executor cũng đã được dùng ở Chương 13 (Room) và Chương 14 (file I/O) — chương này chính thức hệ thống hoá lại mẫu đó.</p>
+<p>Vài loại Executor thường gặp:</p>
+<table>
+<thead>
+<tr>
+<th>Loại</th>
+<th>Khi nào dùng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Executors.newSingleThreadExecutor()</code></td>
+<td>Các task cần chạy TUẦN TỰ, không chồng chéo (như code mẫu)</td>
+</tr>
+<tr>
+<td><code>Executors.newFixedThreadPool(n)</code></td>
+<td>Nhiều task độc lập, muốn chạy song song có giới hạn</td>
+</tr>
+<tr>
+<td><code>Executors.newCachedThreadPool()</code></td>
+<td>Nhiều task ngắn, số lượng biến động — cẩn thận có thể tạo quá nhiều thread nếu dùng sai</td>
+</tr>
+</tbody>
+</table>
+<h2>19.4 Huỷ tác vụ đúng cách — &quot;hợp tác&quot;, không &quot;ép buộc&quot;</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant UI as MainActivity
+    participant Task as Task (thread nền)
+
+    UI-&gt;&gt;Task: currentTask.cancel(true)
+    Note over Task: cancel(true) chỉ ĐẶT CỜ interrupted&lt;br/&gt;lên thread, KHÔNG tự dừng ngay
+    Task-&gt;&gt;Task: Vòng lặp tự kiểm tra&lt;br/&gt;Thread.currentThread().isInterrupted()
+    Task-&gt;&gt;Task: Thấy true → chủ động return sớm
+    Task--&gt;&gt;UI: runOnUiThread() báo kết quả đã huỷ
+</pre></div>
+<pre><code class="language-java">public static int countPrimes(int limit, ProgressCallback callback) {
+    int count = 0;
+    for (int n = 2; n &lt;= limit; n++) {
+        if (Thread.currentThread().isInterrupted()) {
+            return count;   // dừng SỚM một cách chủ động
+        }
+        if (isPrime(n)) count++;
+    }
+    return count;
+}
+</code></pre>
+<p>Điểm quan trọng nhất chương này: <code>Future.cancel(true)</code> <strong>không có phép màu nào tự dừng vòng lặp đang chạy</strong> — nó chỉ gọi <code>Thread.interrupt()</code>, đặt một cờ nội bộ lên. Code bên trong task phải <strong>tự nguyện kiểm tra</strong> cờ đó (<code>isInterrupted()</code>) tại những điểm hợp lý (ở đây là đầu mỗi vòng lặp) và tự quyết định dừng. Bỏ qua bước kiểm tra này, <code>cancel(true)</code> gọi xong nhưng vòng lặp vẫn chạy tới hết — hiện tượng &quot;bấm Huỷ mà không huỷ&quot; rất khó hiểu nếu không biết cơ chế này.</p>
+<h2>19.5 <code>AsyncTask</code> đã lỗi thời — vì sao không dùng?</h2>
+<p>Nhiều tài liệu cũ dạy <code>AsyncTask</code> — lớp này đã bị Google <strong>đánh dấu deprecated (API 30) và gỡ bỏ hoàn toàn khỏi Android 13 SDK</strong>. Lý do: hành vi chạy tuần tự/song song của nó thay đổi khó lường giữa các phiên bản Android, và dễ gây rò rỉ Activity nếu dùng sai. Nếu gặp code cũ dùng <code>AsyncTask</code>, nên chuyển sang <code>ExecutorService</code> (như chương này) hoặc <code>WorkManager</code> (Chương 18) tuỳ tình huống.</p>
+<h2>19.6 Kotlin Coroutine — hướng đi hiện đại (ngoài phạm vi code Java)</h2>
+<p>Cộng đồng Android hiện đại phần lớn đã chuyển sang <strong>Kotlin Coroutines</strong> cho xử lý bất đồng bộ — cú pháp gần giống code đồng bộ thông thường (<code>suspend fun</code>) nhưng chạy không chặn thread, tích hợp sẵn cơ chế huỷ (<code>cancel()</code> hợp tác tương tự mục 19.4 nhưng được ngôn ngữ hỗ trợ trực tiếp) và xử lý lỗi gọn hơn nhiều so với callback lồng nhau. Sách này viết bằng Java nên không đi sâu vào cú pháp Coroutine, nhưng <strong>nên biết tên và khái niệm này tồn tại</strong> — nếu sau này chuyển một phần project sang Kotlin (hoàn toàn có thể làm xen kẽ trong cùng một project Android), đây là hướng đáng tìm hiểu tiếp theo.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, bấm Bắt đầu rồi bấm Huỷ giữa chừng — xác nhận số lượng nguyên tố hiển thị đúng bằng số đã đếm được TỚI THỜI ĐIỂM huỷ, không phải 0.</li>
+<li>Thử xoá dòng kiểm tra <code>Thread.currentThread().isInterrupted()</code> trong <code>PrimeCounter.countPrimes()</code>, build lại — bấm Huỷ và quan sát tác vụ vẫn chạy tới hết (minh chứng trực tiếp cho mục 19.4).</li>
+<li>Đổi <code>Executors.newSingleThreadExecutor()</code> thành <code>Executors.newFixedThreadPool(2)</code>, thử bấm Bắt đầu hai lần liên tiếp với hai giá trị giới hạn khác nhau — quan sát cả hai cùng chạy song song thay vì xếp hàng.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Cập nhật View trực tiếp từ trong task chạy trên Executor</strong> (quên <code>runOnUiThread()</code>): ném <code>CalledFromWrongThreadException</code> ngay lập tức — Android chủ động chặn hành vi này, tương tự tinh thần bảo vệ của Room ở Chương 13.</li>
+<li><strong>Tưởng <code>cancel(true)</code> dừng tác vụ ngay lập tức</strong>: sai, xem mục 19.4 — tác vụ chỉ dừng nếu chủ động kiểm tra cờ interrupted.</li>
+<li><strong>Không gọi <code>executor.shutdown()</code>/<code>shutdownNow()</code> khi Activity bị huỷ</strong>: executor (và thread nó tạo ra) tiếp tục tồn tại dù không còn Activity nào cần tới, rò rỉ tài nguyên.</li>
+<li><strong>Dùng <code>AsyncTask</code> trong code mới</strong>: đã bị gỡ khỏi SDK ở các phiên bản Android mới — code sẽ không biên dịch được nếu compileSdk đủ mới.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có bộ công cụ đầy đủ cho xử lý bất đồng bộ trong Java: <code>Executor</code> để chạy nền có tổ chức, và cơ chế huỷ hợp tác đúng cách. Chương 20 khép lại Phần 3 với <code>Notification</code> — cách giao tiếp với người dùng ngay cả khi app không ở foreground, đã dùng sơ bộ ở Chương 16, giờ sẽ đi sâu đầy đủ.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch18-workmanager.html">&larr; 18. WorkManager (tác vụ nền có lịch/điều kiện)</a><a class="next" href="./ch20-notification.html">20. Notification &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

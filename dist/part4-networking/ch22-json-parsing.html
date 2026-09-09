@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>22. Parse JSON (Gson/Moshi), mapping dữ liệu — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="./ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class="active"><a href="./ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="./ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 22: Parse JSON (Gson/Moshi), mapping dữ liệu</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu Retrofit tự động hoá những gì bạn vừa làm thủ công ở Chương 21.</li>
+<li>Khai báo API bằng interface + annotation, để Retrofit tự sinh code gọi mạng.</li>
+<li>Dùng Gson map JSON sang object Java, xử lý trường hợp tên field khác nhau bằng <code>@SerializedName</code>.</li>
+<li>Biết Moshi tồn tại như một lựa chọn thay thế Gson, và khi nào nên cân nhắc.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch22-json-parsing/</code> — cùng chức năng với Chương 21, viết lại bằng Retrofit + Gson để so sánh trực tiếp.</p>
+</blockquote>
+<h2>22.1 Retrofit là gì?</h2>
+<p>Retrofit biến việc gọi API thành gọi một <strong>hàm Java bình thường</strong>: bạn khai báo interface mô tả API, Retrofit tự sinh code thật (dựa trên OkHttp bên dưới) để gửi request và parse response — hoàn toàn tương tự cách <code>@Dao</code> của Room (Chương 13) chỉ cần khai báo, không viết thân hàm.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    Interface[&quot;interface JsonPlaceholderApi&lt;br/&gt;@GET('posts')&lt;br/&gt;Call&amp;lt;List&amp;lt;Post&amp;gt;&amp;gt; getPosts()&quot;] --&gt; Retrofit[&quot;Retrofit (lúc runtime)&quot;]
+    Retrofit --&gt; Generated[&quot;Code thật: build Request,&lt;br/&gt;gửi qua OkHttp, parse JSON response&quot;]
+    Generated --&gt; Gson[&quot;GsonConverterFactory&lt;br/&gt;JSON ↔ object Java&quot;]
+</pre></div>
+<h2>22.2 Khai báo API bằng interface</h2>
+<pre><code class="language-java">public interface JsonPlaceholderApi {
+    @GET(&quot;posts&quot;)
+    Call&lt;List&lt;Post&gt;&gt; getPosts();
+
+    @GET(&quot;posts/{id}&quot;)
+    Call&lt;Post&gt; getPost(@Path(&quot;id&quot;) int id);
+}
+</code></pre>
+<p><code>@GET(&quot;posts&quot;)</code> ghép với <code>baseUrl</code> thành URL đầy đủ. <code>@Path(&quot;id&quot;)</code> thay thế <code>{id}</code> trong đường dẫn bằng giá trị tham số truyền vào — Retrofit hỗ trợ tương tự cho query parameter (<code>@Query</code>), request body (<code>@Body</code>), header (<code>@Header</code>)... đủ dùng cho hầu hết REST API mà không cần tự ghép chuỗi URL bằng tay như Chương 21.</p>
+<h2>22.3 Khởi tạo Retrofit — một singleton dùng chung</h2>
+<pre><code class="language-java">public final class ApiClient {
+    private static final String BASE_URL = &quot;https://jsonplaceholder.typicode.com/&quot;;
+    private static volatile JsonPlaceholderApi api;
+
+    public static JsonPlaceholderApi getApi() {
+        if (api == null) {
+            synchronized (ApiClient.class) {
+                if (api == null) {
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl(BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    api = retrofit.create(JsonPlaceholderApi.class);
+                }
+            }
+        }
+        return api;
+    }
+}
+</code></pre>
+<p>Mẫu singleton <strong>giống hệt</strong> <code>AppDatabase</code> ở Chương 13 — cùng lý do: chỉ nên có một instance Retrofit (và OkHttpClient bên dưới nó) cho toàn bộ app.</p>
+<h2>22.4 Gọi API — so sánh trực tiếp với Chương 21</h2>
+<pre><code class="language-java">ApiClient.getApi().getPosts().enqueue(new Callback&lt;List&lt;Post&gt;&gt;() {
+    @Override
+    public void onResponse(Call&lt;List&lt;Post&gt;&gt; call, Response&lt;List&lt;Post&gt;&gt; response) {
+        if (response.isSuccessful() &amp;&amp; response.body() != null) {
+            adapter.submitList(response.body());   // đã là List&lt;Post&gt;, không cần tự parse!
+        }
+    }
+
+    @Override
+    public void onFailure(Call&lt;List&lt;Post&gt;&gt; call, Throwable t) {
+        showError(t.getMessage());
+    }
+});
+</code></pre>
+<p>Hai khác biệt quan trọng so với OkHttp thuần (Chương 21):</p>
+<ol>
+<li><strong>Không còn bước parse JSON thủ công</strong> — <code>response.body()</code> đã là <code>List&lt;Post&gt;</code> sẵn.</li>
+<li><strong>Callback chạy thẳng trên main thread</strong> khi dùng trên Android — không cần <code>runOnUiThread()</code> nữa, Retrofit tự phát hiện đang chạy trên Android và tự động đưa callback về đúng main thread.</li>
+</ol>
+<h2>22.5 <code>@SerializedName</code> — khi tên field Java khác tên key JSON</h2>
+<pre><code class="language-java">public class Post {
+    public int id;
+
+    @SerializedName(&quot;userId&quot;)   // JSON dùng &quot;userId&quot;, ta muốn field Java tên khác
+    public int authorId;
+
+    public String title;
+    public String body;
+}
+</code></pre>
+<p>Gson mặc định map field JSON và field Java <strong>cùng tên</strong> — field nào không khớp tên sẽ bị bỏ qua (không lỗi, chỉ âm thầm giữ giá trị mặc định). <code>@SerializedName(&quot;tên-key-json&quot;)</code> cho phép đặt tên field Java theo ý muốn (rõ nghĩa hơn, đúng convention đặt tên của bạn) mà vẫn map đúng dữ liệu.</p>
+<h2>22.6 Moshi — lựa chọn thay thế Gson</h2>
+<p>Moshi (cũng của Square, cùng nhà với Retrofit/OkHttp) là một thư viện parse JSON khác, thường được nhắc tới như lựa chọn thay thế Gson. Cú pháp tương tự, dùng annotation <code>@Json(name = &quot;...&quot;)</code> thay cho <code>@SerializedName</code>, và cần đổi converter factory:</p>
+<pre><code class="language-groovy">implementation 'com.squareup.retrofit2:converter-moshi:2.11.0'
+</code></pre>
+<pre><code class="language-java">Retrofit retrofit = new Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(MoshiConverterFactory.create())
+        .build();
+</code></pre>
+<p>Khác biệt thực dụng: Moshi kiểm tra chặt hơn (mặc định coi field thiếu là lỗi thay vì âm thầm bỏ qua như Gson), và hiệu năng nhỉnh hơn ở một số benchmark. Với quy mô project trong sách này, cả hai đều dùng tốt — Gson được chọn làm mặc định vì phổ biến hơn trong tài liệu tiếng Việt và dễ tiếp cận hơn cho người mới.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, xác nhận <code>authorId</code> hiển thị đúng giá trị <code>userId</code> gốc từ JSON.</li>
+<li>Thêm một field mới vào <code>Post</code> khớp tên JSON có sẵn (ví dụ không có trong API này, thử thêm field <code>email</code> không tồn tại) — quan sát Gson gán giá trị <code>null</code> mặc định thay vì báo lỗi, khác hành vi bạn có thể ngờ.</li>
+<li>So sánh trực tiếp số dòng code giữa <code>MainActivity.java</code> của Chương 21 và Chương 22 — liệt kê những phần đã biến mất.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Gõ sai giá trị trong <code>@SerializedName</code></strong>: field Java âm thầm nhận giá trị mặc định (<code>0</code>, <code>null</code>) mà không có lỗi báo — luôn double-check tên field JSON thực tế (xem response mẫu từ Postman/trình duyệt trước khi viết model).</li>
+<li><strong>Quên <code>addConverterFactory(GsonConverterFactory.create())</code></strong>: Retrofit không biết cách chuyển JSON thành object, ném lỗi runtime ngay khi gọi API đầu tiên.</li>
+<li><strong>Trộn lẫn kiểu dữ liệu</strong> (khai báo field Java là <code>int</code> nhưng JSON trả về chuỗi <code>&quot;123&quot;</code>): Gson khá khoan dung và tự chuyển đổi được nhiều trường hợp, nhưng không phải luôn luôn — kiểm tra kỹ khi gặp <code>JsonSyntaxException</code>.</li>
+<li><strong>Dùng <code>response.body()</code> mà không kiểm tra <code>null</code></strong>: một số trường hợp server trả <code>204 No Content</code> hoặc lỗi bất thường khiến <code>body()</code> là <code>null</code> dù <code>isSuccessful()</code> vẫn <code>true</code>.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã thấy Retrofit + Gson giảm tải đáng kể công việc gọi API so với làm thủ công. Chương 23 khép lại Phần 4 với chủ đề xử lý lỗi mạng bài bản hơn, chiến lược retry, và cache offline-first — kết hợp lại với Room (Chương 13) để app vẫn dùng được khi mất mạng.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch21-http-retrofit.html">&larr; 21. Gọi HTTP với OkHttp/Retrofit</a><a class="next" href="./ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>20. Notification — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="./ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="./ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="./ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="./ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class="active"><a href="./ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 20: Notification</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Tạo <code>NotificationChannel</code> đúng cách, hiểu vì sao không thể đổi importance bằng code sau khi tạo.</li>
+<li>Xây một notification đầy đủ: tiêu đề, nội dung dài (<code>BigTextStyle</code>), tap để mở app, nút hành động xử lý ngay trên thông báo.</li>
+<li>Hiểu <code>PendingIntent</code> là gì và vì sao nó khác <code>Intent</code> thường.</li>
+<li>Xin đúng quyền <code>POST_NOTIFICATIONS</code> (Android 13+).</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch20-notification/</code> — dùng lại và mở rộng notification đã xuất hiện sơ bộ ở Chương 16.</p>
+</blockquote>
+<h2>20.1 <code>NotificationChannel</code> — bắt buộc từ Android 8</h2>
+<pre><code class="language-java">NotificationChannel channel = new NotificationChannel(
+        CHANNEL_ID,
+        &quot;Nhắc nhở&quot;,
+        NotificationManager.IMPORTANCE_DEFAULT);
+NotificationManager manager = getSystemService(NotificationManager.class);
+manager.createNotificationChannel(channel);
+</code></pre>
+<p>Từ Android 8 (API 26), <strong>mọi notification phải thuộc về một channel</strong> — người dùng kiểm soát riêng từng channel (tắt tiếng, đổi mức độ quan trọng) qua Settings, thay vì chỉ bật/tắt toàn bộ thông báo của app như trước. Code mẫu tạo channel trong <code>Application.onCreate()</code> (Chương 6 đã giới thiệu <code>Application</code> — đây là một ví dụ thực tế cho việc &quot;khởi tạo một lần khi app chạy&quot; mà chương đó nói tới).</p>
+<p><strong>Lưu ý quan trọng</strong>: gọi <code>createNotificationChannel()</code> nhiều lần với cùng ID là an toàn (không tạo trùng), nhưng <strong>một khi channel đã tồn tại, code không thể tự đổi <code>importance</code> của nó nữa</strong> — chỉ người dùng tự đổi được trong Settings. Đặt đúng mức quan trọng ngay từ đầu, và tạo channel MỚI (ID khác) nếu cần một mức khác hẳn về sau.</p>
+<h2>20.2 Xây notification đầy đủ</h2>
+<pre><code class="language-java">NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+        .setSmallIcon(android.R.drawable.ic_dialog_info)
+        .setContentTitle(&quot;Đừng quên ôn bài!&quot;)
+        .setContentText(longText)
+        .setStyle(new NotificationCompat.BigTextStyle().bigText(longText))
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .setAutoCancel(true);
+</code></pre>
+<p><code>setStyle(BigTextStyle...)</code> cho phép người dùng kéo giãn thông báo để đọc đầy đủ nội dung dài — thiếu dòng này, nội dung dài sẽ bị cắt ngắn còn một dòng. <code>setAutoCancel(true)</code> khiến thông báo tự biến mất khi người dùng bấm vào nó (không cần tự gọi <code>cancel()</code>).</p>
+<h2>20.3 <code>PendingIntent</code> — &quot;phiếu uỷ quyền&quot; cho hệ thống</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    App[&quot;App của bạn&quot;] --&gt;|&quot;tạo PendingIntent&lt;br/&gt;(không thực thi ngay)&quot;| System[&quot;Hệ thống Android&lt;br/&gt;giữ 'phiếu uỷ quyền' này&quot;]
+    User[&quot;Người dùng bấm&lt;br/&gt;vào thông báo&quot;] --&gt; System
+    System --&gt;|&quot;thực thi Intent bên trong&lt;br/&gt;NHÂN DANH app của bạn&quot;| Action[&quot;Mở Activity /&lt;br/&gt;gửi Broadcast&quot;]
+</pre></div>
+<p><code>Intent</code> thường thực thi ngay khi bạn gọi <code>startActivity()</code>/<code>sendBroadcast()</code>. <code>PendingIntent</code> thì khác: nó là một <strong>&quot;phiếu uỷ quyền&quot;</strong> — bạn tạo ra và trao cho hệ thống (qua notification), hệ thống giữ nó và chỉ thực thi khi có sự kiện tương ứng xảy ra (người dùng bấm vào thông báo/nút), <strong>thực thi nhân danh app của bạn</strong> dù lúc đó app có đang chạy hay không.</p>
+<pre><code class="language-java">Intent contentIntent = new Intent(context, MainActivity.class);
+PendingIntent pendingIntent = PendingIntent.getActivity(
+        context, notificationId, contentIntent,
+        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+</code></pre>
+<p><code>FLAG_IMMUTABLE</code> (bắt buộc khai báo rõ từ Android 12) nghĩa là hệ thống <strong>không được sửa đổi</strong> nội dung Intent bên trong trước khi thực thi — chỉ dùng <code>FLAG_MUTABLE</code> khi có lý do kỹ thuật cụ thể cần hệ thống chỉnh sửa (hiếm gặp, ngoài phạm vi sách này).</p>
+<h2>20.4 Nút hành động ngay trên thông báo — không cần mở app</h2>
+<pre><code class="language-java">Intent markReadIntent = new Intent(context, MarkReadReceiver.class);
+markReadIntent.setAction(MarkReadReceiver.ACTION_MARK_READ);
+PendingIntent markReadPendingIntent = PendingIntent.getBroadcast(
+        context, notificationId, markReadIntent,
+        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+builder.addAction(icon, &quot;Đánh dấu đã đọc&quot;, markReadPendingIntent);
+</code></pre>
+<p>Đây là lúc <code>BroadcastReceiver</code> (Chương 17) và <code>Notification</code> phối hợp: bấm nút hành động gửi một broadcast, <code>MarkReadReceiver.onReceive()</code> xử lý (ở đây là huỷ notification và hiện Toast) <strong>mà không cần mở Activity nào cả</strong>.</p>
+<p><strong>Ngoại lệ hợp lệ đối với nguyên tắc &quot;luôn đăng ký động&quot; ở Chương 17</strong>: <code>MarkReadReceiver</code> phải khai báo <strong>tĩnh</strong> trong manifest, vì <code>PendingIntent</code> có thể được kích hoạt bất kỳ lúc nào sau này — kể cả khi tiến trình app đã bị hệ thống kill hoàn toàn, lúc đó không có Activity/Service nào đang sống để tự đăng ký receiver động.</p>
+<pre><code class="language-xml">&lt;receiver android:name=&quot;.MarkReadReceiver&quot; android:exported=&quot;false&quot; /&gt;
+</code></pre>
+<h2>20.5 Xin quyền <code>POST_NOTIFICATIONS</code> (Android 13+)</h2>
+<pre><code class="language-java">if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.TIRAMISU
+        &amp;&amp; ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+        != PackageManager.PERMISSION_GRANTED) {
+    requestPermission.launch(Manifest.permission.POST_NOTIFICATIONS);
+} else {
+    sendReminderNotification();
+}
+</code></pre>
+<p>Từ Android 13 (API 33), hiển thị BẤT KỲ notification nào cũng cần quyền runtime — dùng đúng Activity Result API đã học ở Chương 8. Chương 26 sẽ giải thích đầy đủ mô hình permission runtime của Android; ở đây chỉ cần biết notification là một trong những trường hợp cần xin quyền.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, thử cả hai luồng: bấm vào nội dung thông báo (mở app), và bấm nút hành động (không mở app) — quan sát khác biệt.</li>
+<li>Đổi <code>IMPORTANCE_DEFAULT</code> thành <code>IMPORTANCE_HIGH</code> trong <code>ReminderApplication</code>, gỡ cài đặt app rồi cài lại (để channel cũ không còn tồn tại), quan sát thông báo mới hiện dạng &quot;heads-up&quot; (nổi lên đầu màn hình) thay vì chỉ nằm trong thanh trạng thái.</li>
+<li>Thử bỏ <code>FLAG_IMMUTABLE</code> khỏi <code>PendingIntent</code>, build lại trên compileSdk 34 — quan sát Android Studio/Gradle có cảnh báo hoặc lỗi gì liên quan tới yêu cầu bắt buộc chỉ định rõ mutability.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Quên tạo <code>NotificationChannel</code> trên Android 8+</strong>: notification không hiện ra, không có lỗi rõ ràng nào cả — rất khó debug nếu không biết trước quy tắc này.</li>
+<li><strong>Đổi <code>importance</code> của channel đã tồn tại bằng code, tưởng sẽ có tác dụng</strong>: không có gì thay đổi — phải hướng dẫn người dùng tự vào Settings, hoặc tạo channel ID mới.</li>
+<li><strong>Dùng <code>sendBroadcast()</code>/<code>startActivity()</code> trực tiếp thay vì <code>PendingIntent</code> khi cấu hình notification</strong>: không biên dịch được — API notification yêu cầu đúng kiểu <code>PendingIntent</code>, đây là điểm khác biệt nền tảng đã giải thích ở mục 20.3.</li>
+<li><strong>Quên xin quyền <code>POST_NOTIFICATIONS</code> trên Android 13+</strong>: <code>notify()</code> gọi xong không ném lỗi, nhưng notification âm thầm không hiển thị — kiểm tra kỹ quyền trước khi kết luận code sai.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã khép lại <strong>Phần 3 — Chạy ngầm &amp; bất đồng bộ</strong>: Service, BroadcastReceiver, WorkManager, xử lý đa luồng, và Notification — năm mảnh ghép phối hợp chặt chẽ với nhau trong phần lớn ứng dụng Android thực tế. Phần 4 chuyển hướng sang giao tiếp mạng, bắt đầu với việc gọi HTTP API ở Chương 21.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch19-bat-dong-bo.html">&larr; 19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a><a class="next" href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

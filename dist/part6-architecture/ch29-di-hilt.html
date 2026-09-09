@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>29. Dependency Injection với Hilt — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="./ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class="active"><a href="./ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="./ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="./ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 29: Dependency Injection với Hilt</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu Dependency Injection (DI) giải quyết vấn đề gì — nhìn lại các singleton tự viết tay từ Chương 13/22.</li>
+<li>Cấu hình được Hilt trong project Java: <code>@HiltAndroidApp</code>, <code>@AndroidEntryPoint</code>, <code>@Module</code>.</li>
+<li>Dùng <code>@Inject</code> để Hilt tự lắp ráp <code>Repository</code>/<code>ViewModel</code> thay vì tự tay <code>new</code>/singleton.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch29-hilt-di/</code> — refactor lại app Chương 28 bằng Hilt.</p>
+</blockquote>
+<h2>29.1 Vấn đề: singleton tự viết tay đang ngày càng cồng kềnh</h2>
+<p>Nhìn lại các singleton đã tự viết xuyên suốt sách — <code>AppDatabase.getInstance()</code> (Chương 13), <code>ApiClient.getApi()</code> (Chương 22) — đều theo đúng một khuôn mẫu lặp lại: biến <code>static volatile</code>, kiểm tra <code>null</code>, khối <code>synchronized</code>. Khi số lượng đối tượng cần chia sẻ tăng lên (database, API client, các repository khác nhau...), code khởi tạo thủ công này phình to và dễ tạo phụ thuộc vòng (A cần B, B cần A) khó gỡ.</p>
+<p><strong>Dependency Injection</strong> đảo ngược cách tiếp cận: thay vì một class tự đi &quot;tìm&quot; các phụ thuộc nó cần (gọi <code>getInstance()</code>, <code>new</code> trực tiếp), phụ thuộc được <strong>truyền vào từ bên ngoài</strong> (thường qua constructor) — class chỉ khai báo &quot;tôi cần một <code>PostDao</code>&quot;, không cần biết nó được tạo ra từ đâu.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    subgraph Before[&quot;Không có DI (Chương 13/22/23/28)&quot;]
+        B1[&quot;PostRepository tự gọi&lt;br/&gt;AppDatabase.getInstance(context)&quot;]
+        B2[&quot;PostRepository tự gọi&lt;br/&gt;ApiClient.getApi()&quot;]
+    end
+    subgraph After[&quot;Có Hilt (chương này)&quot;]
+        A1[&quot;PostRepository CHỈ khai báo:&lt;br/&gt;@Inject constructor(PostDao, JsonPlaceholderApi)&quot;]
+        A2[&quot;Hilt tự tìm/tạo đúng&lt;br/&gt;PostDao, JsonPlaceholderApi&lt;br/&gt;rồi truyền vào&quot;]
+    end
+</pre></div>
+<h2>29.2 Bốn mảnh ghép cơ bản của Hilt</h2>
+<pre><code class="language-java">@HiltAndroidApp
+public class MyApplication extends Application { }
+</code></pre>
+<p><code>@HiltAndroidApp</code> bắt buộc đặt trên class <code>Application</code> — sinh ra &quot;container&quot; gốc quản lý toàn bộ vòng đời DI của app, tương tự cách <code>Application.onCreate()</code> ở Chương 6 là nơi khởi tạo một lần cho toàn app.</p>
+<pre><code class="language-java">@AndroidEntryPoint
+public class MainActivity extends AppCompatActivity { ... }
+</code></pre>
+<p><code>@AndroidEntryPoint</code> đánh dấu Activity/Fragment/Service... có thể nhận đối tượng do Hilt cung cấp — thiếu annotation này, Hilt không biết &quot;chèn&quot; phụ thuộc vào đâu.</p>
+<pre><code class="language-java">@Module
+@InstallIn(SingletonComponent.class)
+public class AppModule {
+    @Provides
+    @Singleton
+    public AppDatabase provideDatabase(@ApplicationContext Context context) {
+        return Room.databaseBuilder(context, AppDatabase.class, &quot;posts_cache.db&quot;).build();
+    }
+}
+</code></pre>
+<p><code>@Module</code> là nơi viết &quot;công thức&quot; cho những kiểu dữ liệu Hilt <strong>không thể tự đoán cách tạo</strong> — Room/Retrofit cần gọi qua Builder tĩnh, không có constructor đơn giản để Hilt tự suy luận. <code>@InstallIn(SingletonComponent.class)</code> nghĩa là mọi thứ khai báo ở đây sống theo vòng đời <strong>toàn app</strong> — đúng bằng đúng phạm vi các singleton tự viết tay trước đây.</p>
+<pre><code class="language-java">@Singleton
+public class PostRepository {
+    @Inject
+    public PostRepository(PostDao dao, JsonPlaceholderApi api) {
+        this.dao = dao;
+        this.api = api;
+    }
+}
+</code></pre>
+<p>Ngược lại, với class có <strong>constructor đơn giản</strong> như <code>PostRepository</code>, chỉ cần đánh dấu <code>@Inject</code> ngay trên constructor — không cần viết <code>@Module</code> riêng, Hilt tự biết cách tạo nó (miễn là biết cách tạo đủ các tham số của constructor đó, ở đây là <code>PostDao</code> và <code>JsonPlaceholderApi</code>, cả hai đã có công thức trong <code>AppModule</code>).</p>
+<h2>29.3 <code>@HiltViewModel</code> — nối Hilt với ViewModel (Chương 28)</h2>
+<pre><code class="language-java">@HiltViewModel
+public class PostViewModel extends ViewModel {
+    @Inject
+    public PostViewModel(PostRepository repository) {
+        this.repository = repository;
+        refresh();
+    }
+}
+</code></pre>
+<p>Phía <code>MainActivity</code>, cách gọi <strong>không đổi gì</strong> so với Chương 28:</p>
+<pre><code class="language-java">viewModel = new ViewModelProvider(this).get(PostViewModel.class);
+</code></pre>
+<p><code>@AndroidEntryPoint</code> trên Activity đã âm thầm thay thế factory mặc định của <code>ViewModelProvider</code> bằng một factory biết cách gọi đúng constructor có tham số của <code>PostViewModel</code> — đây là lý do <code>PostViewModel</code> ở Chương 28 phải kế thừa <code>AndroidViewModel</code> (để tự lấy <code>Application</code> rồi tự tạo <code>PostRepository</code>), còn ở chương này chỉ cần kế thừa <code>ViewModel</code> trần, nhận thẳng <code>PostRepository</code> đã lắp ráp sẵn.</p>
+<h2>29.4 Toàn cảnh: ai tạo ai?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    HiltApp[&quot;MyApplication (@HiltAndroidApp)&quot;] --&gt; Module[&quot;AppModule (@Module)&quot;]
+    Module --&gt;|&quot;@Provides&quot;| DB[&quot;AppDatabase&quot;]
+    Module --&gt;|&quot;@Provides&quot;| Api[&quot;JsonPlaceholderApi&quot;]
+    DB --&gt; Dao[&quot;PostDao (database.postDao())&quot;]
+    Dao --&gt; Repo[&quot;PostRepository (@Inject constructor)&quot;]
+    Api --&gt; Repo
+    Repo --&gt; VM[&quot;PostViewModel (@HiltViewModel)&quot;]
+    VM --&gt;|&quot;ViewModelProvider(this)&quot;| Activity[&quot;MainActivity (@AndroidEntryPoint)&quot;]
+</pre></div>
+<p>Không một dòng code nào trong toàn bộ chuỗi trên gọi trực tiếp <code>new PostRepository(...)</code> hay <code>AppDatabase.getInstance(...)</code> — Hilt đọc toàn bộ khai báo <code>@Provides</code>/<code>@Inject</code> lúc build, tự sinh code lắp ráp thật (tương tự tinh thần &quot;chỉ khai báo, không viết thân hàm&quot; đã gặp ở Room <code>@Dao</code> từ Chương 13 và Retrofit interface từ Chương 22).</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, xác nhận hành vi giống hệt Chương 28.</li>
+<li>Thử tạo thêm một <code>@Provides</code> mới trong <code>AppModule</code> cho một giá trị cấu hình đơn giản (ví dụ base URL dạng <code>String</code>, đánh dấu <code>@Named(&quot;baseUrl&quot;)</code>), inject nó vào <code>provideApi()</code> thay vì viết cứng chuỗi URL — tìm hiểu thêm về <code>@Named</code>/Qualifier annotation nếu muốn mở rộng bài tập này.</li>
+<li>Xoá annotation <code>@Inject</code> khỏi constructor của <code>PostRepository</code>, build lại — đọc thông báo lỗi Hilt đưa ra lúc biên dịch (không phải lúc chạy) để thấy Hilt kiểm tra được sai sót ngay từ bước build.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Quên <code>@AndroidEntryPoint</code> trên Activity/Fragment</strong>: <code>ViewModelProvider</code> không tìm được factory phù hợp, ném lỗi runtime khi cố tạo <code>PostViewModel</code>.</li>
+<li><strong>Quên khai báo <code>MyApplication</code> trong <code>AndroidManifest.xml</code> (<code>android:name=&quot;.MyApplication&quot;</code>)</strong>: <code>@HiltAndroidApp</code> không có tác dụng gì nếu class đó không thật sự được dùng làm Application của app.</li>
+<li><strong>Trộn lẫn <code>@InstallIn(SingletonComponent.class)</code> với vòng đời ngắn hơn cần thiết</strong> (ví dụ đối tượng chỉ nên sống trong một Activity nhưng lại đặt ở <code>SingletonComponent</code>): giữ đối tượng tồn tại lâu hơn cần thiết — Hilt có các Component khác (<code>ActivityComponent</code>...) cho từng phạm vi ngắn hơn, ngoài phạm vi giới thiệu của chương này.</li>
+<li><strong>Tưởng Hilt là bắt buộc phải có để làm MVVM</strong>: sai — Chương 28 đã làm MVVM đầy đủ mà không cần Hilt. DI là công cụ giúp việc lắp ráp phụ thuộc gọn hơn khi project lớn dần, không phải điều kiện tiên quyết của kiến trúc MVVM.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã thấy Hilt thay thế các singleton tự viết tay bằng khai báo tường minh, kiểm tra được lúc build. Chương 30 tạm rời xa các chủ đề kiến trúc thuần logic, giới thiệu Jetpack Compose — cách xây UI khai báo (declarative) hiện đại, khác hẳn XML layout đã dùng xuyên suốt từ Chương 7.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch28-mvvm-livedata.html">&larr; 28. MVVM, ViewModel &amp; LiveData</a><a class="next" href="./ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

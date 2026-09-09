@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="./ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="./ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="./ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class="active"><a href="./ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="./ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="./ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 35: Bluetooth — Classic &amp; BLE, quét thiết bị, kết nối, truyền/nhận dữ liệu</h1>
+<blockquote>
+<p><strong>Lưu ý</strong>: chương này cần <strong>thiết bị Android thật</strong> để thực hành đầy đủ — máy ảo (Chương 3) không mô phỏng phần cứng radio Bluetooth thật. Cần ít nhất hai thiết bị thật cho phần Classic (chat hai chiều), một thiết bị cho phần quét BLE.</p>
+</blockquote>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Phân biệt Bluetooth Classic (kết nối bền, truyền dữ liệu liên tục — âm thanh, file, chat) và BLE (Bluetooth Low Energy — tiết kiệm pin, truyền gói tin nhỏ, phổ biến ở thiết bị đeo tay/IoT).</li>
+<li>Xin đúng bộ quyền Bluetooth theo từng nhóm phiên bản Android (trước và từ Android 12).</li>
+<li>Cài đặt kết nối Bluetooth Classic hai chiều bằng mẫu Server/Client kinh điển (<code>AcceptThread</code>/<code>ConnectThread</code>/<code>ConnectedThread</code>).</li>
+<li>Quét thiết bị BLE xung quanh bằng <code>BluetoothLeScanner</code>.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch35-bluetooth/</code>.</p>
+</blockquote>
+<h2>35.1 Bluetooth Classic và BLE — chọn loại nào?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Q1{&quot;Cần loại giao tiếp gì?&quot;}
+    Q1 --&gt;|&quot;Truyền liên tục, dữ liệu lớn hơn&lt;br/&gt;(âm thanh, file, chat text)&quot;| Classic[&quot;Bluetooth Classic&lt;br/&gt;(RFCOMM/SPP — mục 35.3)&quot;]
+    Q1 --&gt;|&quot;Gói tin nhỏ, không liên tục,&lt;br/&gt;ưu tiên tiết kiệm pin&lt;br/&gt;(cảm biến, thiết bị đeo tay)&quot;| BLE[&quot;Bluetooth Low Energy&lt;br/&gt;(quét/GATT — mục 35.4)&quot;]
+</pre></div>
+<p>Code mẫu chương này minh hoạ cả hai: <strong>chat hai chiều</strong> qua Bluetooth Classic (đúng chuẩn Serial Port Profile — SPP), và <strong>quét thiết bị</strong> qua BLE (không đi sâu vào việc đọc/ghi dữ liệu GATT của BLE, vốn phức tạp hơn và nằm ngoài phạm vi giới thiệu của sách).</p>
+<h2>35.2 Quyền Bluetooth — khác nhau rõ rệt trước/sau Android 12</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    subgraph Before[&quot;Trước Android 12 (API ≤ 30)&quot;]
+        B1[&quot;BLUETOOTH, BLUETOOTH_ADMIN&lt;br/&gt;— quyền 'normal', chỉ cần khai báo manifest&quot;]
+        B2[&quot;ACCESS_FINE_LOCATION&lt;br/&gt;— RUNTIME, bắt buộc để QUÉT&lt;br/&gt;(lý do lịch sử: suy ra vị trí qua BLE)&quot;]
+    end
+    subgraph After[&quot;Từ Android 12 (API 31+)&quot;]
+        A1[&quot;BLUETOOTH_SCAN — RUNTIME,&lt;br/&gt;thay thế vai trò quét của ACCESS_FINE_LOCATION&quot;]
+        A2[&quot;BLUETOOTH_CONNECT — RUNTIME,&lt;br/&gt;cần để kết nối/lấy tên thiết bị&quot;]
+    end
+</pre></div>
+<pre><code class="language-xml">&lt;uses-permission android:name=&quot;android.permission.BLUETOOTH&quot; android:maxSdkVersion=&quot;30&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.BLUETOOTH_ADMIN&quot; android:maxSdkVersion=&quot;30&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; android:maxSdkVersion=&quot;30&quot; /&gt;
+
+&lt;uses-permission android:name=&quot;android.permission.BLUETOOTH_SCAN&quot;
+    android:usesPermissionFlags=&quot;neverForLocation&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.BLUETOOTH_CONNECT&quot; /&gt;
+</code></pre>
+<p><code>android:usesPermissionFlags=&quot;neverForLocation&quot;</code> là khai báo quan trọng: nó nói với hệ thống &quot;app này quét Bluetooth nhưng <strong>không</strong> dùng kết quả để suy ra vị trí người dùng&quot; — nhờ đó xin được <code>BLUETOOTH_SCAN</code> <strong>mà không cần kèm</strong> <code>ACCESS_FINE_LOCATION</code> trên Android 12+. Code mẫu gom logic chọn đúng bộ quyền theo <code>Build.VERSION.SDK_INT</code> vào <code>BluetoothPermissions.java</code>, đúng tinh thần &quot;gom logic vào một chỗ&quot; đã áp dụng với <code>PrefsManager</code> ở Chương 12.</p>
+<h2>35.3 Bluetooth Classic — mẫu Server/Client/Connected kinh điển</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant DeviceA as Thiết bị A (Server)
+    participant DeviceB as Thiết bị B (Client)
+
+    DeviceA-&gt;&gt;DeviceA: adapter.listenUsingRfcommWithServiceRecord(...)
+    Note over DeviceA: serverSocket.accept() CHẶN THREAD,&lt;br/&gt;chờ tới khi có kết nối
+    DeviceB-&gt;&gt;DeviceB: device.createRfcommSocketToServiceRecord(SPP_UUID)
+    DeviceB-&gt;&gt;DeviceA: socket.connect()
+    DeviceA--&gt;&gt;DeviceB: accept() trả về, hai bên đã kết nối
+    Note over DeviceA,DeviceB: Cả hai chuyển sang ConnectedThread&lt;br/&gt;đọc/ghi dữ liệu qua lại
+</pre></div>
+<p>Ba thread luôn xuất hiện trong mọi cài đặt Bluetooth Classic hai chiều:</p>
+<pre><code class="language-java">// Server: chờ kết nối tới — accept() CHẶN THREAD
+BluetoothServerSocket serverSocket = adapter.listenUsingRfcommWithServiceRecord(NAME, SPP_UUID);
+BluetoothSocket socket = serverSocket.accept();
+
+// Client: chủ động kết nối — connect() cũng CHẶN THREAD
+BluetoothSocket socket = device.createRfcommSocketToServiceRecord(SPP_UUID);
+socket.connect();
+
+// Cả hai, sau khi đã kết nối: đọc liên tục — read() CHẶN THREAD tới khi có dữ liệu
+InputStream input = socket.getInputStream();
+int bytes = input.read(buffer);
+</code></pre>
+<p>Cả ba lời gọi in đậm (<code>accept</code>, <code>connect</code>, <code>read</code>) đều <strong>chặn (blocking)</strong> — đúng nguyên tắc đã lặp lại xuyên suốt từ Chương 13/19: <strong>không bao giờ</strong> chạy chúng trên main thread. Code mẫu (<code>BluetoothChatManager.java</code>) đặt mỗi vai trò vào một <code>Thread</code> riêng (<code>AcceptThread</code>, <code>ConnectThread</code>, <code>ConnectedThread</code>), báo kết quả về main thread qua <code>Handler</code> — chính là mẫu hình đã quen thuộc từ Chương 16 (Service dùng Handler báo về Activity).</p>
+<p><code>SPP_UUID</code> (<code>00001101-0000-1000-8000-00805F9B34FB</code>) là UUID <strong>chuẩn, cố định</strong> cho Serial Port Profile — hầu như mọi thiết bị Bluetooth Classic hỗ trợ truyền dữ liệu nối tiếp đều dùng chung giá trị này, không phải do bạn tự đặt.</p>
+<h2>35.4 Quét BLE — không cần ghép đôi để &quot;thấy&quot; thiết bị</h2>
+<pre><code class="language-java">BluetoothLeScanner scanner = bluetoothAdapter.getBluetoothLeScanner();
+
+ScanCallback callback = new ScanCallback() {
+    @Override
+    public void onScanResult(int callbackType, ScanResult result) {
+        String name = result.getScanRecord().getDeviceName();
+        int rssi = result.getRssi();   // cường độ tín hiệu — càng gần 0 càng mạnh
+        // ...
+    }
+};
+
+scanner.startScan(callback);
+// ... sau một khoảng thời gian:
+scanner.stopScan(callback);
+</code></pre>
+<p>Khác Bluetooth Classic (<code>getBondedDevices()</code> chỉ liệt kê thiết bị đã <strong>ghép đôi</strong> từ Settings), BLE scan phát hiện <strong>mọi thiết bị đang quảng bá (advertising)</strong> xung quanh — không cần ghép đôi trước. Đây là lý do tai nghe, vòng đeo tay thông minh thường &quot;hiện ra ngay&quot; khi mở app quét BLE, dù chưa từng kết nối với chúng.</p>
+<p><strong>Luôn giới hạn thời gian quét</strong> — code mẫu tự động <code>stopScan()</code> sau 12 giây bằng <code>Handler.postDelayed</code>, và dừng ngay trong <code>onStop()</code> nếu người dùng rời màn hình. Quét BLE liên tục vô thời hạn là nguyên nhân phổ biến khiến app bị coi là &quot;hao pin bất thường&quot;.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Với hai thiết bị thật đã ghép đôi Bluetooth, làm theo README: một bên Server, một bên Client, gửi tin nhắn qua lại.</li>
+<li>Mở màn hình quét BLE trên một thiết bị thật, xác nhận thấy danh sách thiết bị xung quanh kèm RSSI, không thiết bị nào trùng lặp (nhờ <code>Map</code> theo địa chỉ MAC trong <code>BleScanActivity</code>).</li>
+<li>Tắt Bluetooth trên thiết bị Client giữa lúc đang chat — quan sát thiết bị Server nhận được sự kiện &quot;Đã ngắt kết nối&quot; qua <code>ConnectedThread</code> bắt được <code>IOException</code> từ <code>read()</code>.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Xin <code>ACCESS_FINE_LOCATION</code> trên Android 12+ mà quên <code>BLUETOOTH_SCAN</code></strong>: quét thất bại âm thầm hoặc ném lỗi quyền — hai bộ quyền phục vụ hai nhóm phiên bản khác nhau, không thể dùng chung.</li>
+<li><strong>Gọi <code>connect()</code>/<code>accept()</code>/<code>read()</code> trực tiếp trên main thread</strong>: đứng UI ngay lập tức (các hàm này chặn vô thời hạn tới khi có sự kiện) — luôn bọc trong <code>Thread</code> riêng như code mẫu.</li>
+<li><strong>Quên <code>adapter.cancelDiscovery()</code> trước khi <code>connect()</code></strong>: quá trình quét (nếu đang chạy) làm chậm đáng kể, thậm chí khiến <code>connect()</code> thất bại — thói quen tốt luôn hủy discovery trước khi kết nối Classic.</li>
+<li><strong>Quét BLE không giới hạn thời gian, không dừng khi rời màn hình</strong>: tốn pin nghiêm trọng — luôn có cơ chế tự dừng (timeout) và dừng trong <code>onStop()</code>.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết giao tiếp với thiết bị bên ngoài qua cả hai chuẩn Bluetooth phổ biến. Chương 36 tiếp tục với NFC — giao tiếp tầm cực gần, thường dùng cho thanh toán, đọc thẻ, và chia sẻ dữ liệu bằng cách chạm hai thiết bị vào nhau.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch34-aidl-bound-service.html">&larr; 34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a><a class="next" href="./ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

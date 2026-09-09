@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>24. Unit test với JUnit — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class="active"><a href="./ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="./ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="./ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="./ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 24: Unit test với JUnit</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Phân biệt <strong>Unit test cục bộ</strong> (chạy trên JVM máy tính) và <strong>Instrumented test</strong> (chạy trên thiết bị/máy ảo, Chương 25).</li>
+<li>Viết được test case với JUnit: trường hợp bình thường, trường hợp biên, trường hợp ném ngoại lệ.</li>
+<li>Hiểu vì sao tách logic ra khỏi Activity giúp việc test dễ dàng hơn nhiều.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch24-unit-test-junit/</code>.</p>
+</blockquote>
+<h2>24.1 Hai loại test trong Android — chạy Ở ĐÂU là khác biệt cốt lõi</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    subgraph Local[&quot;Unit test cục bộ (app/src/test/)&quot;]
+        L1[&quot;Chạy TRÊN MÁY TÍNH,&lt;br/&gt;trong JVM thường&quot;]
+        L2[&quot;KHÔNG cần máy ảo/thiết bị&quot;]
+        L3[&quot;Rất nhanh (mili-giây)&quot;]
+        L4[&quot;KHÔNG gọi được API&lt;br/&gt;của android.* thật&quot;]
+    end
+    subgraph Instrumented[&quot;Instrumented test (app/src/androidTest/) — Chương 25&quot;]
+        I1[&quot;Chạy TRÊN máy ảo/thiết bị thật&quot;]
+        I2[&quot;Có đầy đủ Android framework&quot;]
+        I3[&quot;Chậm hơn nhiều (giây)&quot;]
+        I4[&quot;Test được UI, Activity thật&quot;]
+    end
+</pre></div>
+<p>Chương này chỉ dùng <strong>Unit test cục bộ</strong> — nằm trong thư mục <code>app/src/test/java/</code>, khác thư mục <code>app/src/main/java/</code> (code chạy thật) và <code>app/src/androidTest/java/</code> (Chương 25). Vì chạy trên JVM thường (không có Android thật), code được test <strong>không được phép</strong> gọi thẳng các API của <code>android.*</code> — đây chính là lý do mục 24.2 nhấn mạnh việc tách logic.</p>
+<h2>24.2 Tách logic ra khỏi Activity để dễ test</h2>
+<pre><code class="language-java">// PasswordStrengthChecker.java — KHÔNG import bất kỳ thứ gì từ android.*
+public final class PasswordStrengthChecker {
+    public enum Strength { WEAK, MEDIUM, STRONG }
+
+    public static Strength check(String password) {
+        if (password == null) {
+            throw new IllegalArgumentException(&quot;password không được null&quot;);
+        }
+        // ... logic thuần Java
+    }
+}
+</code></pre>
+<p><code>MainActivity</code> chỉ <strong>gọi</strong> hàm này khi người dùng gõ, không tự chứa logic rẽ nhánh nào cần test riêng:</p>
+<pre><code class="language-java">binding.editPassword.addTextChangedListener(new TextWatcher() {
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        PasswordStrengthChecker.Strength strength = PasswordStrengthChecker.check(s.toString());
+        binding.textStrength.setText(labelFor(strength));
+    }
+    // ...
+});
+</code></pre>
+<p>Nguyên tắc thực dụng: <strong>business logic (quy tắc tính toán, xác thực dữ liệu...) nên là các hàm/class Java thuần</strong>, tách khỏi Activity/Fragment — không phải vì &quot;đúng chuẩn kiến trúc&quot; trừu tượng, mà vì lý do rất cụ thể: chỉ có code như vậy mới test được bằng Unit test nhanh, không cần khởi động máy ảo mỗi lần chạy thử.</p>
+<h2>24.3 Viết test case với JUnit</h2>
+<pre><code class="language-java">public class PasswordStrengthCheckerTest {
+
+    @Test
+    public void matKhauNgan_luonYeu() {
+        assertEquals(PasswordStrengthChecker.Strength.WEAK,
+                PasswordStrengthChecker.check(&quot;ab1&quot;));
+    }
+
+    @Test
+    public void nullNemNgoaiLe() {
+        assertThrows(IllegalArgumentException.class,
+                () -&gt; PasswordStrengthChecker.check(null));
+    }
+}
+</code></pre>
+<p>Mỗi phương thức đánh dấu <code>@Test</code> là một trường hợp kiểm thử độc lập. <code>assertEquals(expected, actual)</code> so sánh giá trị mong đợi với giá trị thực tế; <code>assertThrows(ExceptionClass.class, lambda)</code> xác nhận một đoạn code ném đúng loại ngoại lệ mong muốn.</p>
+<h2>24.4 Test trường hợp biên (boundary) — nơi lỗi hay ẩn náu nhất</h2>
+<pre><code class="language-java">@Test
+public void bienChinhXacDoDaiToiThieuCuaStrong() {
+    // Đủ 3 loại ký tự nhưng CHƯA đủ 10 ký tự -&gt; chỉ MEDIUM, không phải STRONG.
+    assertEquals(PasswordStrengthChecker.Strength.MEDIUM,
+            PasswordStrengthChecker.check(&quot;Abc12345&quot;));
+}
+</code></pre>
+<p>Lỗi lập trình thường không nằm ở trường hợp &quot;bình thường&quot; mà ở đúng <strong>ranh giới</strong> của điều kiện (ví dụ <code>&gt;= 10</code> hay <code>&gt; 10</code>, một lỗi off-by-one kinh điển). Thói quen tốt: với mỗi điều kiện dạng so sánh số trong code, luôn viết ít nhất một test case đứng đúng ngay tại ranh giới đó.</p>
+<h2>24.5 Chạy test — không cần máy ảo, không cần chờ đợi</h2>
+<p>Trong Android Studio: bấm nút mũi tên xanh cạnh tên class hoặc từng <code>@Test</code>. Từ dòng lệnh:</p>
+<pre><code class="language-powershell">.\gradlew.bat testDebugUnitTest
+</code></pre>
+<p>Toàn bộ file <code>PasswordStrengthCheckerTest.java</code> (6 test case) chạy xong trong tích tắc — đây chính là giá trị thực dụng lớn nhất của Unit test: <strong>phản hồi gần như tức thời</strong> mỗi khi bạn sửa code, so với việc phải build lại app, chờ cài lên máy ảo, rồi tự tay thao tác lại từng bước để kiểm tra thủ công.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy toàn bộ test có sẵn, xác nhận cả 6 test case đều pass (màu xanh).</li>
+<li>Sửa <code>PasswordStrengthChecker.check()</code>, đổi điều kiện độ dài tối thiểu của <code>STRONG</code> từ <code>10</code> xuống <code>8</code>, chạy lại test — xác nhận đúng test <code>bienChinhXacDoDaiToiThieuCuaStrong</code> chuyển sang fail (vì giờ nó mong đợi kết quả khác với hành vi mới).</li>
+<li>Viết thêm một test case cho chuỗi rỗng (<code>&quot;&quot;</code>) — dự đoán kết quả trước, sau đó chạy để xác nhận.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Viết logic quan trọng trực tiếp trong <code>onClick</code>/<code>onTextChanged</code> thay vì tách hàm riêng</strong>: không có gì để gọi từ test, buộc phải test thủ công bằng tay mỗi lần — chậm và dễ bỏ sót trường hợp.</li>
+<li><strong>Chỉ test &quot;đường vui&quot; (happy path), bỏ qua input null/rỗng/âm</strong>: đây thường là nguồn crash phổ biến nhất trong thực tế, và là chỗ Unit test phát huy giá trị rõ nhất.</li>
+<li><strong>Test phụ thuộc vào thứ tự chạy của các test khác</strong> (ví dụ test B giả định test A đã chạy trước và để lại trạng thái nào đó): mỗi <code>@Test</code> nên độc lập hoàn toàn, JUnit không đảm bảo thứ tự chạy cố định.</li>
+<li><strong>Nhầm Unit test cục bộ với Instrumented test</strong>: cố <code>import android.widget.TextView</code> trong file ở <code>app/src/test/java/</code> sẽ báo lỗi hoặc test luôn fail — loại API đó chỉ tồn tại thật sự trên thiết bị, thuộc phạm vi Chương 25.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết viết Unit test nhanh cho business logic thuần Java. Chương 25 chuyển sang Instrumented test với Espresso — kiểm thử tự động ngay trên giao diện thật, bù đắp cho phần Unit test không chạm tới được.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="../part4-networking/ch23-loi-mang-cache.html">&larr; 23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a><a class="next" href="./ch25-ui-test-espresso.html">25. UI test với Espresso &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

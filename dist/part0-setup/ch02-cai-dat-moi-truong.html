@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Cài đặt JDK, Android Studio, SDK/SDK Manager — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="./ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class="active"><a href="./ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="./ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="./ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="./ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 2: Cài đặt JDK, Android Studio, SDK/SDK Manager</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Cài đặt được Android Studio trên Windows và hoàn tất setup wizard lần đầu.</li>
+<li>Hiểu vai trò của JDK, Android SDK, SDK Manager, Gradle trong bộ công cụ — cái nào Android Studio đã tự lo, cái nào bạn cần biết để tự xử lý khi có lỗi.</li>
+<li>Cấu hình biến môi trường để dùng được <code>adb</code> từ dòng lệnh (ngoài Android Studio).</li>
+<li>Xác nhận cài đặt thành công bằng vài lệnh kiểm tra cụ thể.</li>
+</ul>
+<h2>2.1 Bộ công cụ gồm những gì?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    AS[&quot;Android Studio&lt;br/&gt;(IDE)&quot;] --&gt; JBR[&quot;JDK đi kèm (JBR)&lt;br/&gt;dùng để chạy IDE &amp; build Gradle&quot;]
+    AS --&gt; SDK[&quot;Android SDK&lt;br/&gt;Platform, Build-Tools, Platform-Tools&quot;]
+    AS --&gt; GRADLE[&quot;Gradle&lt;br/&gt;(hệ thống build)&quot;]
+    AS --&gt; AVD[&quot;AVD Manager&lt;br/&gt;(máy ảo)&quot;]
+    SDK --&gt; ADB[&quot;adb&lt;br/&gt;(Android Debug Bridge)&quot;]
+</pre></div>
+<p>Điểm nhiều tài liệu cũ còn nhầm: <strong>từ các bản Android Studio gần đây, bạn không cần tự cài JDK riêng</strong> — Android Studio đi kèm sẵn một bản JDK (JetBrains Runtime, dựa trên OpenJDK) và tự dùng nó để chạy IDE lẫn build Gradle. Bạn chỉ cần cài JDK riêng nếu:</p>
+<ul>
+<li>Build project bằng dòng lệnh (<code>gradlew</code>) mà không mở Android Studio, trên máy chưa từng cài Android Studio.</li>
+<li>Cần một phiên bản JDK cụ thể khác với bản đi kèm vì lý do riêng của dự án.</li>
+</ul>
+<p>Ở sách này, mặc định dùng JDK đi kèm Android Studio — đủ cho toàn bộ nội dung.</p>
+<h2>2.2 Cài đặt Android Studio (Windows)</h2>
+<ol>
+<li>Tải bộ cài từ trang chính thức của Android Studio (bản Windows).</li>
+<li>Chạy installer, giữ nguyên các lựa chọn mặc định: cài <strong>Android SDK</strong>, <strong>Android Virtual Device</strong>, và <strong>performance (Intel HAXM)</strong> — nếu máy dùng CPU Intel; máy AMD/ARM sẽ có lựa chọn tương ứng cho tăng tốc ảo hoá.</li>
+<li>Chọn thư mục cài đặt Android SDK (nhớ đường dẫn này — dùng ở bước 2.4). Mặc định thường là <code>C:\Users\&lt;tên-bạn&gt;\AppData\Local\Android\Sdk</code>.</li>
+<li>Sau khi cài xong, Android Studio mở <strong>Setup Wizard</strong> lần đầu: chọn kiểu cài &quot;Standard&quot; — wizard sẽ tự tải về:
+<ul>
+<li>SDK Platform mới nhất ổn định (API level cao nhất hiện tại).</li>
+<li>SDK Build-Tools tương ứng.</li>
+<li>Một bản system image để tạo máy ảo (chi tiết ở Chương 3).</li>
+<li>Android Emulator, Platform-Tools (chứa <code>adb</code>).</li>
+</ul>
+</li>
+</ol>
+<p>Bước này cần mạng ổn định — SDK component khá nặng (vài GB nếu tải nhiều API level).</p>
+<h2>2.3 SDK Manager — nơi quản lý mọi phiên bản Android</h2>
+<p>Mở qua <strong>Tools → SDK Manager</strong> trong Android Studio. Ba tab quan trọng:</p>
+<ul>
+<li><strong>SDK Platforms</strong>: từng phiên bản Android (API level) bạn muốn build/test. Cài ít nhất phiên bản <code>targetSdkVersion</code> bạn dự định dùng (sách này khuyến nghị compileSdk/targetSdk 34 — Android 14).</li>
+<li><strong>SDK Tools</strong>: <code>Android SDK Build-Tools</code>, <code>Android SDK Platform-Tools</code> (chứa <code>adb</code>), <code>Android Emulator</code>, <code>Android SDK Command-line Tools</code>.</li>
+<li><strong>SDK Update Sites</strong>: danh sách nguồn cập nhật, thường không cần đổi.</li>
+</ul>
+<p>Mỗi API level cài thêm tốn khoảng 500MB–1.5GB — không cần cài hết tất cả, chỉ cài phiên bản bạn thật sự target và test.</p>
+<h2>2.4 Cấu hình biến môi trường (để dùng <code>adb</code> ngoài Android Studio)</h2>
+<p>Android Studio tự biết đường dẫn SDK, nhưng terminal ngoài IDE (PowerShell, Command Prompt) thì không, trừ khi bạn khai báo:</p>
+<ol>
+<li>Mở <strong>System Properties → Environment Variables</strong> (gõ &quot;environment variables&quot; vào Windows Search).</li>
+<li>Thêm biến hệ thống mới: <code>ANDROID_HOME</code> = đường dẫn SDK (vd <code>C:\Users\&lt;tên-bạn&gt;\AppData\Local\Android\Sdk</code>).</li>
+<li>Thêm vào biến <code>Path</code> hai mục:
+<ul>
+<li><code>%ANDROID_HOME%\platform-tools</code></li>
+<li><code>%ANDROID_HOME%\emulator</code></li>
+</ul>
+</li>
+<li>Mở lại terminal (PowerShell) để biến môi trường có hiệu lực.</li>
+</ol>
+<h2>2.5 Ví dụ thực hành: xác nhận cài đặt</h2>
+<p>Sau khi cài xong, mở PowerShell và chạy lần lượt:</p>
+<pre><code class="language-powershell">adb --version
+</code></pre>
+<p>Kết quả mong đợi: in ra phiên bản Android Debug Bridge, ví dụ <code>Android Debug Bridge version 1.0.41</code>.</p>
+<pre><code class="language-powershell">sdkmanager --list_installed
+</code></pre>
+<p>(Nếu lệnh <code>sdkmanager</code> chưa nhận, dùng đường dẫn đầy đủ: <code>%ANDROID_HOME%\cmdline-tools\latest\bin\sdkmanager.bat --list_installed</code>.) Kết quả liệt kê các package SDK đã cài — dùng để đối chiếu khi gặp lỗi thiếu component.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Sau khi cài đặt, ghi lại: đường dẫn <code>ANDROID_HOME</code> trên máy bạn, API level bạn đã cài qua SDK Manager.</li>
+<li>Chạy <code>adb --version</code> — nếu báo lỗi &quot;not recognized&quot;, tự tra lại bước 2.4 và sửa cho đến khi chạy được (đây là bài tập bắt buộc — Chương 3 giả định <code>adb</code> đã dùng được).</li>
+<li>Mở SDK Manager, thử cài thêm một API level cũ hơn (ví dụ API 26) — quan sát dung lượng tải về.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong><code>'adb' is not recognized as an internal or external command</code></strong>: biến môi trường <code>Path</code> chưa trỏ đúng tới <code>platform-tools</code>, hoặc terminal đang mở từ trước khi bạn cập nhật biến môi trường — đóng và mở lại terminal.</li>
+<li><strong>Setup Wizard tải rất chậm hoặc treo</strong>: thường do mạng chặn domain tải SDK — thử đổi mạng, hoặc cấu hình proxy trong <code>Settings → Appearance &amp; Behavior → System Settings → HTTP Proxy</code>.</li>
+<li><strong>Không thấy tuỳ chọn Intel HAXM khi cài</strong>: máy dùng CPU AMD hoặc đã bật Hyper-V/WSL2 (Windows) — không sao, Chương 3 sẽ nói rõ ảnh hưởng của việc này tới tốc độ máy ảo và cách xử lý.</li>
+<li><strong>Cài nhiều API level &quot;cho chắc&quot;</strong>: mỗi API level tốn dung lượng đáng kể — chỉ cài các phiên bản bạn thực sự cần test.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có Android Studio, SDK, và <code>adb</code> chạy được từ dòng lệnh. Chương 3 sẽ dùng đúng những thứ này để tạo máy ảo (AVD) và/hoặc kết nối thiết bị Android thật — chuẩn bị nơi để chạy ứng dụng đầu tiên ở Chương 4–5.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch01-gioi-thieu-android.html">&larr; 1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a><a class="next" href="./ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB) &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

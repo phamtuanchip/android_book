@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>21. Gọi HTTP với OkHttp/Retrofit — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class="active"><a href="./ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="./ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="./ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 21: Gọi HTTP với OkHttp</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Khai báo đúng quyền <code>INTERNET</code> và hiểu vì sao Android không tự cho phép truy cập mạng.</li>
+<li>Gửi được một request GET bằng OkHttp, xử lý response bất đồng bộ.</li>
+<li>Hiểu callback của OkHttp chạy trên thread nào — và vì sao phải <code>runOnUiThread()</code>.</li>
+<li>Phân biệt lỗi MẠNG (không kết nối được) với lỗi HTTP (server phản hồi nhưng báo lỗi).</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch21-http-okhttp/</code>. Chương này cố tình dùng OkHttp thuần + parse JSON thủ công để bạn thấy rõ những gì Retrofit (Chương 22) sẽ tự động hoá giúp bạn.</p>
+</blockquote>
+<h2>21.1 Quyền <code>INTERNET</code></h2>
+<pre><code class="language-xml">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+</code></pre>
+<p>Đây là quyền <strong>duy nhất trong sách không cần xin runtime</strong> (khác <code>POST_NOTIFICATIONS</code> ở Chương 20) — chỉ cần khai báo trong manifest là đủ, vì Google xếp nó vào nhóm quyền &quot;normal&quot; (rủi ro thấp), sẽ giải thích đầy đủ mô hình phân loại quyền ở Chương 26. Thiếu dòng này, mọi request mạng sẽ thất bại với <code>SecurityException</code>, dù logic code hoàn toàn đúng — lỗi hay gặp nhất với người mới bắt đầu phần mạng.</p>
+<h2>21.2 Gửi một request GET</h2>
+<pre><code class="language-java">private final OkHttpClient client = new OkHttpClient.Builder()
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
+        .build();
+
+Request request = new Request.Builder()
+        .url(&quot;https://jsonplaceholder.typicode.com/posts&quot;)
+        .get()
+        .build();
+
+client.newCall(request).enqueue(new Callback() {
+    @Override
+    public void onFailure(Call call, IOException e) { ... }
+
+    @Override
+    public void onResponse(Call call, Response response) throws IOException { ... }
+});
+</code></pre>
+<p><code>OkHttpClient</code> nên được <strong>tạo một lần, dùng lại cho cả app</strong> — nó tự quản lý connection pool bên trong, tạo mới liên tục cho mỗi request sẽ lãng phí và chậm hơn hẳn. <code>enqueue()</code> gửi request bất đồng bộ (không chặn thread gọi nó) — có <code>execute()</code> đồng bộ nhưng <strong>không bao giờ gọi trên main thread</strong> (Android chủ động ném <code>NetworkOnMainThreadException</code> nếu bạn thử làm vậy, tương tự tinh thần bảo vệ của Room ở Chương 13).</p>
+<h2>21.3 Callback chạy trên thread nào?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant UI as Main thread
+    participant OkHttp as OkHttp dispatcher (thread nền)
+    participant Server
+
+    UI-&gt;&gt;OkHttp: client.newCall(request).enqueue(callback)
+    Note over UI: UI thread được giải phóng NGAY,&lt;br/&gt;không chờ kết quả
+    OkHttp-&gt;&gt;Server: Gửi request thật
+    Server--&gt;&gt;OkHttp: Response
+    OkHttp-&gt;&gt;OkHttp: onResponse()/onFailure() chạy&lt;br/&gt;TRÊN THREAD NỀN của OkHttp
+    OkHttp-&gt;&gt;UI: runOnUiThread() để quay lại main thread
+</pre></div>
+<p>Đây là điểm dễ nhầm nhất: callback <code>onResponse</code>/<code>onFailure</code> <strong>không chạy trên main thread</strong> — khác hẳn Retrofit ở Chương 22 (Retrofit tự động đưa callback về main thread khi chạy trên Android). Với OkHttp thuần, mọi cập nhật UI trong callback đều phải bọc qua <code>runOnUiThread()</code>, đúng nguyên tắc đã lặp lại xuyên suốt từ Chương 13.</p>
+<pre><code class="language-java">@Override
+public void onResponse(Call call, Response response) {
+    String json = response.body().string();
+    List&lt;Post&gt; posts = parsePosts(json);
+    runOnUiThread(() -&gt; adapter.submitList(posts));  // bắt buộc
+}
+</code></pre>
+<h2>21.4 Hai loại lỗi khác nhau — đừng gộp chung</h2>
+<pre><code class="language-java">@Override
+public void onFailure(Call call, IOException e) {
+    // Lỗi MẠNG: không kết nối được server (mất mạng, timeout, sai domain...)
+    runOnUiThread(() -&gt; showError(&quot;Lỗi mạng: &quot; + e.getMessage()));
+}
+
+@Override
+public void onResponse(Call call, Response response) {
+    if (!response.isSuccessful()) {
+        // Lỗi HTTP: SERVER ĐÃ TRẢ LỜI, nhưng với mã lỗi (404, 500...)
+        runOnUiThread(() -&gt; showError(&quot;Server trả lỗi HTTP &quot; + response.code()));
+        return;
+    }
+    // response.isSuccessful() true — xử lý dữ liệu bình thường
+}
+</code></pre>
+<p>Hai tình huống cần thông báo khác nhau cho người dùng: <code>onFailure</code> nghĩa là <strong>request chưa bao giờ tới được server</strong> (kiểm tra lại kết nối mạng); <code>response.isSuccessful() == false</code> bên trong <code>onResponse</code> nghĩa là <strong>server đã nhận và xử lý, nhưng trả về lỗi</strong> (ví dụ dữ liệu không tồn tại, server đang gặp sự cố) — hai loại lỗi này cần hướng xử lý khác nhau, sẽ bàn kỹ hơn ở Chương 23.</p>
+<h2>21.5 Parse JSON thủ công — tại sao chương này cố tình làm &quot;khổ&quot;?</h2>
+<pre><code class="language-java">private List&lt;Post&gt; parsePosts(String json) throws JSONException {
+    List&lt;Post&gt; posts = new ArrayList&lt;&gt;();
+    JSONArray array = new JSONArray(json);
+    for (int i = 0; i &lt; array.length(); i++) {
+        JSONObject obj = array.getJSONObject(i);
+        posts.add(new Post(
+                obj.getInt(&quot;id&quot;),
+                obj.getInt(&quot;userId&quot;),
+                obj.getString(&quot;title&quot;),
+                obj.getString(&quot;body&quot;)));
+    }
+    return posts;
+}
+</code></pre>
+<p>Với API có nhiều field, lồng nhau nhiều tầng, cách viết tay này nhanh chóng trở nên dài dòng và dễ gõ sai tên field (<code>&quot;titel&quot;</code> thay vì <code>&quot;title&quot;</code> chỉ phát hiện lúc chạy). Chương 22 giới thiệu Gson/Retrofit tự động hoá toàn bộ phần này — cố tình cho bạn thấy công việc thủ công trước để hiểu rõ <strong>Retrofit thực chất đang làm gì bên dưới</strong>, thay vì dùng nó như một &quot;hộp đen&quot;.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, tải danh sách bài viết thành công.</li>
+<li>Bật chế độ máy bay, bấm tải lại — xác nhận thấy đúng thông báo lỗi MẠNG (<code>onFailure</code>).</li>
+<li>Sửa tạm <code>POSTS_URL</code> thành <code>&quot;.../postss&quot;</code> (sai đường dẫn, JSONPlaceholder trả 404) — xác nhận thấy đúng thông báo lỗi HTTP (khác thông báo ở bài tập 2).</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Quên khai báo <code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</code></strong>: mọi request thất bại với <code>SecurityException</code>, dễ nhầm tưởng lỗi code logic.</li>
+<li><strong>Gọi <code>execute()</code> (đồng bộ) trên main thread thay vì <code>enqueue()</code></strong>: crash ngay với <code>NetworkOnMainThreadException</code>.</li>
+<li><strong>Cập nhật View trực tiếp trong <code>onResponse</code>/<code>onFailure</code> mà quên <code>runOnUiThread()</code></strong>: <code>CalledFromWrongThreadException</code>, cùng nguyên nhân đã gặp ở Chương 19.</li>
+<li><strong>Gộp chung xử lý lỗi mạng và lỗi HTTP vào một nhánh</strong>: người dùng nhận thông báo mơ hồ (&quot;Có lỗi xảy ra&quot;) thay vì gợi ý hữu ích (&quot;Kiểm tra kết nối mạng&quot; so với &quot;Server đang bảo trì&quot;).</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã gọi được API thật, hiểu rõ cơ chế bất đồng bộ và hai loại lỗi mạng/HTTP. Chương 22 giới thiệu Retrofit + Gson — xây lại đúng chức năng này với ít code hơn nhiều, tự động hoá phần parse JSON vừa làm thủ công ở đây.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="../part3-background/ch20-notification.html">&larr; 20. Notification</a><a class="next" href="./ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

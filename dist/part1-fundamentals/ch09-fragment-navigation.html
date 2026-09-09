@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9. Fragment &amp; Navigation Component — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="./ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="./ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="./ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class="active"><a href="./ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="./ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="./ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 9: Fragment &amp; Navigation Component</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu <code>Fragment</code> là gì, khác <code>Activity</code> ở điểm nào, và vì sao vòng đời của nó phức tạp hơn.</li>
+<li>Dựng được mô hình &quot;single-activity&quot; — một Activity chứa nhiều Fragment.</li>
+<li>Dùng Navigation Component để điều hướng và truyền dữ liệu an toàn kiểu (Safe Args) giữa các Fragment.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch09-fragment-navigation/</code>.</p>
+</blockquote>
+<h2>9.1 Vì sao cần Fragment nếu đã có Activity?</h2>
+<p>Ở Chương 8, mỗi màn hình là một Activity riêng. Cách này có hai giới hạn:</p>
+<ul>
+<li>Muốn hiển thị 2 màn hình cạnh nhau (ví dụ layout máy tính bảng: danh sách bên trái, chi tiết bên phải) — không làm được nếu mỗi màn hình là một Activity độc lập.</li>
+<li>Chuyển màn hình bằng Activity luôn kèm chi phí tạo mới cửa sổ hệ thống, nặng hơn cần thiết cho những màn hình đơn giản chỉ là &quot;một phần nội dung thay đổi&quot;.</li>
+</ul>
+<p><code>Fragment</code> giải quyết việc này: là một <strong>mảnh giao diện có vòng đời riêng, nhưng sống bên trong một Activity</strong>. Nhiều app hiện đại dùng đúng <strong>một Activity duy nhất</strong>, mọi màn hình còn lại đều là Fragment — mô hình dùng trong code mẫu chương này.</p>
+<h2>9.2 Vòng đời Fragment — phức tạp hơn Activity một bậc</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+stateDiagram-v2
+    [*] --&gt; Attached: onAttach()
+    Attached --&gt; Created: onCreate()
+    Created --&gt; ViewCreated: onCreateView() + onViewCreated()
+    ViewCreated --&gt; Started: onStart()
+    Started --&gt; Resumed: onResume()
+    Resumed --&gt; Started: onPause()
+    Started --&gt; Created2: onStop()
+    Created2 --&gt; ViewDestroyed: onDestroyView()
+    ViewDestroyed --&gt; Detached: onDestroy() + onDetach()
+    Detached --&gt; [*]
+
+    Created2: Created (Stopped)
+</pre></div>
+<p>Điểm khác biệt quan trọng nhất so với Activity: <strong>Fragment có <code>onCreateView()</code>/<code>onDestroyView()</code> tách riêng khỏi <code>onCreate()</code>/<code>onDestroy()</code></strong>. Lý do: View của Fragment có thể bị huỷ và tạo lại (ví dụ khi Fragment tạm thời không hiển thị trong <code>ViewPager</code>) trong khi bản thân đối tượng Fragment vẫn còn sống. Đây là lý do code mẫu luôn <strong>null hoá <code>binding</code> trong <code>onDestroyView()</code></strong>:</p>
+<pre><code class="language-java">@Override
+public void onDestroyView() {
+    super.onDestroyView();
+    binding = null;  // View đã chết — giữ tham chiếu là rò rỉ bộ nhớ
+}
+</code></pre>
+<h2>9.3 NavHostFragment — nơi chứa các Fragment điều hướng qua lại</h2>
+<pre><code class="language-xml">&lt;!-- activity_main.xml --&gt;
+&lt;fragment
+    android:id=&quot;@+id/navHostFragment&quot;
+    android:name=&quot;androidx.navigation.fragment.NavHostFragment&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    app:defaultNavHost=&quot;true&quot;
+    app:navGraph=&quot;@navigation/nav_graph&quot; /&gt;
+</code></pre>
+<p><code>app:navGraph</code> trỏ tới file định nghĩa sơ đồ điều hướng — mở bằng Android Studio sẽ thấy giao diện kéo-thả trực quan (Navigation Editor):</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    First[&quot;firstFragment&lt;br/&gt;(start destination)&quot;] --&gt;|&quot;action_first_to_second&lt;br/&gt;(kèm argument: message)&quot;| Second[&quot;secondFragment&quot;]
+</pre></div>
+<p><code>app:defaultNavHost=&quot;true&quot;</code> để <code>NavHostFragment</code> tự xử lý nút Back của hệ thống — bấm Back sẽ tự quay lại Fragment trước đó trong back stack, không cần code tay.</p>
+<h2>9.4 Safe Args — truyền dữ liệu có kiểm tra kiểu</h2>
+<p>Ở Chương 8, <code>putExtra</code>/<code>getStringExtra</code> không có gì đảm bảo hai bên dùng đúng cùng một key và đúng kiểu — sai chỉ lộ ra lúc chạy. Navigation Component giải quyết bằng <strong>Safe Args</strong>: khai báo tham số ngay trong <code>nav_graph.xml</code>:</p>
+<pre><code class="language-xml">&lt;fragment android:id=&quot;@+id/secondFragment&quot; ...&gt;
+    &lt;argument
+        android:name=&quot;message&quot;
+        app:argType=&quot;string&quot; /&gt;
+&lt;/fragment&gt;
+</code></pre>
+<p>Plugin Safe Args (<code>id 'androidx.navigation.safeargs'</code>, khai báo ở <code>build.gradle</code>) sinh ra class <code>FirstFragmentDirections</code> và <code>SecondFragmentArgs</code> lúc build:</p>
+<pre><code class="language-java">// Gửi đi — FirstFragment
+NavDirections action = FirstFragmentDirections.actionFirstToSecond(message);
+NavHostFragment.findNavController(this).navigate(action);
+
+// Nhận — SecondFragment
+SecondFragmentArgs args = SecondFragmentArgs.fromBundle(requireArguments());
+String message = args.getMessage();
+</code></pre>
+<p>Nếu bạn đổi <code>app:argType=&quot;string&quot;</code> thành <code>&quot;integer&quot;</code> mà quên sửa code Java tương ứng, <strong>lỗi lộ ra ngay lúc biên dịch</strong> — không phải khi chạy thử mới phát hiện, khác hẳn cách làm ở Chương 8.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, xác nhận luồng nhập tin nhắn → chuyển Fragment → hiển thị đúng dữ liệu → bấm Back quay lại.</li>
+<li>Mở <code>nav_graph.xml</code> bằng Navigation Editor trong Android Studio, thử kéo thêm một Fragment thứ ba, nối action từ <code>secondFragment</code> tới nó.</li>
+<li>Thêm một <code>argument</code> kiểu <code>integer</code> (ví dụ độ ưu tiên tin nhắn), truyền và hiển thị nó ở <code>SecondFragment</code>.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Quên null hoá <code>binding</code> trong <code>onDestroyView()</code></strong>: rò rỉ bộ nhớ, đặc biệt nghiêm trọng nếu Fragment nằm trong danh sách vuốt qua lại nhiều lần.</li>
+<li><strong>Gọi thao tác trên <code>binding</code> sau khi View đã bị huỷ</strong> (ví dụ trong callback bất đồng bộ hoàn thành trễ) → <code>NullPointerException</code>. Luôn kiểm tra Fragment còn &quot;alive&quot;/View còn tồn tại trước khi cập nhật UI.</li>
+<li><strong>Không thấy class <code>FirstFragmentDirections</code> dù đã khai báo action</strong>: quên áp dụng plugin Safe Args trong <code>app/build.gradle</code>, hoặc chưa build lại project sau khi sửa <code>nav_graph.xml</code>.</li>
+<li><strong><code>IllegalArgumentException: Required argument &quot;message&quot; is missing</code></strong>: điều hướng tới <code>secondFragment</code> mà không qua action đã khai báo argument (ví dụ gọi thẳng <code>navigate(R.id.secondFragment)</code>), khiến Safe Args không có dữ liệu để truyền.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết tách một Activity thành nhiều Fragment, điều hướng và truyền dữ liệu giữa chúng an toàn kiểu. Chương 10 sẽ dùng Fragment/Activity để hiển thị <strong>danh sách</strong> dữ liệu hiệu quả bằng <code>RecyclerView</code> — thứ gần như mọi ứng dụng thực tế đều cần.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch08-su-kien-intent.html">&larr; 8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a><a class="next" href="./ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng) &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

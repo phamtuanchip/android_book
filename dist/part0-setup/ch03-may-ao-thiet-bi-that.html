@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB) — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="./ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="./ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class="active"><a href="./ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="./ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="./ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 3: Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Tạo được một máy ảo Android (AVD) chạy được trong Android Studio.</li>
+<li>Bật Developer Options và USB debugging để kết nối thiết bị Android thật.</li>
+<li>Dùng được các lệnh <code>adb</code> cơ bản để kiểm tra thiết bị/máy ảo đang kết nối.</li>
+<li>Biết chọn máy ảo hay thiết bị thật tuỳ tình huống.</li>
+</ul>
+<h2>3.1 Máy ảo hay thiết bị thật?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Start[&quot;Cần chạy thử ứng dụng&quot;] --&gt; Q1{&quot;Có thiết bị Android thật sẵn?&quot;}
+    Q1 --&gt;|Không| AVD[&quot;Dùng máy ảo (AVD)&quot;]
+    Q1 --&gt;|Có| Q2{&quot;Cần test phần cứng thật&lt;br/&gt;(Bluetooth, NFC, camera, cảm biến)?&quot;}
+    Q2 --&gt;|Có| Real[&quot;Dùng thiết bị thật&quot;]
+    Q2 --&gt;|Không, chỉ test UI/logic| Q3{&quot;Máy tính đủ mạnh chạy emulator mượt?&quot;}
+    Q3 --&gt;|Có| AVD
+    Q3 --&gt;|Không| Real
+</pre></div>
+<p>Máy ảo tiện cho việc test nhanh, nhiều cấu hình màn hình/API level khác nhau mà không cần nhiều máy thật. Nhưng một số phần cứng (Bluetooth thật, NFC, cảm biến chuyển động thật) <strong>bắt buộc phải test trên thiết bị thật</strong> — nội dung này sẽ quan trọng trở lại ở Chương 35–36.</p>
+<h2>3.2 Tạo máy ảo (AVD)</h2>
+<ol>
+<li>Mở <strong>Tools → Device Manager</strong> trong Android Studio.</li>
+<li>Chọn <strong>Create Device</strong>.</li>
+<li>Chọn một <strong>Device definition</strong> (ví dụ Pixel 6) — quyết định kích thước màn hình, mật độ điểm ảnh.</li>
+<li>Chọn <strong>System Image</strong> — đây là phiên bản Android sẽ chạy trong máy ảo:
+<ul>
+<li>Ưu tiên bản có nhãn <strong>x86_64</strong> (chạy nhanh hơn nhiều so với ARM trên máy Windows/Intel thông qua ảo hoá phần cứng).</li>
+<li>Chọn API level trùng với <code>targetSdkVersion</code> bạn định dùng (Chương 2 đã cài).</li>
+</ul>
+</li>
+<li>Đặt tên AVD, có thể chỉnh thêm RAM/dung lượng lưu trữ nếu cần test app nặng.</li>
+<li>Bấm <strong>Finish</strong> — lần đầu chạy máy ảo sẽ hơi chậm (khởi tạo), các lần sau nhanh hơn nhiều nhờ snapshot.</li>
+</ol>
+<h2>3.3 Thao tác cơ bản trên máy ảo</h2>
+<p>Khi máy ảo đã chạy, thanh công cụ bên cạnh cho phép:</p>
+<ul>
+<li>Xoay màn hình (rotate).</li>
+<li>Giả lập vị trí GPS (Extended controls → Location) — hữu ích khi học các chương liên quan tới vị trí (Chương 37).</li>
+<li>Giả lập cuộc gọi/SMS đến.</li>
+<li>Chụp ảnh màn hình, quay video màn hình.</li>
+<li>Giả lập mức pin yếu, mất mạng — để test app trong điều kiện bất lợi.</li>
+</ul>
+<h2>3.4 Kết nối thiết bị Android thật</h2>
+<ol>
+<li>Trên điện thoại: vào <strong>Settings → About phone</strong>, bấm liên tục 7 lần vào <strong>Build number</strong> để mở khoá <strong>Developer options</strong>.</li>
+<li>Vào <strong>Settings → System → Developer options</strong>, bật <strong>USB debugging</strong>.</li>
+<li>Cắm điện thoại vào máy tính bằng cáp USB (ưu tiên cáp hỗ trợ truyền dữ liệu, không phải cáp chỉ sạc).</li>
+<li>Trên điện thoại sẽ hiện hộp thoại &quot;Allow USB debugging?&quot; kèm vân tay RSA của máy tính — chọn <strong>Allow</strong> (có thể tick &quot;Always allow from this computer&quot; để khỏi hỏi lại).</li>
+<li>Xác nhận từ máy tính:</li>
+</ol>
+<pre><code class="language-powershell">adb devices
+</code></pre>
+<p>Kết quả mong đợi:</p>
+<pre><code>List of devices attached
+R58N60XXXXX    device
+</code></pre>
+<p>Nếu cột thứ hai hiện <code>unauthorized</code> thay vì <code>device</code>, quay lại điện thoại và xác nhận lại hộp thoại cho phép ở bước 4.</p>
+<h2>3.5 ADB cơ bản — bạn sẽ dùng lại nhiều lần trong sách</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant Dev as Máy tính (adb)
+    participant Target as Thiết bị/Máy ảo
+
+    Dev-&gt;&gt;Target: adb devices (liệt kê thiết bị đang kết nối)
+    Dev-&gt;&gt;Target: adb install app-debug.apk
+    Target--&gt;&gt;Dev: Success
+    Dev-&gt;&gt;Target: adb shell (mở shell trên thiết bị)
+    Dev-&gt;&gt;Target: adb logcat (xem log runtime)
+    Target--&gt;&gt;Dev: dòng log liên tục
+</pre></div>
+<p>Vài lệnh dùng thường xuyên:</p>
+<pre><code class="language-powershell">adb devices              # liệt kê thiết bị/máy ảo đang kết nối
+adb install app.apk      # cài 1 file APK vào thiết bị đang chọn
+adb uninstall vn.example.helloandroid   # gỡ theo package name
+adb logcat                # xem log runtime (Ctrl+C để dừng)
+adb shell                 # mở shell Linux trên thiết bị (gõ exit để thoát)
+</code></pre>
+<p>Nếu có nhiều thiết bị/máy ảo cùng kết nối, thêm <code>-s &lt;device-id&gt;</code> (lấy từ <code>adb devices</code>) vào trước lệnh để chỉ định đích.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Tạo một AVD Pixel 6, API level trùng với bản bạn đã cài ở Chương 2, khởi động thành công.</li>
+<li>Nếu có điện thoại Android thật: bật Developer options + USB debugging, chạy <code>adb devices</code> cho tới khi thấy trạng thái <code>device</code> (không phải <code>unauthorized</code> hay trống).</li>
+<li>Thử <code>adb shell</code>, gõ <code>exit</code> để thoát — xác nhận bạn vào được shell của máy ảo/thiết bị.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Máy ảo chạy cực chậm / bị treo khi khởi động</strong>: thường do chưa bật ảo hoá phần cứng (Intel VT-x/AMD-V) trong BIOS, hoặc xung đột với Hyper-V/WSL2 đang bật sẵn trên Windows. Cân nhắc dùng thiết bị thật nếu máy không hỗ trợ tốt.</li>
+<li><strong><code>adb devices</code> không thấy thiết bị thật</strong>: thiếu driver USB (một số hãng máy Android cần driver riêng trên Windows), hoặc cáp chỉ hỗ trợ sạc không truyền dữ liệu.</li>
+<li><strong>Thiết bị hiện <code>unauthorized</code></strong>: chưa xác nhận hộp thoại &quot;Allow USB debugging&quot; trên điện thoại, hoặc vân tay RSA cũ bị đổi — vào lại Developer options, chọn <strong>Revoke USB debugging authorizations</strong>, rút và cắm lại cáp.</li>
+<li><strong>Máy ảo mất kết nối mạng bên trong</strong>: thường do phần mềm VPN/firewall trên máy tính chặn — tắt thử VPN rồi khởi động lại máy ảo.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có nơi để chạy ứng dụng: một máy ảo và/hoặc một thiết bị thật đã kết nối qua <code>adb</code>. Chương 4 sẽ tạo project Android đầu tiên và giải thích từng phần trong cấu trúc project đó.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch02-cai-dat-moi-truong.html">&larr; 2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a><a class="next" href="./ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

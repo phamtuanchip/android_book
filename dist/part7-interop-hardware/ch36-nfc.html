@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="./ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="./ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="./ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="./ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class="active"><a href="./ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="./ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 36: NFC — đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</h1>
+<blockquote>
+<p><strong>Lưu ý</strong>: phần đọc/ghi thẻ NFC cần <strong>thiết bị Android thật có NFC</strong> — máy ảo không mô phỏng được sóng NFC thật. Phần Host Card Emulation (HCE) khó tự kiểm chứng hơn nữa, cần đầu đọc NFC chuyên dụng — xem giải thích chi tiết ở mục 36.5.</p>
+</blockquote>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu NFC hoạt động ở khoảng cách cực gần (vài cm), khác hẳn tầm hoạt động của Bluetooth (Chương 35).</li>
+<li>Dùng Foreground Dispatch để giành quyền xử lý sự kiện chạm thẻ khi Activity đang mở.</li>
+<li>Đọc và ghi <code>NdefMessage</code>/<code>NdefRecord</code> — định dạng dữ liệu chuẩn cho tag NFC.</li>
+<li>Biết Host Card Emulation (HCE) là gì ở mức khái niệm — cơ chế đứng sau Google Wallet.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch36-nfc/</code>.</p>
+</blockquote>
+<h2>36.1 NFC khác Bluetooth ở điểm nào?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    subgraph BT[&quot;Bluetooth (Chương 35)&quot;]
+        B1[&quot;Tầm hoạt động: vài mét tới vài chục mét&quot;]
+        B2[&quot;Cần ghép đôi (Classic) hoặc quét (BLE)&quot;]
+        B3[&quot;Phù hợp: truyền liên tục, dữ liệu lớn hơn&quot;]
+    end
+    subgraph NFC[&quot;NFC (chương này)&quot;]
+        N1[&quot;Tầm hoạt động: VÀI CENTIMET&quot;]
+        N2[&quot;KHÔNG cần ghép đôi — chạm là nhận diện&quot;]
+        N3[&quot;Phù hợp: thanh toán, đọc thẻ, trao đổi&lt;br/&gt;lượng dữ liệu NHỎ tức thời&quot;]
+    end
+</pre></div>
+<p>Chính khoảng cách cực gần này khiến NFC phù hợp cho các tình huống cần <strong>chủ đích rõ ràng</strong> của người dùng (chạm thẻ để thanh toán, chạm để mở khoá) — khó bị kích hoạt nhầm hay từ xa như Bluetooth.</p>
+<h2>36.2 Foreground Dispatch — giành quyền xử lý khi Activity đang mở</h2>
+<pre><code class="language-java">@Override
+protected void onResume() {
+    super.onResume();
+    nfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFilters, null);
+}
+
+@Override
+protected void onPause() {
+    super.onPause();
+    nfcAdapter.disableForegroundDispatch(this);
+}
+</code></pre>
+<p>Không có Foreground Dispatch, khi chạm thẻ, hệ thống tự chọn app xử lý dựa trên <code>&lt;intent-filter&gt;</code> tĩnh trong manifest — có thể hiện hộp thoại &quot;Open with&quot; nếu nhiều app cùng khai báo, hoặc mở nhầm app khác. <code>enableForegroundDispatch()</code> (gọi trong <code>onResume</code>) đảm bảo <strong>Activity đang mở này luôn nhận sự kiện trước tiên</strong>, không hỏi han gì — đúng cặp bật/tắt theo vòng đời <code>onResume</code>/<code>onPause</code> đã quen thuộc từ nguyên tắc đăng ký/huỷ đăng ký ở Chương 12/17.</p>
+<pre><code class="language-java">private void setupForegroundDispatch() {
+    Intent intent = new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
+    intentFilters = new IntentFilter[]{
+            new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED),
+            new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)
+    };
+}
+</code></pre>
+<p><code>PendingIntent</code> (đã học kỹ ở Chương 20, nhìn lại ở Chương 33) một lần nữa xuất hiện — đây là cách hệ thống &quot;gọi ngược&quot; vào đúng Activity đang mở khi phát hiện thẻ, dùng <code>FLAG_MUTABLE</code> (khác <code>FLAG_IMMUTABLE</code> ở Chương 20) vì hệ thống cần <strong>chèn thêm dữ liệu thẻ</strong> vào Intent trước khi gửi lại cho app.</p>
+<h2>36.3 Đọc <code>NdefMessage</code> từ thẻ</h2>
+<pre><code class="language-java">@Override
+protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+    Parcelable[] rawMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+    if (rawMessages != null) {
+        NdefMessage message = (NdefMessage) rawMessages[0];
+        for (NdefRecord record : message.getRecords()) {
+            String text = decodeTextRecord(record);
+            // hiển thị text
+        }
+    }
+}
+</code></pre>
+<p><code>NDEF</code> (NFC Data Exchange Format) là định dạng dữ liệu chuẩn cho tag NFC — một <code>NdefMessage</code> chứa một hoặc nhiều <code>NdefRecord</code>. Việc giải mã một record kiểu Text đòi hỏi đọc đúng cấu trúc byte: byte đầu tiên là độ dài mã ngôn ngữ, phần còn lại mới là văn bản thật:</p>
+<pre><code class="language-java">private String decodeTextRecord(NdefRecord record) {
+    byte[] payload = record.getPayload();
+    int langLength = payload[0] &amp; 0x3F;
+    return new String(payload, 1 + langLength, payload.length - 1 - langLength, StandardCharsets.UTF_8);
+}
+</code></pre>
+<h2>36.4 Ghi <code>NdefMessage</code> vào thẻ</h2>
+<pre><code class="language-java">Ndef ndef = Ndef.get(tag);
+if (ndef != null) {
+    ndef.connect();
+    if (ndef.isWritable()) {
+        ndef.writeNdefMessage(message);
+    }
+    ndef.close();
+} else {
+    // Thẻ TRỐNG, chưa từng có định dạng NDEF — cần format trước khi ghi
+    NdefFormatable formatable = NdefFormatable.get(tag);
+    if (formatable != null) {
+        formatable.connect();
+        formatable.format(message);
+        formatable.close();
+    }
+}
+</code></pre>
+<p>Hai đường khác nhau tuỳ trạng thái thẻ: <code>Ndef</code> (thẻ đã có định dạng NDEF, có thể ghi đè) và <code>NdefFormatable</code> (thẻ hoàn toàn trống, cần định dạng lần đầu trước khi ghi được). Luôn kiểm tra <code>isWritable()</code> — một số thẻ bị khoá ghi (read-only) sau lần format/ghi đầu tiên có chủ đích.</p>
+<h2>36.5 Host Card Emulation (HCE) — điện thoại &quot;giả làm&quot; thẻ</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant Reader as Đầu đọc NFC (POS, cửa an ninh...)
+    participant Phone as Điện thoại (HostApduService)
+
+    Reader-&gt;&gt;Phone: Lệnh SELECT AID (chọn &quot;ứng dụng thẻ&quot;)
+    Phone-&gt;&gt;Phone: processCommandApdu() xử lý,&lt;br/&gt;trả lời NGAY (không có thời gian làm việc nặng)
+    Phone--&gt;&gt;Reader: Phản hồi APDU (vd &quot;9000&quot; = thành công)
+    Reader-&gt;&gt;Phone: Các lệnh APDU tiếp theo (đọc dữ liệu, xác thực...)
+    Phone--&gt;&gt;Reader: Phản hồi tương ứng
+</pre></div>
+<p>Khác mọi phần trước (điện thoại <strong>chủ động đọc</strong> thẻ), HCE khiến điện thoại đóng vai <strong>bị động</strong> — chờ một đầu đọc bên ngoài gửi lệnh APDU (theo chuẩn ISO 7816-4) tới. Đây chính là cơ chế đứng sau việc dùng điện thoại thay thẻ giao thông, thẻ ra vào văn phòng, hay Google Wallet.</p>
+<pre><code class="language-java">public class HceService extends HostApduService {
+    @Override
+    public byte[] processCommandApdu(byte[] commandApdu, Bundle extras) {
+        if (startsWith(commandApdu, SELECT_APDU_HEADER)) {
+            return SUCCESS_RESPONSE; // phải trả lời NGAY, không có độ trễ
+        }
+        return UNKNOWN_COMMAND;
+    }
+}
+</code></pre>
+<pre><code class="language-xml">&lt;aid-group android:category=&quot;other&quot;&gt;
+    &lt;aid-filter android:name=&quot;F0010203040506&quot; /&gt;
+&lt;/aid-group&gt;
+</code></pre>
+<p><code>AID</code> (Application Identifier) đóng vai trò tương tự <code>AUTHORITY</code> của <code>ContentProvider</code> (Chương 32) — &quot;địa chỉ&quot; để đầu đọc chọn đúng &quot;ứng dụng thẻ&quot; cần giao tiếp trong số nhiều app HCE có thể cài trên máy. Dải AID bắt đầu bằng <code>F0</code> dành riêng cho mục đích proprietary/nội bộ, không trùng với AID thật của các hệ thống thanh toán.</p>
+<p><strong>Vì sao khó tự test tại nhà</strong>: HCE cần một <strong>đầu đọc NFC thật</strong> (không phải điện thoại khác) đã biết gửi đúng lệnh APDU khớp AID khai báo — khác phần đọc/ghi tag (mục 36.3-36.4) chỉ cần một thẻ NFC rẻ tiền là tự kiểm chứng được ngay.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu trên thiết bị thật, thử luồng ghi rồi đọc lại đúng nội dung trên cùng một thẻ NFC.</li>
+<li>Thử chạm một thẻ NFC hoàn toàn mới (chưa từng format) — xác nhận app tự chuyển sang dùng <code>NdefFormatable</code> thay vì <code>Ndef</code>.</li>
+<li>Đọc lại <code>HceService.java</code>, tự vẽ ra sơ đồ tương tự mục 36.5 nhưng cho tình huống app của bạn dùng để mở cửa văn phòng bằng điện thoại — xác định đâu là &quot;đầu đọc&quot;, đâu là &quot;lệnh APDU&quot; trong ngữ cảnh đó.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Quên <code>disableForegroundDispatch()</code> trong <code>onPause()</code></strong>: Activity tiếp tục giành sự kiện NFC dù không còn hiển thị, chặn cả Activity khác trong cùng app nhận đúng sự kiện của nó.</li>
+<li><strong>Không kiểm tra <code>NfcAdapter.getDefaultAdapter(this)</code> trả về <code>null</code></strong>: crash ngay trên thiết bị không có phần cứng NFC — luôn kiểm tra trước khi dùng, giống <code>BluetoothAdapter</code> ở Chương 35.</li>
+<li><strong>Cố ghi vào thẻ mà không kiểm tra <code>isWritable()</code></strong>: một số thẻ bị khoá ghi có chủ đích (ví dụ thẻ NFC dùng cho mục đích công cộng, cố định nội dung) — <code>writeNdefMessage()</code> ném lỗi rõ ràng thay vì âm thầm thất bại.</li>
+<li><strong>Xử lý chậm trong <code>processCommandApdu()</code></strong>: đầu đọc NFC thường có thời gian chờ phản hồi rất ngắn (vài trăm ms) — bất kỳ việc nặng nào (mạng, đĩa) đều khiến giao dịch thất bại; trả lời gần như tức thời là bắt buộc.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã hoàn thành ba chương phần cứng (Bluetooth, NFC) — đủ kiến thức cơ bản để giao tiếp với thế giới vật lý bên ngoài điện thoại. Chương 37 khép lại Phần 7 bằng việc hệ thống hoá toàn bộ các quyền runtime đã gặp rải rác (vị trí cho quét Bluetooth/BLE, quyền theo từng API level) thành một bức tranh đầy đủ.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch35-bluetooth.html">&larr; 35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a><a class="next" href="./ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

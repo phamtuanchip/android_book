@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="./ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="./ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="./ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class="active"><a href="./ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 27: Bảo mật cơ bản — ProGuard/R8, keystore, ký ứng dụng</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu R8 làm ba việc gì: shrinking, obfuscation, optimization.</li>
+<li>Viết đúng <code>proguard-rules.pro</code> cho code dùng reflection (Gson) — tránh lỗi &quot;hoạt động ở debug, crash ở release&quot;.</li>
+<li>Hiểu khái niệm ký ứng dụng bằng keystore, và vì sao mất keystore là sự cố nghiêm trọng.</li>
+<li>Biết <code>mapping.txt</code> dùng để làm gì và vì sao phải lưu giữ nó.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch27-proguard-keystore/</code> — bật R8 cho app Retrofit + Gson ở Chương 22.</p>
+</blockquote>
+<h2>27.1 R8 làm gì với code của bạn?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    Source[&quot;Code Java đã compile&quot;] --&gt; Shrink[&quot;1. Shrinking&lt;br/&gt;Xoá code/resource KHÔNG dùng tới&quot;]
+    Shrink --&gt; Obfuscate[&quot;2. Obfuscation&lt;br/&gt;Đổi tên class/field/method&lt;br/&gt;thành a, b, c... ngắn gọn&quot;]
+    Obfuscate --&gt; Optimize[&quot;3. Optimization&lt;br/&gt;Viết lại bytecode gọn/nhanh hơn&quot;]
+    Optimize --&gt; Output[&quot;APK/AAB nhỏ hơn,&lt;br/&gt;khó đọc ngược hơn&quot;]
+</pre></div>
+<p>R8 (thay thế ProGuard cũ, nhưng vẫn dùng chung định dạng file cấu hình <code>proguard-rules.pro</code>) chạy tự động khi bật <code>minifyEnabled true</code> cho build type <code>release</code>. Hai lợi ích cụ thể: <strong>APK/AAB nhỏ hơn</strong> (ảnh hưởng tốc độ tải về, quan trọng ở Chương 39), và <strong>khó dịch ngược hơn</strong> — không phải bất khả xâm phạm, nhưng đủ để cản trở việc đọc hiểu logic app của người không có quyền truy cập source code.</p>
+<h2>27.2 Vì sao build release &quot;vô cớ&quot; crash mà debug thì không?</h2>
+<p>Đây là tình huống rất phổ biến và gây khó chịu cho người mới: app chạy hoàn hảo ở bản debug (<code>minifyEnabled false</code> mặc định), nhưng bản release đóng gói để test thử lại crash hoặc trả dữ liệu <code>null</code> không rõ lý do.</p>
+<p>Thủ phạm gần như luôn là: <strong>thư viện dùng reflection</strong> (đọc/ghi field bằng tên chuỗi lúc chạy, không qua lời gọi hàm bình thường lúc biên dịch) — Gson (Chương 22) là ví dụ điển hình:</p>
+<pre><code class="language-java">public class Post {
+    public int id;
+    public String title;   // Gson gán giá trị vào field này bằng REFLECTION,
+    public String body;    // dựa theo tên field khớp với key JSON &quot;title&quot;, &quot;body&quot;
+}
+</code></pre>
+<p>R8 không &quot;nhìn thấy&quot; được việc field <code>title</code> đang bị Gson truy cập theo tên chuỗi — nó chỉ thấy field này <strong>không có lời gọi Java tường minh nào</strong> nên coi là an toàn để đổi tên thành <code>a</code>, <code>b</code>. Sau khi đổi tên, Gson tìm field tên <code>&quot;title&quot;</code> để gán giá trị nhưng field đó giờ tên là <code>&quot;a&quot;</code> — <strong>âm thầm không gán được gì cả</strong>, không ném exception, chỉ để <code>null</code>.</p>
+<h2>27.3 Viết <code>proguard-rules.pro</code> đúng cách</h2>
+<pre><code># Giữ nguyên tên mọi field trong Post — Gson cần đúng tên gốc để map JSON.
+-keepclassmembers class vn.example.ch27security.Post {
+    &lt;fields&gt;;
+}
+
+# Giữ thông tin kiểu generic (Call&lt;List&lt;Post&gt;&gt;) — Retrofit/Gson cần lúc runtime
+# để biết chính xác phải parse JSON thành kiểu dữ liệu nào.
+-keepattributes Signature
+-keepattributes *Annotation*
+</code></pre>
+<p>Quy tắc thực dụng: <strong>bất kỳ class nào bị truy cập bằng reflection từ bên ngoài code Java thông thường</strong> (model JSON, class dùng qua <code>Class.forName()</code>, đối tượng inject bằng Hilt ở Chương 29...) đều cần một dòng <code>-keep</code> tương ứng. Một cách khác, gọn hơn cho từng class riêng lẻ, là đánh dấu ngay trong code bằng annotation <code>@Keep</code> của AndroidX:</p>
+<pre><code class="language-java">@Keep
+public class Post { ... }
+</code></pre>
+<p><code>@Keep</code> và viết tay trong <code>proguard-rules.pro</code> đạt cùng mục đích — chọn một cách nhất quán trong cả project để dễ theo dõi.</p>
+<h2>27.4 <code>mapping.txt</code> — chìa khoá đọc lại crash log</h2>
+<pre><code>app/build/outputs/mapping/release/mapping.txt
+</code></pre>
+<p>File này ghi lại bảng đối chiếu tên gốc ↔ tên đã bị R8 đổi (<code>Post -&gt; a</code>, <code>getPosts -&gt; b</code>...). Khi app đã phát hành gặp crash thật ngoài thực tế, log lỗi thu về từ công cụ theo dõi (Chương 40 sẽ giới thiệu Crashlytics) sẽ chỉ hiện tên đã bị làm rối (<code>a.b.c: NullPointerException</code>) — <strong>hoàn toàn vô nghĩa nếu không có đúng file <code>mapping.txt</code> của đúng phiên bản đó</strong> để dịch ngược lại tên thật. Quy tắc bắt buộc: <strong>lưu trữ <code>mapping.txt</code> cho mọi bản release đã phát hành</strong>, thường bằng cách tải nó lên cùng công cụ theo dõi crash hoặc lưu trữ có đánh số phiên bản riêng.</p>
+<h2>27.5 Keystore — vì sao mọi APK đều phải được ký?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Dev[&quot;Bạn build app&quot;] --&gt; Sign[&quot;Ký bằng private key&lt;br/&gt;trong file keystore (.jks)&quot;]
+    Sign --&gt; Apk[&quot;APK/AAB đã ký&quot;]
+    Apk --&gt; Install[&quot;Cài lên máy người dùng&quot;]
+    Update[&quot;Bản cập nhật sau này&quot;] --&gt; SignAgain[&quot;Ký lại bằng ĐÚNG&lt;br/&gt;private key đó&quot;]
+    SignAgain --&gt; Verify{&quot;Chữ ký khớp&lt;br/&gt;bản đã cài trước đó?&quot;}
+    Verify --&gt;|&quot;Khớp&quot;| AllowUpdate[&quot;Cho phép cài đè (update)&quot;]
+    Verify --&gt;|&quot;Không khớp&quot;| Reject[&quot;TỪ CHỐI —&lt;br/&gt;coi như app khác hẳn&quot;]
+</pre></div>
+<p>Android dùng chữ ký số (dựa trên cặp khoá bất đối xứng, lưu trong file <strong>keystore</strong>) để đảm bảo: bản cập nhật của một app <strong>chắc chắn đến từ cùng một nhà phát triển</strong> với bản đã cài trước đó — đây chính là nguyên nhân lỗi quen thuộc <code>INSTALL_FAILED_UPDATE_INCOMPATIBLE</code> đã gặp ở Chương 5, khi hai bản build được ký bằng hai key khác nhau.</p>
+<p>Android Studio tự tạo sẵn một <strong>debug keystore</strong> (key mặc định, không bảo mật, dùng chung cho mọi máy phát triển) để bạn build và test nhanh — <strong>không bao giờ dùng để phát hành</strong>. Trước khi phát hành thật (Chương 38), bắt buộc tự tạo một <strong>release keystore</strong> riêng:</p>
+<pre><code class="language-powershell">keytool -genkeypair -v -keystore release-key.jks -alias my-app-key -keyalg RSA -keysize 2048 -validity 10000
+</code></pre>
+<p><strong>Cảnh báo quan trọng nhất chương này</strong>: làm mất file keystore này (và không dùng Google Play App Signing — Chương 38 sẽ giải thích cơ chế đó) đồng nghĩa với việc <strong>không bao giờ phát hành được bản cập nhật nào nữa</strong> cho app đã public dưới đúng định danh cũ — phải phát hành app mới hoàn toàn, mất hết lượt cài đặt/đánh giá cũ. Không commit file <code>.jks</code> hay mật khẩu của nó vào git.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Build thử bản release của code mẫu (<code>gradlew assembleRelease</code>), mở <code>mapping.txt</code> sinh ra, tìm dòng ánh xạ tên class <code>Post</code>.</li>
+<li>Thử xoá tạm rule <code>-keepclassmembers class ... Post</code> trong <code>proguard-rules.pro</code>, build lại, cài bản APK release lên máy ảo (dùng <code>adb install</code>, nhớ bản release ở dạng chưa ký cần cấu hình <code>signingConfig debug</code> tạm để cài thử được — hoặc đơn giản chỉ so sánh nội dung <code>mapping.txt</code> trước/sau mà không cần cài) — quan sát field <code>title</code>/<code>body</code> của <code>Post</code> cũng bị đổi tên trong mapping.</li>
+<li>Tự tạo một release keystore thử nghiệm bằng lệnh <code>keytool</code> ở mục 27.5 (dùng thông tin giả), sau đó tự xoá nó đi — chỉ để quen thao tác trước khi làm thật ở Chương 38.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Bật <code>minifyEnabled true</code> mà không test kỹ bản release trước khi phát hành</strong>: lỗi do thiếu <code>-keep</code> rule chỉ xuất hiện ở bản release, dễ lọt qua nếu chỉ test bản debug suốt quá trình phát triển.</li>
+<li><strong>Đánh mất <code>mapping.txt</code> của một bản đã phát hành</strong>: không thể đọc hiểu crash report từ bản đó nữa, dù bug vẫn còn nguyên trong code.</li>
+<li><strong>Làm mất keystore release, hoặc để lộ nó công khai</strong> (commit nhầm lên GitHub): mất keystore = không update được app cũ; lộ keystore = người khác có thể giả mạo phát hành bản cập nhật độc hại dưới danh nghĩa app của bạn.</li>
+<li><strong>Tưởng debug keystore đủ an toàn để dùng cho bản phát hành thật</strong>: debug keystore dùng chung mật khẩu mặc định trên mọi máy cài Android Studio — hoàn toàn không có giá trị bảo mật.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã khép lại <strong>Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</strong>: JUnit, Espresso, mô hình quyền, và bảo mật ở tầng build/ký ứng dụng. Phần 6 chuyển sang kiến trúc nâng cao, bắt đầu với MVVM và <code>ViewModel</code>/<code>LiveData</code> ở Chương 28 — chính thức hệ thống hoá mẫu &quot;Repository&quot; đã dùng tạm ở Chương 23.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch26-sandbox-permission.html">&larr; 26. Sandbox của Android: mô hình quyền (permission), runtime permission</a><a class="next" href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

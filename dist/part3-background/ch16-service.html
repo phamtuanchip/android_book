@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>16. Service &amp; foreground service — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class="active"><a href="./ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="./ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="./ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="./ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="./ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 16: Service &amp; foreground service</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu <code>Service</code> là gì — và điều nó KHÔNG phải: không tự động chạy trên thread riêng, không phải &quot;mini Activity không giao diện&quot;.</li>
+<li>Phân biệt Service dạng <strong>started</strong> và dạng <strong>bound</strong>, biết khi nào dùng loại nào.</li>
+<li>Hiểu vì sao <strong>foreground service</strong> ra đời và bắt buộc phải có notification liên tục.</li>
+<li>Biết <code>startForegroundService()</code> khác <code>startService()</code> ở đâu, và giới hạn chạy nền từ Android 8+.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch16-service/</code>.</p>
+</blockquote>
+<h2>16.1 Ngộ nhận đầu tiên: Service KHÔNG tự chạy trên thread riêng</h2>
+<p>Đây là hiểu lầm phổ biến nhất với người mới: <code>Service</code> chỉ là một <strong>thành phần có vòng đời riêng, được hệ thống ưu tiên giữ sống lâu hơn Activity thông thường</strong> — mọi callback của nó (<code>onCreate</code>, <code>onStartCommand</code>...) mặc định vẫn chạy trên <strong>main thread</strong>, giống hệt Activity. Muốn làm việc nặng, bạn vẫn phải tự tạo thread/Executor bên trong Service, đúng như đã làm với Room (Chương 13) hay file I/O (Chương 14).</p>
+<h2>16.2 Hai kiểu Service</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Need[&quot;Cần chạy tác vụ nền&quot;] --&gt; Q1{&quot;Ai cần biết kết quả?&quot;}
+    Q1 --&gt;|&quot;Không ai cả — tự chạy,&lt;br/&gt;tự kết thúc&quot;| Started[&quot;Started Service&lt;br/&gt;startService()/startForegroundService()&quot;]
+    Q1 --&gt;|&quot;Activity cần lấy dữ liệu/&lt;br/&gt;gọi hàm trực tiếp trong lúc chạy&quot;| Bound[&quot;Bound Service&lt;br/&gt;bindService()&quot;]
+    Started -.-&gt;|&quot;có thể vừa Started&lt;br/&gt;vừa cho Bind cùng lúc&quot;| Bound
+</pre></div>
+<p>Code mẫu chương này minh hoạ <strong>cả hai cùng lúc</strong> trên một <code>CounterService</code>: khởi động bằng <code>startForegroundService()</code> (chạy độc lập, đếm số giây), đồng thời cho phép <code>MainActivity</code> <code>bindService()</code> vào để đọc số đếm hiện tại trực tiếp — không cần disk, không cần Intent, chỉ cần gọi hàm Java bình thường qua <code>Binder</code>.</p>
+<h2>16.3 Started Service — tự chạy, không cần ai bind</h2>
+<pre><code class="language-java">Intent intent = new Intent(this, CounterService.class);
+ContextCompat.startForegroundService(this, intent);
+</code></pre>
+<p>Sau khi gọi, <code>CounterService.onStartCommand()</code> chạy — Service <strong>tiếp tục tồn tại</strong> cho tới khi tự gọi <code>stopSelf()</code> hoặc bị <code>stopService()</code> từ bên ngoài, <strong>kể cả khi Activity đã bị đóng</strong>. Giá trị trả về của <code>onStartCommand()</code> quyết định hành vi khi hệ thống buộc phải kill tiến trình để giải phóng bộ nhớ:</p>
+<table>
+<thead>
+<tr>
+<th>Giá trị trả về</th>
+<th>Hành vi sau khi bị kill</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>START_STICKY</code></td>
+<td>Hệ thống tự khởi động lại Service (intent = <code>null</code>) — dùng cho tác vụ nên tiếp tục (như code mẫu)</td>
+</tr>
+<tr>
+<td><code>START_NOT_STICKY</code></td>
+<td>Không tự khởi động lại — dùng cho tác vụ chỉ cần chạy một lần</td>
+</tr>
+<tr>
+<td><code>START_REDELIVER_INTENT</code></td>
+<td>Tự khởi động lại VÀ gửi lại đúng Intent ban đầu — dùng khi cần biết lại tham số gốc</td>
+</tr>
+</tbody>
+</table>
+<h2>16.4 Bound Service — Activity gọi hàm trực tiếp</h2>
+<pre><code class="language-java">public class LocalBinder extends Binder {
+    public CounterService getService() {
+        return CounterService.this;
+    }
+}
+
+@Nullable
+@Override
+public IBinder onBind(Intent intent) {
+    return binder;
+}
+</code></pre>
+<p>Phía Activity:</p>
+<pre><code class="language-java">private final ServiceConnection connection = new ServiceConnection() {
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        CounterService.LocalBinder localBinder = (CounterService.LocalBinder) service;
+        boundService = localBinder.getService();
+        boundService.setListener(MainActivity.this);
+    }
+    @Override
+    public void onServiceDisconnected(ComponentName name) { ... }
+};
+
+bindService(intent, connection, Context.BIND_AUTO_CREATE);
+</code></pre>
+<p><code>LocalBinder</code> chỉ hoạt động vì Activity và Service <strong>chạy trong cùng một tiến trình</strong> (cùng app) — gọi thẳng phương thức Java, không qua serialization nào. Giao tiếp giữa hai tiến trình khác nhau (hai app riêng biệt) cần cơ chế khác hẳn: AIDL, sẽ học ở Chương 34.</p>
+<p><strong>Điểm dễ nhầm nhất</strong>: <code>unbindService()</code> <strong>không</strong> làm Service dừng nếu nó đã được khởi động bằng <code>startForegroundService()</code> — Service (và notification) tiếp tục chạy độc lập. Chỉ <code>stopSelf()</code>/<code>stopService()</code> mới thực sự dừng nó.</p>
+<h2>16.5 Foreground Service — vì sao bắt buộc có notification?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant Activity
+    participant Service as CounterService
+    participant System as Android System
+
+    Activity-&gt;&gt;Service: startForegroundService(intent)
+    Service-&gt;&gt;Service: onStartCommand()
+    Service-&gt;&gt;System: startForeground(id, notification)
+    Note over System: Từ giờ Service được xem như&lt;br/&gt;đang &quot;foreground&quot; — ít bị kill hơn
+    Note over Activity: Notification LUÔN hiển thị,&lt;br/&gt;không thể ẩn khi Service còn foreground
+</pre></div>
+<p>Trước Android 8, một app có thể âm thầm chạy Service nền vô thời hạn — nguồn gốc của nhiều app &quot;ăn pin&quot; mà người dùng không biết lý do. Từ Android 8 (API 26), Google <strong>giới hạn mạnh</strong> việc chạy Service nền thông thường, và bắt buộc: muốn chạy tác vụ dài hơi mà người dùng có thể nhận biết, phải dùng <strong>foreground service</strong> — đổi lại được ưu tiên không bị hệ thống kill, nhưng <strong>bắt buộc hiển thị notification liên tục</strong> để người dùng luôn biết app đang làm gì:</p>
+<pre><code class="language-java">@Override
+public int onStartCommand(Intent intent, int flags, int startId) {
+    // Bắt buộc gọi trong vài giây đầu — trễ hơn sẽ bị hệ thống coi là lỗi (ANR)
+    startForeground(NOTIFICATION_ID, buildNotification());
+    ...
+}
+</code></pre>
+<p>Từ Android 14 (API 34), còn phải khai báo rõ <strong>loại</strong> foreground service trong manifest (<code>android:foregroundServiceType</code>) — hệ thống áp dụng ràng buộc khác nhau tuỳ loại (ví dụ loại <code>location</code> cho phép chạy lâu hơn loại thông thường, nhưng đòi hỏi quyền vị trí tương ứng — liên quan tới Chương 37).</p>
+<pre><code class="language-xml">&lt;service
+    android:name=&quot;.CounterService&quot;
+    android:exported=&quot;false&quot;
+    android:foregroundServiceType=&quot;dataSync&quot; /&gt;
+</code></pre>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, bấm Bắt đầu, rời khỏi app (Home) — quan sát notification tiếp tục cập nhật số đếm mỗi giây dù không có màn hình nào của app hiển thị.</li>
+<li>Mở lại app, quan sát <code>textCount</code> đồng bộ ngay với số hiện tại của Service (nhờ <code>bindService()</code> đọc trực tiếp <code>getCount()</code>).</li>
+<li>Thử đổi <code>START_STICKY</code> thành <code>START_NOT_STICKY</code>, mô tả tình huống hành vi sẽ khác nhau (không cần code thêm, chỉ cần giải thích bằng lời dựa vào bảng ở mục 16.3).</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Gọi <code>startService()</code> thay vì <code>startForegroundService()</code> khi target Android 8+, rồi gọi <code>startForeground()</code> trễ</strong>: hệ thống ném <code>ForegroundServiceDidNotStartInTimeException</code>, app bị crash.</li>
+<li><strong>Quên khai báo <code>foregroundServiceType</code> trên Android 14+</strong>: crash ngay khi gọi <code>startForeground()</code> với thông báo lỗi rõ ràng về thiếu type.</li>
+<li><strong>Tưởng <code>bindService()</code> một mình đủ để Service chạy nền bền vững</strong>: sai — Service chỉ sống bằng đúng thời gian còn ít nhất một client bind, trừ khi cũng được start bằng <code>startService()</code>/<code>startForegroundService()</code> (chính là lý do code mẫu dùng cả hai).</li>
+<li><strong>Không huỷ đăng ký listener (<code>setListener(null)</code>) khi Activity dừng bind</strong>: giữ tham chiếu Activity trong Service lâu hơn cần thiết — rò rỉ bộ nhớ, cùng nguyên tắc với Chương 12/15.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết chạy tác vụ nền dài hơi, đúng luật của Android hiện đại (foreground service + notification bắt buộc). Chương 17 giới thiệu <code>BroadcastReceiver</code> — cách lắng nghe sự kiện hệ thống (như thay đổi pin, kết nối mạng) và giao tiếp giữa các thành phần bằng broadcast.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="../part2-storage/ch15-datastore.html">&larr; 15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a><a class="next" href="./ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

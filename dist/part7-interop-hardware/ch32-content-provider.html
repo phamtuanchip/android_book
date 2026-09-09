@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class="active"><a href="./ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="./ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="./ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="./ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="./ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="./ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 32: Content Provider — chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu vì sao sandbox (Chương 1/26) khiến app khác không đọc được trực tiếp file SQLite của app mình.</li>
+<li>Viết một <code>ContentProvider</code> công khai dữ liệu Room qua giao diện chuẩn (query/insert/delete).</li>
+<li>Truy cập dữ liệu app khác từ một app hoàn toàn riêng biệt bằng <code>ContentResolver</code>.</li>
+<li>Dùng <code>ContentObserver</code> để tự động nhận biết khi dữ liệu ở app kia thay đổi.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch32-content-provider/</code> — <strong>hai app thật sự riêng biệt</strong> (<code>:app</code> và <code>:client</code>, hai APK khác nhau) để minh hoạ đúng bản chất chia sẻ liên-app, không phải mô phỏng trong cùng một app.</p>
+</blockquote>
+<h2>32.1 Vấn đề: sandbox chặn truy cập trực tiếp</h2>
+<p>Chương 1 và 26 đã nói: mỗi app có <code>UID</code> riêng, thư mục dữ liệu riêng (<code>getFilesDir()</code>, Chương 14) mà <strong>app khác không đọc/ghi được</strong>. File <code>notes.db</code> (SQLite của app Provider ở Chương 13) nằm trong sandbox đó — một app khác không thể mở file này trực tiếp, dù biết chính xác đường dẫn.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    ClientApp[&quot;App Client&lt;br/&gt;(package vn.example.ch32client)&quot;] -.-&gt;|&quot;❌ Không đọc được trực tiếp&lt;br/&gt;(chặn bởi sandbox)&quot;| DbFile[&quot;notes.db&lt;br/&gt;trong sandbox của App Provider&quot;]
+    ClientApp --&gt;|&quot;✅ Qua ContentResolver +&lt;br/&gt;content:// URI&quot;| Provider[&quot;NoteProvider&lt;br/&gt;(ContentProvider)&quot;]
+    Provider --&gt; DbFile
+</pre></div>
+<p><code>ContentProvider</code> là <strong>cửa duy nhất</strong> được phép mở xuyên qua ranh giới sandbox này — nó tự quyết định app khác được đọc/ghi những gì, theo cách nào, không phải mở toang toàn bộ file.</p>
+<h2>32.2 Viết <code>ContentProvider</code> — bốn thao tác chuẩn</h2>
+<pre><code class="language-java">public class NoteProvider extends ContentProvider {
+
+    @Override
+    public boolean onCreate() {
+        return true;   // chạy RẤT SỚM, kể cả trước Application.onCreate() — không làm việc nặng ở đây
+    }
+
+    @Override
+    public Cursor query(Uri uri, String[] projection, String selection,
+                         String[] selectionArgs, String sortOrder) {
+        Cursor cursor = writableDb().query(new SimpleSQLiteQuery(
+                &quot;SELECT id, title, created_at FROM notes ORDER BY id DESC&quot;));
+        cursor.setNotificationUri(requireContext().getContentResolver(), uri);
+        return cursor;
+    }
+
+    @Override
+    public Uri insert(Uri uri, ContentValues values) {
+        long id = writableDb().insert(&quot;notes&quot;, SQLiteDatabase.CONFLICT_REPLACE, values);
+        Uri result = ContentUris.withAppendedId(NoteContract.CONTENT_URI, id);
+        requireContext().getContentResolver().notifyChange(result, null);
+        return result;
+    }
+}
+</code></pre>
+<p>Bốn phương thức bắt buộc cài đặt: <code>query</code>, <code>insert</code>, <code>update</code>, <code>delete</code> (code mẫu bỏ qua <code>update</code> để gọn, một Provider thật cần đủ cả bốn). <code>writableDb()</code> lấy <code>SupportSQLiteDatabase</code> ngay từ <code>AppDatabase</code> (Room) đã xây ở Chương 13 — Provider chỉ là một <strong>lớp giao diện mỏng</strong> đặt trước database đã có sẵn, không cần viết lại logic lưu trữ.</p>
+<h2>32.3 <code>UriMatcher</code> và &quot;hợp đồng&quot; URI công khai</h2>
+<pre><code class="language-java">public final class NoteContract {
+    public static final String AUTHORITY = &quot;vn.example.ch32provider.provider&quot;;
+    public static final Uri CONTENT_URI = Uri.parse(&quot;content://&quot; + AUTHORITY + &quot;/notes&quot;);
+    public static final String COLUMN_ID = &quot;id&quot;;
+    public static final String COLUMN_TITLE = &quot;title&quot;;
+    public static final String COLUMN_CREATED_AT = &quot;created_at&quot;;
+}
+</code></pre>
+<p><code>AUTHORITY</code> là định danh duy nhất của Provider trên toàn hệ thống (tương tự <code>applicationId</code> cho app) — khai báo khớp trong manifest:</p>
+<pre><code class="language-xml">&lt;provider
+    android:name=&quot;.NoteProvider&quot;
+    android:authorities=&quot;vn.example.ch32provider.provider&quot;
+    android:exported=&quot;true&quot; /&gt;
+</code></pre>
+<p><code>android:exported=&quot;true&quot;</code> <strong>bắt buộc</strong> để app khác truy cập được — ngược với mặc định &quot;false&quot; đã quen dùng cho Activity/Service nội bộ (Chương 8, 16). Đây chính là điểm cần cân nhắc bảo mật: Provider <code>exported=true</code> không kèm <code>readPermission</code>/<code>writePermission</code> nghĩa là <strong>MỌI app khác trên máy</strong> đều đọc/ghi được, không chỉ app Client trong ví dụ. Với dữ liệu nhạy cảm, luôn thêm quyền tuỳ chỉnh (<code>android:readPermission=&quot;com.example.app.permission.READ_NOTES&quot;</code>) để giới hạn — nằm ngoài phạm vi trình bày chi tiết ở chương này nhưng bắt buộc biết để tự tra cứu khi làm dự án thật.</p>
+<h2>32.4 Phía app khách: <code>ContentResolver</code></h2>
+<pre><code class="language-java">private static final Uri NOTES_URI =
+        Uri.parse(&quot;content://vn.example.ch32provider.provider/notes&quot;);
+
+try (Cursor cursor = getContentResolver().query(NOTES_URI, null, null, null, null)) {
+    int idxTitle = cursor.getColumnIndexOrThrow(&quot;title&quot;);
+    while (cursor.moveToNext()) {
+        String title = cursor.getString(idxTitle);
+        // ...
+    }
+}
+</code></pre>
+<p>Đây chính là API đã dùng để đọc danh bạ ở Chương 26 (<code>getContentResolver().query(ContactsContract...)</code>) — danh bạ máy thực chất cũng chỉ là một <code>ContentProvider</code> do hệ thống cung cấp sẵn. App Client trong code mẫu <strong>không hề import bất kỳ class nào của app Provider</strong> — chỉ cần đúng chuỗi URI và tên cột, y hệt cách một app thật kết nối tới Provider của app khác mà không cần mã nguồn của nhau.</p>
+<h2>32.5 <code>ContentObserver</code> — tự động biết khi dữ liệu đổi</h2>
+<pre><code class="language-java">private final ContentObserver observer = new ContentObserver(mainHandler) {
+    @Override
+    public void onChange(boolean selfChange) {
+        queryNotes();   // tự tải lại, không cần người dùng bấm nút
+    }
+};
+
+getContentResolver().registerContentObserver(NOTES_URI, true, observer);
+</code></pre>
+<p>Hoạt động được là nhờ <code>cursor.setNotificationUri(...)</code> trong <code>query()</code> và <code>notifyChange(...)</code> trong <code>insert()</code>/<code>delete()</code> phía Provider — đúng nguyên tắc &quot;đăng ký lúc <code>onStart</code>, huỷ đăng ký lúc <code>onStop</code>&quot; đã lặp lại từ Chương 12/17: <code>unregisterContentObserver()</code> trong <code>onStop()</code> để tránh rò rỉ.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Cài cả hai app (<code>:app</code> và <code>:client</code>) lên cùng một máy ảo, làm theo README để xác nhận luồng đọc/ghi hai chiều hoạt động.</li>
+<li>Gỡ cài đặt app <code>:app</code>, mở app <code>:client</code>, bấm đọc ghi chú — đọc thông báo lỗi hiển thị, xác nhận app không crash im lặng.</li>
+<li>Thử thêm <code>android:readPermission</code> tuỳ chỉnh vào <code>NoteProvider</code> trong manifest của <code>:app</code>, không khai báo quyền tương ứng ở <code>:client</code> — build lại cả hai, quan sát lỗi <code>SecurityException</code> khi <code>:client</code> cố gọi <code>query()</code>.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Quên <code>android:exported=&quot;true&quot;</code></strong>: Provider tồn tại nhưng không app nào khác gọi tới được — từ Android 12 (API 31), giá trị này bắt buộc khai báo tường minh, không có mặc định ngầm.</li>
+<li><strong>Provider <code>exported=&quot;true&quot;</code> không giới hạn quyền cho dữ liệu nhạy cảm</strong>: bất kỳ app nào cài trên máy (không chỉ app bạn tự viết) đều đọc được — cân nhắc <code>readPermission</code>/<code>writePermission</code> ngay từ đầu với dữ liệu thật.</li>
+<li><strong>Quên gọi <code>notifyChange()</code> sau <code>insert</code>/<code>delete</code></strong>: <code>ContentObserver</code> phía client không bao giờ được kích hoạt, giao diện không tự cập nhật dù dữ liệu đã đổi thật sự.</li>
+<li><strong>Làm việc nặng trong <code>onCreate()</code> của Provider</strong>: Provider khởi tạo cực sớm trong vòng đời tiến trình, việc nặng ở đây có thể làm chậm toàn bộ quá trình khởi động app, kể cả trước khi <code>Application.onCreate()</code> (Chương 6) chạy.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết cách chia sẻ dữ liệu có kiểm soát giữa hai app hoàn toàn tách biệt — cơ chế đứng sau danh bạ, lịch, và nhiều API hệ thống khác đã dùng ở Chương 26. Chương 33 mở rộng sang các hình thức giao tiếp liên ứng dụng khác: App Links/Deep Link, chia sẻ nội dung qua Share sheet, và <code>PendingIntent</code> (đã gặp ở Chương 20) nhìn từ góc độ liên ứng dụng.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="../part6-architecture/ch31-clean-architecture.html">&larr; 31. Clean Architecture cơ bản cho ứng dụng Android</a><a class="next" href="./ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

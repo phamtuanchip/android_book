@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>26. Sandbox của Android: mô hình quyền (permission), runtime permission — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="./ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="./ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class="active"><a href="./ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="./ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 26: Sandbox của Android — mô hình quyền (permission), runtime permission</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu cơ chế sandbox của Android ở tầng hệ điều hành — nhắc lại và đào sâu Chương 1.</li>
+<li>Phân biệt ba nhóm quyền: normal, dangerous, signature.</li>
+<li>Viết đúng luồng xin quyền runtime đầy đủ: kiểm tra, xin, xử lý từ chối, xử lý &quot;không hỏi lại&quot;.</li>
+<li>Biết khi nào phải giải thích lý do (rationale) trước khi xin quyền.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch26-permission/</code>. Chương này cũng đã dùng runtime permission ở Chương 16/20 (<code>POST_NOTIFICATIONS</code>) — giờ giải thích đầy đủ cơ chế đứng sau.</p>
+</blockquote>
+<h2>26.1 Nhắc lại: Sandbox là gì?</h2>
+<p>Chương 1 đã nhắc: mỗi app Android chạy trong <strong>sandbox</strong> riêng — tiến trình Linux riêng, user ID riêng (<code>UID</code>), thư mục dữ liệu riêng mà app khác không đọc/ghi được (đây chính là nền tảng cho <code>getFilesDir()</code> &quot;luôn riêng tư&quot; ở Chương 14). Permission là <strong>cơ chế app xin phép vượt ra ngoài sandbox của chính mình</strong> — đọc danh bạ (dữ liệu người dùng), dùng camera (phần cứng), truy cập mạng (Chương 21), v.v.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    App[&quot;App của bạn&lt;br/&gt;(sandbox riêng)&quot;] --&gt;|&quot;Muốn đọc danh bạ&lt;br/&gt;= dữ liệu NGOÀI sandbox&quot;| Permission{&quot;Đã có quyền&lt;br/&gt;READ_CONTACTS chưa?&quot;}
+    Permission --&gt;|&quot;Có&quot;| Allow[&quot;Hệ thống cho phép truy cập&quot;]
+    Permission --&gt;|&quot;Chưa&quot;| Deny[&quot;Hệ thống CHẶN,&lt;br/&gt;ném SecurityException&quot;]
+</pre></div>
+<h2>26.2 Ba nhóm quyền</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    subgraph Normal[&quot;Normal — rủi ro thấp&quot;]
+        N1[&quot;INTERNET (Chương 21)&quot;]
+        N2[&quot;Tự động cấp khi cài app,&lt;br/&gt;chỉ cần khai báo manifest&quot;]
+    end
+    subgraph Dangerous[&quot;Dangerous — ảnh hưởng riêng tư/an toàn&quot;]
+        D1[&quot;READ_CONTACTS, CAMERA,&lt;br/&gt;ACCESS_FINE_LOCATION...&quot;]
+        D2[&quot;PHẢI xin runtime,&lt;br/&gt;người dùng chủ động Allow/Deny&quot;]
+    end
+    subgraph Signature[&quot;Signature — nội bộ hệ thống/hãng&quot;]
+        S1[&quot;Chỉ cấp cho app ký cùng&lt;br/&gt;certificate với app khai báo quyền&quot;]
+        S2[&quot;Hiếm gặp trong app thông thường&quot;]
+    end
+</pre></div>
+<p>Sách đã gặp cả ba nhóm: <code>INTERNET</code> (Chương 21) và <code>FOREGROUND_SERVICE</code> (Chương 16) thuộc nhóm <strong>normal</strong> — chỉ cần khai báo trong manifest là đủ. <code>POST_NOTIFICATIONS</code> (Chương 20) và <code>READ_CONTACTS</code> (chương này) thuộc nhóm <strong>dangerous</strong> — khai báo manifest là điều kiện CẦN nhưng CHƯA ĐỦ, còn phải xin runtime lúc chạy. Nhóm <strong>signature</strong> hiếm gặp trong app thông thường nên không đi sâu.</p>
+<h2>26.3 Luồng xin quyền runtime đầy đủ</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Start[&quot;Cần dùng tính năng cần quyền dangerous&quot;] --&gt; Check{&quot;checkSelfPermission()&lt;br/&gt;đã granted chưa?&quot;}
+    Check --&gt;|&quot;Rồi&quot;| Use[&quot;Dùng tính năng luôn&quot;]
+    Check --&gt;|&quot;Chưa&quot;| Rationale{&quot;shouldShowRequestPermissionRationale()?&quot;}
+    Rationale --&gt;|&quot;true — đã từ chối&lt;br/&gt;ít nhất 1 lần&quot;| Explain[&quot;Giải thích lý do cần quyền&lt;br/&gt;TRƯỚC khi xin lại&quot;]
+    Rationale --&gt;|&quot;false — lần đầu HOẶC&lt;br/&gt;đã chọn 'không hỏi lại'&quot;| Request[&quot;Gọi launcher.launch(permission)&quot;]
+    Explain --&gt; Request
+    Request --&gt; Result{&quot;Người dùng chọn?&quot;}
+    Result --&gt;|&quot;Allow&quot;| Use
+    Result --&gt;|&quot;Deny&quot;| CheckAgain{&quot;shouldShowRequestPermissionRationale()&lt;br/&gt;bây giờ?&quot;}
+    CheckAgain --&gt;|&quot;true&quot;| Retry[&quot;Có thể xin lại sau&quot;]
+    CheckAgain --&gt;|&quot;false&quot;| Settings[&quot;Không thể tự xin lại —&lt;br/&gt;hướng dẫn vào Settings&quot;]
+</pre></div>
+<pre><code class="language-java">private void checkAndReadContacts() {
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+            == PackageManager.PERMISSION_GRANTED) {
+        readContactsCount();
+        return;
+    }
+    if (shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
+        binding.textResult.setText(R.string.rationale_contacts);
+    }
+    requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS);
+}
+</code></pre>
+<p><code>launcher</code> ở đây dùng đúng Activity Result API đã học ở Chương 8/16/20 — <code>ActivityResultContracts.RequestPermission()</code>.</p>
+<h2>26.4 &quot;Không hỏi lại&quot; — điểm dễ làm sai nhất</h2>
+<pre><code class="language-java">private void handleDenied() {
+    if (!shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
+        // false SAU KHI đã bị từ chối =&gt; người dùng chọn &quot;Không hỏi lại&quot;
+        binding.buttonOpenSettings.setVisibility(View.VISIBLE);
+    } else {
+        binding.textResult.setText(R.string.permission_denied_once);
+    }
+}
+</code></pre>
+<p><code>shouldShowRequestPermissionRationale()</code> trả về <code>true</code>/<code>false</code> mang <strong>hai ý nghĩa hoàn toàn khác nhau tuỳ ngữ cảnh gọi</strong>:</p>
+<ul>
+<li>Gọi <strong>TRƯỚC KHI</strong> xin quyền lần đầu: <code>false</code> (chưa từng hỏi, chưa có gì để &quot;nên giải thích&quot;).</li>
+<li>Gọi <strong>SAU KHI</strong> bị từ chối: <code>true</code> nghĩa là &quot;có thể xin lại, nên giải thích trước&quot;; <code>false</code> nghĩa là <strong>người dùng đã chọn &quot;Không hỏi lại&quot;</strong> — từ giờ <code>launcher.launch()</code> sẽ tự động trả về <code>false</code> ngay lập tức, không hiện hộp thoại nào nữa. Cách duy nhất còn lại là mở màn hình Settings của app cho người dùng tự bật:</li>
+</ul>
+<pre><code class="language-java">private void openAppSettings() {
+    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+    intent.setData(Uri.fromParts(&quot;package&quot;, getPackageName(), null));
+    startActivity(intent);
+}
+</code></pre>
+<h2>26.5 Dùng quyền sau khi được cấp — vẫn nên chạy nền</h2>
+<pre><code class="language-java">executor.execute(() -&gt; {
+    int count = 0;
+    try (Cursor cursor = getContentResolver().query(
+            ContactsContract.Contacts.CONTENT_URI,
+            new String[]{ContactsContract.Contacts._ID},
+            null, null, null)) {
+        if (cursor != null) count = cursor.getCount();
+    }
+    runOnUiThread(() -&gt; binding.textResult.setText(...));
+});
+</code></pre>
+<p>Được cấp quyền không có nghĩa thao tác truy cập dữ liệu trở nên &quot;miễn phí&quot; về hiệu năng — <code>ContentResolver.query()</code> (đọc qua <code>ContentProvider</code>, sẽ học kỹ ở Chương 32) vẫn là một lời gọi liên tiến trình, nên vẫn tuân theo nguyên tắc đã xuyên suốt từ Chương 13: không chạy việc có thể chậm trên main thread.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, cấp quyền, xác nhận số lượng liên hệ hiển thị đúng.</li>
+<li>Gỡ cài đặt, cài lại, thử luồng từ chối rồi xin lại — xác nhận thấy đúng dòng giải thích rationale trước khi hộp thoại hiện lại lần hai.</li>
+<li>Chọn &quot;Không hỏi lại&quot; ở lần từ chối tiếp theo, xác nhận nút &quot;Mở Cài đặt ứng dụng&quot; xuất hiện và dẫn đúng tới màn hình Settings của app.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Chỉ khai báo <code>&lt;uses-permission&gt;</code> trong manifest mà quên xin runtime cho quyền dangerous</strong>: crash ngay với <code>SecurityException</code> khi gọi API cần quyền đó — quên mất bước bắt buộc kể từ Android 6 (API 23).</li>
+<li><strong>Gọi <code>requestPermissionLauncher.launch()</code> liên tục dù người dùng đã chọn &quot;Không hỏi lại&quot;</strong>: không có tác dụng gì (không hiện hộp thoại), lãng phí và gây trải nghiệm khó hiểu — luôn kiểm tra <code>shouldShowRequestPermissionRationale()</code> để phát hiện đúng tình huống này.</li>
+<li><strong>Xin quyền ngay khi vừa mở app, trước khi người dùng hiểu vì sao cần nó</strong>: tỷ lệ bị từ chối cao hơn hẳn so với xin đúng lúc người dùng vừa bấm vào tính năng cần quyền đó (nguyên tắc UX quan trọng, không chỉ là vấn đề kỹ thuật).</li>
+<li><strong>Quên rằng người dùng có thể thu hồi quyền bất kỳ lúc nào trong Settings</strong>, kể cả sau khi đã cấp: luôn <code>checkSelfPermission()</code> lại mỗi lần thật sự cần dùng, không giả định quyền đã cấp sẽ mãi mãi còn hiệu lực.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã nắm vững mô hình quyền của Android — nền tảng chi phối mọi tính năng &quot;nhạy cảm&quot; từ đây tới hết sách (đặc biệt là Bluetooth/NFC/vị trí ở Phần 7). Chương 27 khép lại Phần 5 với bảo mật ở tầng build: ProGuard/R8 và ký ứng dụng bằng keystore.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch25-ui-test-espresso.html">&larr; 25. UI test với Espresso</a><a class="next" href="./ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

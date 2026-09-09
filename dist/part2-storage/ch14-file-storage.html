@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14. File storage: internal vs external, scoped storage — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="./ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="./ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class="active"><a href="./ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="./ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 14: File storage — internal vs external, scoped storage</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Phân biệt bộ nhớ trong (internal) và bộ nhớ ngoài (external), và thư mục &quot;riêng của app&quot; so với thư mục &quot;dùng chung&quot;.</li>
+<li>Đọc/ghi file bằng API chuẩn (<code>FileInputStream</code>/<code>FileOutputStream</code>), chạy đúng cách trên background thread.</li>
+<li>Hiểu khái niệm <strong>scoped storage</strong> (từ Android 10/API 29) và vì sao nó ra đời.</li>
+<li>Biết khi nào cần dùng <code>MediaStore</code>/Storage Access Framework thay vì <code>File</code> trực tiếp (giới thiệu, không đi sâu).</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch14-file-storage/</code>.</p>
+</blockquote>
+<h2>14.1 Bốn &quot;nơi&quot; lưu file khác nhau</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Start[&quot;Cần lưu 1 file&quot;] --&gt; Q1{&quot;Riêng cho app này,&lt;br/&gt;hay chia sẻ được với app khác?&quot;}
+
+    Q1 --&gt;|&quot;Riêng, không ai khác cần thấy&quot;| Q2{&quot;Bộ nhớ trong hay ngoài?&quot;}
+    Q2 --&gt;|&quot;Trong (luôn tồn tại,&lt;br/&gt;dung lượng nhỏ hơn)&quot;| Internal[&quot;getFilesDir()&lt;br/&gt;internal storage&quot;]
+    Q2 --&gt;|&quot;Ngoài (dung lượng lớn hơn,&lt;br/&gt;người dùng có thể xem qua Files app)&quot;| ExternalPrivate[&quot;getExternalFilesDir(null)&lt;br/&gt;external, riêng của app&quot;]
+
+    Q1 --&gt;|&quot;Chia sẻ được (ảnh, nhạc,&lt;br/&gt;tài liệu người dùng chọn)&quot;| Q3{&quot;Loại nội dung?&quot;}
+    Q3 --&gt;|&quot;Ảnh/video/nhạc&quot;| MediaStore[&quot;MediaStore API&lt;br/&gt;(Chương ngoài phạm vi sách)&quot;]
+    Q3 --&gt;|&quot;Tài liệu bất kỳ, người dùng tự chọn nơi lưu&quot;| SAF[&quot;Storage Access Framework&lt;br/&gt;(Intent ACTION_CREATE_DOCUMENT)&quot;]
+</pre></div>
+<p>Chương này tập trung vào hai ô <strong>Internal</strong> và <strong>External riêng của app</strong> — không cần xin bất kỳ quyền runtime nào (khác các chương liên quan tới Bluetooth/NFC/vị trí ở Phần 7). Hai ô còn lại (MediaStore, Storage Access Framework) chỉ giới thiệu khái niệm để bạn biết tồn tại khi cần tra cứu thêm.</p>
+<h2>14.2 Bộ nhớ trong (internal) — luôn riêng tư, luôn tồn tại</h2>
+<pre><code class="language-java">File file = new File(getFilesDir(), &quot;note.txt&quot;);
+try (FileOutputStream out = new FileOutputStream(file)) {
+    out.write(content.getBytes(StandardCharsets.UTF_8));
+}
+</code></pre>
+<p><code>getFilesDir()</code> trả về thư mục <strong>chỉ app của bạn truy cập được</strong> (nhờ sandbox — Chương 26 sẽ giải thích sâu hơn cơ chế này), không cần khai báo quyền gì trong manifest, và <strong>tự động bị xoá khi người dùng gỡ cài đặt app</strong>. Phù hợp cho: cache, dữ liệu tạm, file cấu hình nội bộ.</p>
+<h2>14.3 Bộ nhớ ngoài, thư mục riêng của app</h2>
+<pre><code class="language-java">File dir = getExternalFilesDir(null);   // null = thư mục gốc riêng của app
+File file = new File(dir, &quot;note.txt&quot;);
+</code></pre>
+<p>Khác bộ nhớ trong ở chỗ: dung lượng thường lớn hơn, và <strong>người dùng có thể tự xem file này qua ứng dụng Quản lý file</strong> (đường dẫn dạng <code>Android/data/&lt;package&gt;/files/</code>) — nhưng vẫn <strong>không app nào khác</strong> đọc/ghi được (từ Android 10 trở đi, đây chính là quy tắc &quot;scoped storage&quot; ở mục 14.4). Cũng tự động bị xoá khi gỡ app, và <strong>không cần khai báo quyền</strong> <code>WRITE_EXTERNAL_STORAGE</code> — điểm hay bị hiểu nhầm vì tài liệu cũ (trước Android 10) yêu cầu quyền này cho MỌI thao tác ghi ra bộ nhớ ngoài.</p>
+<h2>14.4 Scoped storage là gì, vì sao Android 10 đổi luật chơi?</h2>
+<p>Trước Android 10 (API 29), một app xin quyền <code>WRITE_EXTERNAL_STORAGE</code> có thể đọc/ghi <strong>gần như mọi file</strong> trên bộ nhớ ngoài — kể cả file do app khác tạo ra. Đây là rủi ro bảo mật/riêng tư lớn (một app &quot;đèn pin&quot; xin quyền này có thể âm thầm đọc ảnh riêng tư của bạn).</p>
+<p><strong>Scoped storage</strong> giới hạn lại: mỗi app mặc định chỉ thấy được thư mục riêng của mình (<code>getExternalFilesDir()</code>) mà <strong>không cần xin quyền</strong>. Muốn truy cập file người dùng thật sự sở hữu (ảnh trong thư viện, tài liệu bất kỳ), phải đi qua các API tôn trọng lựa chọn của người dùng: <code>MediaStore</code> (cho ảnh/video/nhạc) hoặc Storage Access Framework (cho tài liệu bất kỳ, người dùng tự chọn qua hộp thoại hệ thống) — cả hai đều nằm ngoài phạm vi sách này nhưng nên biết tên để tra cứu khi cần.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    subgraph Before[&quot;Trước Android 10&quot;]
+        AppX1[&quot;App bất kỳ&quot;] --&gt;|&quot;xin quyền WRITE_EXTERNAL_STORAGE&quot;| AllFiles[&quot;Đọc/ghi HẦU HẾT file&lt;br/&gt;trên bộ nhớ ngoài&quot;]
+    end
+    subgraph After[&quot;Từ Android 10 (scoped storage)&quot;]
+        AppX2[&quot;App bất kỳ&quot;] --&gt; OwnDir[&quot;Chỉ thấy thư mục&lt;br/&gt;RIÊNG của mình&lt;br/&gt;(không cần xin quyền)&quot;]
+        AppX2 -.-&gt;|&quot;Muốn truy cập ảnh/tài liệu&lt;br/&gt;của người dùng&quot;| MediaAPI[&quot;Phải qua MediaStore/SAF&lt;br/&gt;— người dùng chủ động cho phép&quot;]
+    end
+</pre></div>
+<h2>14.5 Vì sao đọc/ghi file trên background thread?</h2>
+<p>Tương tự Room ở Chương 13, thao tác đĩa có thể mất thời gian đáng kể — code mẫu dùng <code>ExecutorService</code> riêng cho I/O:</p>
+<pre><code class="language-java">private final ExecutorService ioExecutor = Executors.newSingleThreadExecutor();
+
+private void saveTo(File file, String label) {
+    String content = binding.editContent.getText().toString();
+    ioExecutor.execute(() -&gt; {
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            out.write(content.getBytes(StandardCharsets.UTF_8));
+            runOnUiThread(() -&gt; Toast.makeText(this, &quot;...&quot;, Toast.LENGTH_LONG).show());
+        } catch (IOException e) {
+            runOnUiThread(() -&gt; Toast.makeText(this, &quot;Lưu thất bại.&quot;, Toast.LENGTH_SHORT).show());
+        }
+    });
+}
+</code></pre>
+<p>Khác với Room, API <code>File</code> <strong>không tự ép buộc</strong> bạn tránh main thread (không ném lỗi nếu gọi sai chỗ) — kỷ luật tự giác quan trọng hơn ở đây. <code>runOnUiThread()</code> đưa phần cập nhật UI (Toast, TextView) quay lại đúng main thread sau khi việc I/O hoàn tất trên thread nền.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, lưu nội dung vào cả hai nơi, đọc lại và so sánh đường dẫn hiển thị trong Toast.</li>
+<li>Dùng <code>adb shell run-as &lt;package&gt;</code> (Chương 3) để tự tay xem file <code>note.txt</code> nằm ở đâu trên thiết bị thật/máy ảo.</li>
+<li>Thử xoá dòng <code>try (FileOutputStream out = ...)</code> sang gọi trực tiếp trên main thread (không qua <code>ioExecutor</code>) — dùng Android Studio Profiler quan sát main thread bị chiếm dụng, dù ngắn, trong lúc ghi file.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Tưởng <code>getExternalFilesDir()</code> cần quyền <code>WRITE_EXTERNAL_STORAGE</code></strong>: sai với thư mục riêng của app — quyền này chỉ từng cần cho việc ghi vào thư mục DÙNG CHUNG trước Android 10, và hiện gần như không còn tác dụng do scoped storage.</li>
+<li><strong>Không kiểm tra <code>getExternalFilesDir()</code> trả về <code>null</code></strong>: có thể xảy ra nếu thẻ nhớ ngoài không sẵn sàng (hiếm nhưng có thật) — code mẫu có kiểm tra và dùng bộ nhớ trong làm phương án dự phòng.</li>
+<li><strong>Đọc file lớn bằng cách đọc hết vào một mảng byte</strong> (như code mẫu làm để đơn giản): ổn với file nhỏ như ghi chú văn bản, nhưng với file lớn (vài chục MB trở lên) cần đọc theo luồng (stream) từng phần thay vì nạp hết vào bộ nhớ.</li>
+<li><strong>Nhầm lẫn &quot;bộ nhớ ngoài&quot; (external storage) với &quot;thẻ nhớ SD vật lý&quot;</strong>: trên phần lớn thiết bị hiện đại, &quot;external storage&quot; chỉ là một phân vùng logic trong bộ nhớ trong máy, không nhất thiết là thẻ SD rời.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết ba cách lưu trữ dữ liệu: cấu hình đơn giản (SharedPreferences), dữ liệu có cấu trúc (Room), và file thô (chương này) — cùng khái niệm scoped storage chi phối toàn bộ hệ sinh thái Android hiện đại. Chương 15 giới thiệu <code>DataStore</code> — giải pháp hiện đại của Jetpack, dần thay thế <code>SharedPreferences</code> cho các trường hợp Chương 12 đã đề cập.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch13-sqlite-room.html">&larr; 13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a><a class="next" href="./ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại) &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

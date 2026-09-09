@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="./ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="./ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="./ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="./ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class="active"><a href="./ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 5: Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Chạy được ứng dụng từ Chương 4 lên máy ảo hoặc thiết bị thật qua Android Studio.</li>
+<li>Hiểu được pipeline build &amp; deploy diễn ra bên dưới nút <strong>Run</strong>.</li>
+<li>Build được file APK bằng dòng lệnh (<code>gradlew</code>) và cài thủ công bằng <code>adb</code>.</li>
+<li>Đọc được Logcat để quan sát ứng dụng đang chạy.</li>
+</ul>
+<h2>5.1 Chạy ứng dụng qua Android Studio</h2>
+<ol>
+<li>Mở lại <code>code/ch04-05-hello-world/</code> (hoặc project bạn tự tạo ở Chương 4).</li>
+<li>Ở thanh công cụ, chọn thiết bị đích: máy ảo đã tạo (Chương 3) hoặc thiết bị thật đã kết nối.</li>
+<li>Bấm <strong>Run ▶</strong> (hoặc Shift+F10).</li>
+<li>Chờ build xong — ứng dụng tự mở trên thiết bị đích, hiển thị dòng chữ &quot;Xin chào, Android!&quot; (định nghĩa ở <code>strings.xml</code>, hiển thị qua <code>activity_main.xml</code>).</li>
+</ol>
+<h2>5.2 Điều gì xảy ra khi bạn bấm Run?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    Src[&quot;Source code&lt;br/&gt;(.java, .xml)&quot;] --&gt; Compile[&quot;Gradle: compile Java&lt;br/&gt;+ đóng gói resource&quot;]
+    Compile --&gt; Dex[&quot;Chuyển sang bytecode&lt;br/&gt;Dalvik/ART (.dex)&quot;]
+    Dex --&gt; Apk[&quot;Đóng gói thành file .apk&lt;br/&gt;đã ký (debug key)&quot;]
+    Apk --&gt; Install[&quot;adb install&lt;br/&gt;lên thiết bị/máy ảo đích&quot;]
+    Install --&gt; Launch[&quot;adb shell am start&lt;br/&gt;mở Activity MAIN/LAUNCHER&quot;]
+    Launch --&gt; Run[&quot;Ứng dụng chạy&lt;br/&gt;+ Logcat bắt đầu stream log&quot;]
+</pre></div>
+<p>Nút <strong>Run</strong> trong Android Studio thực chất chỉ là giao diện gói gọn lại đúng các bước trên — mọi bước đều có thể tự làm bằng dòng lệnh, như mục 5.3 dưới đây. Hiểu rõ pipeline này giúp bạn tự debug khi Android Studio báo lỗi mơ hồ, vì bạn biết lỗi đang xảy ra ở bước nào (compile? đóng gói? cài đặt? khởi chạy?).</p>
+<h2>5.3 Build &amp; cài bằng dòng lệnh</h2>
+<p>Từ thư mục project (PowerShell):</p>
+<pre><code class="language-powershell">.\gradlew.bat assembleDebug
+</code></pre>
+<p>Lệnh này chạy đúng 3 bước đầu của sơ đồ trên (compile → dex → đóng gói APK), không cần Android Studio. Kết quả nằm ở:</p>
+<pre><code>app\build\outputs\apk\debug\app-debug.apk
+</code></pre>
+<p>Cài thủ công lên thiết bị/máy ảo đang kết nối (Chương 3):</p>
+<pre><code class="language-powershell">adb install app\build\outputs\apk\debug\app-debug.apk
+</code></pre>
+<p>Mở ứng dụng thủ công bằng <code>adb</code> (không cần chạm vào màn hình):</p>
+<pre><code class="language-powershell">adb shell am start -n vn.example.helloandroid/.MainActivity
+</code></pre>
+<h2>5.4 Đọc Logcat</h2>
+<p>Logcat là dòng log runtime của toàn hệ thống Android, lọc theo ứng dụng của bạn để dễ theo dõi:</p>
+<pre><code class="language-powershell">adb logcat --pid=$(adb shell pidof -s vn.example.helloandroid)
+</code></pre>
+<p>Trong Android Studio, tab <strong>Logcat</strong> ở dưới màn hình làm việc này tự động, có ô lọc theo package name hoặc theo mức log (Verbose/Debug/Info/Warn/Error). Thói quen nên có: khi app &quot;không có phản ứng gì&quot;, luôn mở Logcat trước khi đoán nguyên nhân.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Sửa <code>strings.xml</code> trong code mẫu, đổi <code>hello_message</code> thành một câu khác, Run lại — quan sát Android Studio chỉ build lại phần cần thiết (nhanh hơn lần đầu).</li>
+<li>Build APK bằng <code>gradlew assembleDebug</code>, cài bằng <code>adb install</code>, mở app bằng lệnh <code>adb shell am start</code> ở mục 5.3 — không chạm tay vào thiết bị.</li>
+<li>Cố tình gây lỗi (ví dụ sửa sai tên resource trong <code>activity_main.xml</code>), Run lại, đọc thông báo lỗi Gradle và tự sửa.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong><code>INSTALL_FAILED_UPDATE_INCOMPATIBLE</code></strong>: máy đã cài một bản app cùng <code>applicationId</code> nhưng ký bằng key khác (thường do trước đó cài bản build từ máy/IDE khác) — gỡ bản cũ (<code>adb uninstall vn.example.helloandroid</code>) rồi cài lại.</li>
+<li><strong>App cài xong nhưng bấm icon không mở được / crash ngay khi mở</strong>: mở Logcat, tìm dòng <code>FATAL EXCEPTION</code> — stack trace luôn chỉ đúng dòng code gây lỗi.</li>
+<li><strong><code>gradlew.bat</code> báo &quot;not recognized&quot; hoặc thiếu file</strong>: thư mục project chưa có Gradle wrapper — mở project bằng Android Studio một lần để IDE tự sinh wrapper, hoặc chạy <code>gradle wrapper</code> nếu đã cài Gradle riêng.</li>
+<li><strong>Build rất chậm ở lần chạy đầu tiên</strong>: bình thường — Gradle tải và cache dependency lần đầu; các lần sau nhanh hơn đáng kể nhờ cache.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã hoàn thành cột mốc đầu tiên: viết, build, và chạy thành công một ứng dụng Android thật, cả qua Android Studio lẫn dòng lệnh thuần. Đây cũng là điểm kết thúc <strong>Phần 0 — Chuẩn bị môi trường</strong>. Chương 6 bắt đầu <strong>Phần 1 — Nền tảng</strong>, đi sâu vào vòng đời Activity mà Chương 1 mới chỉ giới thiệu sơ bộ.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch04-project-dau-tien.html">&larr; 4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a><a class="next" href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

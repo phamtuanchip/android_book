@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>18. WorkManager (tác vụ nền có lịch/điều kiện) — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="./ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="./ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class="active"><a href="./ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="./ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="./ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 18: WorkManager (tác vụ nền có lịch/điều kiện)</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu WorkManager giải quyết bài toán gì mà Service (Chương 16) không phù hợp.</li>
+<li>Viết được một <code>Worker</code>, chạy một lần (<code>OneTimeWorkRequest</code>) với ràng buộc điều kiện (<code>Constraints</code>).</li>
+<li>Theo dõi trạng thái công việc qua <code>WorkInfo</code> và <code>LiveData</code>.</li>
+<li>Biết cú pháp <code>PeriodicWorkRequest</code> và giới hạn chu kỳ tối thiểu.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch18-workmanager/</code>.</p>
+</blockquote>
+<h2>18.1 WorkManager khác Service ở đâu?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Q1{&quot;Tác vụ cần chạy khi nào?&quot;}
+    Q1 --&gt;|&quot;NGAY, người dùng đang chờ&lt;br/&gt;và cần thấy tiến trình liên tục&quot;| FGS[&quot;Foreground Service&lt;br/&gt;(Chương 16)&quot;]
+    Q1 --&gt;|&quot;Sớm hay muộn không quan trọng,&lt;br/&gt;miễn CHẮC CHẮN chạy được&lt;br/&gt;(kể cả sau khi khởi động lại máy)&quot;| WM[&quot;WorkManager&lt;br/&gt;(chương này)&quot;]
+    Q1 --&gt;|&quot;Chỉ cần chạy trong lúc&lt;br/&gt;Activity/Fragment còn tồn tại&quot;| Exec[&quot;Thread/Executor&lt;br/&gt;(Chương 19)&quot;]
+</pre></div>
+<p>WorkManager phù hợp cho tác vụ như: đồng bộ dữ liệu định kỳ, upload log, nén ảnh trước khi gửi — <strong>không cần chạy ngay lập tức</strong>, nhưng <strong>phải đảm bảo chạy được</strong>, kể cả khi app đã bị đóng hoàn toàn hoặc thiết bị vừa khởi động lại. WorkManager tự chọn cơ chế phù hợp nhất bên dưới tuỳ phiên bản Android (JobScheduler, AlarmManager...) — bạn chỉ cần lập trình với một API duy nhất, không cần tự xử lý khác biệt giữa các phiên bản.</p>
+<h2>18.2 Viết một <code>Worker</code></h2>
+<pre><code class="language-java">public class SyncWorker extends Worker {
+
+    public SyncWorker(@NonNull Context context, @NonNull WorkerParameters params) {
+        super(context, params);
+    }
+
+    @NonNull
+    @Override
+    public Result doWork() {
+        // Chạy trên thread nền do WorkManager tự quản lý — an toàn Thread.sleep(),
+        // gọi mạng trực tiếp, không cần tự tạo Executor như Chương 13/14.
+        Thread.sleep(3000);
+
+        Data output = new Data.Builder()
+                .putString(&quot;synced_at&quot;, &quot;12:00:00&quot;)
+                .build();
+        return Result.success(output);
+    }
+}
+</code></pre>
+<p>Ba giá trị <code>Result</code> có thể trả về: <code>Result.success(data)</code> (xong, có thể kèm dữ liệu output), <code>Result.failure()</code> (thất bại hẳn, không thử lại), <code>Result.retry()</code> (thất bại tạm thời, WorkManager tự lên lịch thử lại sau).</p>
+<h2>18.3 Ràng buộc điều kiện (<code>Constraints</code>)</h2>
+<pre><code class="language-java">Constraints constraints = new Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.CONNECTED)
+        .build();
+
+OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(SyncWorker.class)
+        .setConstraints(constraints)
+        .build();
+
+WorkManager.getInstance(context).enqueue(request);
+</code></pre>
+<p>WorkManager tự chờ tới khi điều kiện thoả mãn mới thật sự chạy <code>doWork()</code> — ví dụ <code>NetworkType.CONNECTED</code> khiến công việc bị giữ ở trạng thái <code>ENQUEUED</code> cho tới khi thiết bị có mạng, hoàn toàn tự động, không cần bạn tự kiểm tra kết nối mạng thủ công. Các ràng buộc khác thường dùng: <code>setRequiresCharging(true)</code>, <code>setRequiresBatteryNotLow(true)</code>, <code>setRequiresDeviceIdle(true)</code>.</p>
+<h2>18.4 Theo dõi trạng thái bằng <code>WorkInfo</code></h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+stateDiagram-v2
+    [*] --&gt; ENQUEUED
+    ENQUEUED --&gt; RUNNING: điều kiện đã thoả mãn
+    RUNNING --&gt; SUCCEEDED: Result.success()
+    RUNNING --&gt; FAILED: Result.failure()
+    RUNNING --&gt; ENQUEUED: Result.retry()
+    ENQUEUED --&gt; CANCELLED: bị huỷ
+</pre></div>
+<pre><code class="language-java">workManager.getWorkInfoByIdLiveData(request.getId()).observe(this, workInfo -&gt; {
+    if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
+        String syncedAt = workInfo.getOutputData().getString(&quot;synced_at&quot;);
+        // cập nhật UI
+    }
+});
+</code></pre>
+<p>Trạng thái công việc được WorkManager <strong>lưu xuống database nội bộ riêng</strong> — vẫn tồn tại kể cả khi Activity đang quan sát nó bị huỷ và tạo lại (xoay màn hình, Chương 6), hoặc kể cả khi cả app bị đóng hoàn toàn rồi mở lại.</p>
+<h2>18.5 <code>PeriodicWorkRequest</code> — lặp lại định kỳ</h2>
+<pre><code class="language-java">PeriodicWorkRequest request = new PeriodicWorkRequest.Builder(SyncWorker.class, 15, TimeUnit.MINUTES)
+        .setConstraints(constraints)
+        .build();
+
+workManager.enqueueUniquePeriodicWork(
+        &quot;periodic_sync&quot;, ExistingPeriodicWorkPolicy.KEEP, request);
+</code></pre>
+<p>Hai điểm quan trọng cần nhớ:</p>
+<ul>
+<li><strong>Chu kỳ tối thiểu là 15 phút</strong> — đặt số nhỏ hơn, WorkManager tự động nâng lên 15 phút mà không báo lỗi. Đây không phải giới hạn kỹ thuật ngẫu nhiên mà là chính sách có chủ đích của Android để hạn chế app đánh thức máy quá thường xuyên, tốn pin.</li>
+<li><code>enqueueUniquePeriodicWork</code> với <code>ExistingPeriodicWorkPolicy.KEEP</code> đảm bảo dù gọi hàm này nhiều lần (ví dụ mỗi lần mở app), <strong>chỉ một lịch chạy định kỳ duy nhất tồn tại</strong> — tránh tạo hàng chục bản lặp trùng nếu người dùng mở app nhiều lần.</li>
+</ul>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, bấm <strong>Đồng bộ ngay</strong>, quan sát đúng trình tự trạng thái ENQUEUED → RUNNING → SUCCEEDED trong khoảng 3 giây.</li>
+<li>Bật chế độ máy bay trước khi bấm nút — xác nhận trạng thái dừng lại ở ENQUEUED cho tới khi tắt chế độ máy bay.</li>
+<li>Sửa <code>SyncWorker.doWork()</code> để thỉnh thoảng trả về <code>Result.retry()</code> (ví dụ dựa vào <code>getRunAttemptCount()</code> để giả lập thất bại ở lần thử đầu), quan sát WorkManager tự động chạy lại.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Kỳ vọng <code>OneTimeWorkRequest</code> chạy NGAY LẬP TỨC</strong>: WorkManager có thể trì hoãn một chút để tối ưu pin/hệ thống, không đảm bảo chạy tức thời như gọi hàm bình thường — không phù hợp cho việc cần phản hồi ngay (dùng Executor, Chương 19, cho trường hợp đó).</li>
+<li><strong>Không dùng <code>enqueueUniquePeriodicWork</code></strong>: gọi <code>enqueuePeriodicWork</code> thông thường nhiều lần tạo ra nhiều lịch chạy song song, gây tác vụ chạy trùng lặp không kiểm soát.</li>
+<li><strong>Đặt chu kỳ <code>PeriodicWorkRequest</code> nhỏ hơn 15 phút rồi thắc mắc sao chạy chậm hơn khai báo</strong>: đây là hành vi đã định, không phải lỗi — xem lại mục 18.5.</li>
+<li><strong>Làm việc nặng trực tiếp trên <code>doWork()</code> mà không xử lý <code>InterruptedException</code></strong>: WorkManager có thể huỷ Worker giữa chừng (ví dụ hệ thống cần tài nguyên gấp) — nên kiểm tra khả năng dừng sớm với tác vụ dài, tương tự nguyên tắc huỷ Thread ở Chương 19.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có công cụ đúng đắn cho tác vụ nền cần đảm bảo chạy được, có điều kiện, có thể định kỳ. Chương 19 lùi lại một bước, hệ thống hoá các lựa chọn xử lý bất đồng bộ trong Android (<code>Thread</code>, <code>Handler</code>, <code>Executor</code>) mà sách đã dùng rải rác từ Chương 13 tới giờ.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch17-broadcast-receiver.html">&larr; 17. BroadcastReceiver, hệ thống sự kiện của Android</a><a class="next" href="./ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin) &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="./ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="./ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class="active"><a href="./ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 40: Theo dõi sau phát hành — Crashlytics, Analytics cơ bản</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu cơ chế đứng sau crash reporting: <code>Thread.UncaughtExceptionHandler</code>, và vì sao không bao giờ được &quot;nuốt&quot; crash âm thầm.</li>
+<li>Hiểu vì sao SDK analytics luôn <strong>gom sự kiện (batching)</strong> thay vì gửi ngay từng cái một.</li>
+<li>Biết cách đọc lại crash log kèm <code>mapping.txt</code> (Chương 27) khi crash xảy ra trên bản release đã làm rối tên.</li>
+<li>Biết Firebase Crashlytics/Analytics là gì, và tại sao thường là lựa chọn thực dụng hơn tự xây khi làm dự án thật.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch40-crash-analytics/</code> — tự cài đặt cơ chế crash reporting và analytics batching, không phụ thuộc dịch vụ ngoài, để hiểu rõ &quot;hộp đen&quot; trước khi dùng SDK thật.</p>
+</blockquote>
+<h2>40.1 Vì sao cần theo dõi sau phát hành?</h2>
+<p>Chương 24-25 đã dạy kiểm thử <strong>trước khi</strong> phát hành (Unit test, Espresso) — nhưng không có bộ test nào bắt được <strong>mọi</strong> tình huống thực tế: thiết bị lạ, phiên bản Android hiếm gặp, dữ liệu người dùng nhập bất thường. Theo dõi sau phát hành là tấm lưới an toàn cuối cùng — biết được app đang crash ở đâu, bao nhiêu người bị ảnh hưởng, ngay cả khi bạn không tự tái hiện được lỗi đó trên máy mình.</p>
+<h2>40.2 Cơ chế crash reporting: <code>UncaughtExceptionHandler</code></h2>
+<pre><code class="language-java">Thread.UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+
+Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -&gt; {
+    writeCrashLog(appContext, thread, throwable);   // 1. Ghi lại đầy đủ ngữ cảnh
+    defaultHandler.uncaughtException(thread, throwable);  // 2. BẮT BUỘC gọi lại
+});
+</code></pre>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Crash[&quot;Exception không được xử lý&lt;br/&gt;(uncaught) xảy ra&quot;] --&gt; Custom[&quot;Handler tuỳ chỉnh của bạn&lt;br/&gt;chạy TRƯỚC TIÊN&quot;]
+    Custom --&gt; Log[&quot;Ghi log: stack trace,&lt;br/&gt;thiết bị, phiên bản app&quot;]
+    Log --&gt; Chain[&quot;Gọi lại handler MẶC ĐỊNH&lt;br/&gt;của hệ thống&quot;]
+    Chain --&gt; SystemCrash[&quot;Hệ thống tiếp tục quy trình&lt;br/&gt;chuẩn: đóng app, hiện dialog lỗi&quot;]
+</pre></div>
+<p>Điểm quan trọng nhất, dễ làm sai nhất: <strong>luôn giữ và gọi lại handler mặc định</strong> sau khi ghi log xong. Bỏ qua bước này để &quot;tự xử lý&quot; exception không đúng cách khiến app rơi vào trạng thái treo bất thường, tệ hơn hẳn một crash bình thường — mục tiêu của crash reporting là <strong>quan sát</strong>, không phải <strong>ngăn chặn</strong> crash.</p>
+<p>Cài đặt càng sớm càng tốt — trong <code>Application.onCreate()</code> (Chương 6), trước cả <code>MainActivity</code>:</p>
+<pre><code class="language-java">public class MonitoringApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        CrashReporter.install(this);
+    }
+}
+</code></pre>
+<h2>40.3 Đọc lại crash log ở lần chạy tiếp theo</h2>
+<p>Vì tiến trình đã chết ngay sau khi crash, không thể &quot;gửi lên server ngay lúc đó&quot; một cách đáng tin cậy — cách thực dụng là <strong>ghi xuống đĩa trước</strong> (giống nguyên tắc offline-first ở Chương 23), rồi thử tải lên ở lần khởi động tiếp theo:</p>
+<pre><code class="language-java">List&lt;String&gt; logs = CrashReporter.getPendingCrashLogs(this);
+if (!logs.isEmpty()) {
+    // Ở app thật: gọi OkHttp/Retrofit (Chương 21-22) tải log lên server,
+    // dùng WorkManager (Chương 18) để đảm bảo tải được kể cả khi mất mạng lúc
+    // mở lại app — rồi mới CrashReporter.clearCrashLogs() sau khi tải thành công.
+}
+</code></pre>
+<p>Code mẫu dừng ở bước hiển thị log ngay trong app để bạn tận mắt thấy nó đã được ghi lại đầy đủ — một dịch vụ thật (mục 40.5) tự động hoá toàn bộ phần &quot;tải lên server&quot; này.</p>
+<h2>40.4 Analytics — vì sao luôn gom theo đợt (batching)?</h2>
+<pre><code class="language-java">public static void logEvent(String name, String... params) {
+    pendingEvents.add(...);   // chỉ THÊM VÀO HÀNG ĐỢI, KHÔNG gửi ngay
+}
+
+// Chạy định kỳ, độc lập với logEvent()
+scheduler.scheduleWithFixedDelay(AnalyticsLogger::flush, 10, 10, TimeUnit.SECONDS);
+</code></pre>
+<p>Gửi một request mạng cho <strong>mỗi</strong> sự kiện (mỗi lần bấm nút, mỗi lần cuộn màn hình) sẽ tốn pin và dữ liệu di động đáng kể nếu người dùng thao tác nhiều — đúng vấn đề đã cảnh báo từ Chương 21 về chi phí một request HTTP. Mọi SDK analytics thật (Firebase Analytics, Amplitude, Mixpanel...) đều <strong>gom nhiều sự kiện lại, gửi định kỳ một lần</strong> — đây là lý do đôi khi bạn thấy sự kiện &quot;xuất hiện trễ vài phút&quot; trên dashboard thật, không phải lỗi của SDK mà là hành vi thiết kế có chủ đích.</p>
+<h2>40.5 Firebase Crashlytics/Analytics — khi nào nên dùng bản thật thay vì tự xây?</h2>
+<p>Code mẫu chương này giúp hiểu <strong>cơ chế</strong>, nhưng cho dự án thật, hầu như luôn nên dùng dịch vụ đã có sẵn (Firebase Crashlytics/Analytics là lựa chọn phổ biến nhất, miễn phí cho quy mô vừa) thay vì tự xây toàn bộ, vì những lý do tự xây khó tái tạo đầy đủ:</p>
+<ul>
+<li><strong>Dashboard trực quan</strong>: biểu đồ, lọc theo phiên bản/thiết bị, không phải tự đọc log thô.</li>
+<li><strong>Tự động dedup</strong>: hàng nghìn người dùng gặp CÙNG một lỗi được gộp thành một &quot;issue&quot; duy nhất, không phải hàng nghìn dòng log riêng lẻ.</li>
+<li><strong>Tích hợp sẵn <code>mapping.txt</code></strong>: tự động dịch ngược tên đã bị R8 làm rối (Chương 27) khi hiển thị crash từ bản release, không cần tự quản lý thủ công.</li>
+<li><strong>Cảnh báo chủ động</strong>: gửi thông báo khi tỷ lệ crash tăng đột biến, không cần tự mở app kiểm tra.</li>
+</ul>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    subgraph Sample[&quot;Code mẫu chương này&quot;]
+        S1[&quot;Hiểu cơ chế:&lt;br/&gt;UncaughtExceptionHandler,&lt;br/&gt;batching&quot;]
+    end
+    subgraph Real[&quot;Firebase Crashlytics/Analytics&quot;]
+        R1[&quot;Cùng cơ chế NHƯNG:&lt;br/&gt;dashboard, dedup, mapping.txt&lt;br/&gt;tự động, cảnh báo chủ động&quot;]
+    end
+    Sample -.-&gt;|&quot;Hiểu trước khi dùng,&lt;br/&gt;không phải hộp đen&quot;| Real
+</pre></div>
+<p>Xem <code>README.md</code> của code mẫu để biết các bước cụ thể tích hợp Firebase thật khi cần.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, gây crash thử, xác nhận log được ghi lại đầy đủ ở lần mở app tiếp theo.</li>
+<li>Bấm nút ghi sự kiện nhiều lần liên tiếp trong vài giây, quan sát Logcat xác nhận chúng được gộp thành một đợt gửi duy nhất.</li>
+<li>Đọc kỹ <code>CrashReporter.install()</code>, giải thích bằng lời tại sao dòng gọi lại <code>defaultHandler.uncaughtException(...)</code> là bắt buộc, dựa trên mục 40.2.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Không gọi lại handler mặc định sau khi ghi log</strong>: app rơi vào trạng thái treo/lỗi khó hiểu thay vì đóng gọn gàng như một crash bình thường.</li>
+<li><strong>Gửi một request mạng cho mỗi sự kiện analytics</strong>: tốn pin/dữ liệu di động không cần thiết — luôn gom theo đợt như mục 40.4.</li>
+<li><strong>Cài đặt crash reporting trễ (ví dụ trong <code>MainActivity.onCreate()</code> thay vì <code>Application.onCreate()</code>)</strong>: bỏ lỡ những crash xảy ra sớm hơn trong quá trình khởi động app.</li>
+<li><strong>Quên lưu giữ <code>mapping.txt</code> (Chương 27) của mỗi bản release đã phát hành</strong>: dù dùng Crashlytics thật, không có mapping đúng thì vẫn không dịch ngược được tên đã bị làm rối trong crash log.</li>
+</ul>
+<h2>Lời kết</h2>
+<p>Bạn đã đi trọn hành trình từ dòng lệnh cài đặt Android Studio đầu tiên (Chương 2) tới việc theo dõi một ứng dụng đã phát hành thật (chương này) — 40 chương, mỗi chương kèm một project chạy được, cùng xây dựng dần một mô hình phát triển Android hoàn chỉnh: từ nền tảng, lưu trữ, xử lý nền, mạng, kiểm thử, kiến trúc, tới giao tiếp phần cứng và xuất bản. Phụ lục cuối sách tổng hợp lại các lỗi thường gặp xuyên suốt các chương, cùng danh sách tài liệu tham khảo để tiếp tục học sâu hơn từng chủ đề riêng lẻ.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch39-google-play-console.html">&larr; 39. Đưa ứng dụng lên Google Play Console</a><a class="next" href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

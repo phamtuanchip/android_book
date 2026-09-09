@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10. RecyclerView &amp; Adapter (danh sách, hiệu năng) — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="./ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="./ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="./ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="./ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class="active"><a href="./ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="./ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 10: RecyclerView &amp; Adapter (danh sách, hiệu năng)</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu vì sao <code>RecyclerView</code> &quot;tái sử dụng&quot; View thay vì tạo mới cho mỗi item — và tại sao điều đó quan trọng với hiệu năng.</li>
+<li>Viết được <code>Adapter</code> + <code>ViewHolder</code> theo đúng mẫu chuẩn.</li>
+<li>Dùng <code>ListAdapter</code> + <code>DiffUtil</code> để cập nhật danh sách hiệu quả, có animation, thay vì <code>notifyDataSetChanged()</code>.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch10-recyclerview-adapter/</code>.</p>
+</blockquote>
+<h2>10.1 Vì sao gọi là &quot;Recycler&quot;?</h2>
+<p>Tưởng tượng một danh sách 10.000 ghi chú nhưng màn hình chỉ hiển thị được 8 item cùng lúc. Nếu tạo mới 10.000 View, gần như toàn bộ sẽ không bao giờ hiển thị — lãng phí bộ nhớ và thời gian. <code>RecyclerView</code> chỉ tạo ra vừa đủ View để lấp đầy màn hình (cộng thêm vài cái đệm), rồi <strong>tái chế (recycle)</strong> — khi một item cuộn ra khỏi màn hình, View của nó không bị huỷ mà được nạp lại (bind) dữ liệu của item mới sắp cuộn vào.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    subgraph Screen[&quot;Đang hiển thị trên màn hình&quot;]
+        V1[&quot;ViewHolder #1&lt;br/&gt;hiện: item[2]&quot;]
+        V2[&quot;ViewHolder #2&lt;br/&gt;hiện: item[3]&quot;]
+        V3[&quot;ViewHolder #3&lt;br/&gt;hiện: item[4]&quot;]
+    end
+
+    Scroll[&quot;Người dùng cuộn xuống&quot;] --&gt; Recycle[&quot;item[2] cuộn khỏi màn hình&lt;br/&gt;ViewHolder #1 được TÁI SỬ DỤNG&quot;]
+    Recycle --&gt; Rebind[&quot;onBindViewHolder() nạp&lt;br/&gt;dữ liệu item[5] vào ViewHolder #1&quot;]
+    Rebind --&gt; Screen
+</pre></div>
+<p>Đây cũng là lý do <code>ViewHolder</code> <strong>luôn phải gán lại toàn bộ dữ liệu cần thiết</strong> trong <code>onBindViewHolder()</code> — kể cả những trường hợp &quot;trông giống mặc định&quot; (ví dụ ẩn/hiện một icon) — vì ViewHolder có thể đang mang trạng thái sót lại từ item trước đó nó từng hiển thị.</p>
+<h2>10.2 Ba mảnh ghép: Model — ViewHolder — Adapter</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Model[&quot;Note (model)&lt;br/&gt;dữ liệu thô: title, createdAt&quot;] --&gt; Adapter
+    Adapter[&quot;NoteAdapter extends ListAdapter&quot;] --&gt;|&quot;onCreateViewHolder()&quot;| VH[&quot;NoteViewHolder&lt;br/&gt;giữ tham chiếu View của 1 item&quot;]
+    Adapter --&gt;|&quot;onBindViewHolder(holder, position)&quot;| VH
+    VH --&gt;|&quot;bind(note)&quot;| Layout[&quot;item_note.xml&lt;br/&gt;(layout của 1 dòng)&quot;]
+</pre></div>
+<pre><code class="language-java">static class NoteViewHolder extends RecyclerView.ViewHolder {
+    private final ItemNoteBinding binding;
+
+    NoteViewHolder(ItemNoteBinding binding) {
+        super(binding.getRoot());
+        this.binding = binding;
+    }
+
+    void bind(Note note, OnNoteClickListener listener) {
+        binding.textTitle.setText(note.getTitle());
+        binding.textTimestamp.setText(note.getCreatedAt());
+        binding.getRoot().setOnClickListener(v -&gt; listener.onNoteClick(note));
+    }
+}
+</code></pre>
+<p>Ba phương thức bắt buộc override trong <code>Adapter</code> truyền thống: <code>onCreateViewHolder()</code> (tạo ViewHolder mới, chỉ gọi khi CHƯA đủ View để tái sử dụng), <code>onBindViewHolder()</code> (gán dữ liệu, gọi RẤT NHIỀU LẦN khi cuộn), và <code>getItemCount()</code>. Code mẫu dùng <code>ListAdapter</code> (mục 10.3) nên <code>getItemCount()</code> đã có sẵn.</p>
+<h2>10.3 <code>ListAdapter</code> + <code>DiffUtil</code> — cập nhật danh sách đúng cách</h2>
+<p>Cách cũ hay thấy: <code>notifyDataSetChanged()</code> — báo cho RecyclerView &quot;toàn bộ danh sách có thể đã đổi, vẽ lại hết đi&quot;. Cách này <strong>luôn đúng nhưng luôn kém hiệu quả</strong> và mất animation (thêm/xoá/di chuyển item mượt mà).</p>
+<p><code>ListAdapter</code> (kế thừa thay vì <code>RecyclerView.Adapter</code>) cùng <code>DiffUtil.ItemCallback</code> tự so sánh danh sách cũ và mới, chỉ báo đúng phần thay đổi:</p>
+<pre><code class="language-java">private static final DiffUtil.ItemCallback&lt;Note&gt; DIFF_CALLBACK = new DiffUtil.ItemCallback&lt;Note&gt;() {
+    @Override
+    public boolean areItemsTheSame(@NonNull Note oldItem, @NonNull Note newItem) {
+        return oldItem.getId() == newItem.getId();      // có phải &quot;cùng một&quot; item không?
+    }
+
+    @Override
+    public boolean areContentsTheSame(@NonNull Note oldItem, @NonNull Note newItem) {
+        return oldItem.getTitle().equals(newItem.getTitle())
+                &amp;&amp; oldItem.getCreatedAt().equals(newItem.getCreatedAt());  // nội dung có đổi không?
+    }
+};
+</code></pre>
+<p>Khi có danh sách mới, chỉ cần gọi:</p>
+<pre><code class="language-java">adapter.submitList(new ArrayList&lt;&gt;(notes));
+</code></pre>
+<p><code>ListAdapter</code> tự chạy <code>DiffUtil</code> trên một thread nền, tính toán chính xác item nào thêm/xoá/đổi vị trí, rồi gọi đúng các hàm <code>notifyItemInserted()</code>/<code>notifyItemRemoved()</code>/... tương ứng — có animation mượt, hiệu năng tốt hơn hẳn <code>notifyDataSetChanged()</code> với danh sách lớn.</p>
+<blockquote>
+<p>Lưu ý luôn <strong>truyền một <code>List</code> MỚI</strong> vào <code>submitList()</code> (code mẫu bọc lại bằng <code>new ArrayList&lt;&gt;(notes)</code>) — nếu truyền cùng một tham chiếu List đã sửa đổi tại chỗ, <code>DiffUtil</code> sẽ không phát hiện được gì khác biệt vì nó so sánh dựa trên tham chiếu/nội dung tại 2 thời điểm.</p>
+</blockquote>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, bấm nhiều lần <strong>Thêm ghi chú ngẫu nhiên</strong>, quan sát animation item mới chèn vào đầu danh sách.</li>
+<li>Thêm chức năng xoá: vuốt một item để xoá khỏi <code>notes</code>, gọi lại <code>submitList()</code> — quan sát animation xoá tự động từ <code>DiffUtil</code> (gợi ý: dùng <code>ItemTouchHelper</code>, có thể tự tìm hiểu thêm ngoài phạm vi chương này).</li>
+<li>Thử đổi tạm <code>areContentsTheSame</code> để luôn trả <code>true</code> — quan sát item không cập nhật giao diện dù dữ liệu đã đổi, để thấy rõ vai trò của hàm này.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Không override <code>getItemCount()</code> khi dùng <code>RecyclerView.Adapter</code> thuần</strong> (không áp dụng nếu dùng <code>ListAdapter</code> như code mẫu): danh sách hiển thị trống dù có dữ liệu.</li>
+<li><strong>Sửa dữ liệu trực tiếp trong <code>List</code> đang hiển thị rồi gọi <code>notifyDataSetChanged()</code> tuỳ tiện</strong>: hoạt động nhưng đánh mất toàn bộ lợi ích hiệu năng của <code>DiffUtil</code> — nên chuyển hẳn sang <code>submitList()</code>.</li>
+<li><strong>Giữ state UI (như trạng thái checkbox) trong <code>ViewHolder</code> mà không đồng bộ với model</strong>: vì ViewHolder bị tái sử dụng, checkbox &quot;được tích&quot; có thể tự nhảy sang item khác khi cuộn — luôn lưu state vào model (<code>Note</code>), không lưu trong View.</li>
+<li><strong><code>onNoteClick</code> bị gọi với dữ liệu item cũ sau khi danh sách đã cập nhật</strong>: đảm bảo listener luôn lấy dữ liệu qua <code>getItem(position)</code> tại thời điểm bind, không cache riêng.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết hiển thị danh sách hiệu quả — kỹ năng dùng lại ở hầu hết mọi màn hình danh sách trong các chương sau (từ SQLite/Room ở Chương 13 đến kết quả API ở Chương 21). Chương 11 khép lại Phần 1 với chủ đề resource: string/dimens/style, và cách làm app hỗ trợ đa ngôn ngữ, đa kích thước màn hình.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch09-fragment-navigation.html">&larr; 9. Fragment &amp; Navigation Component</a><a class="next" href="./ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

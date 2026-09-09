@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle) — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class="active"><a href="./ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="./ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="./ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 38: Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Cấu hình <code>signingConfig</code> để Gradle tự động ký bản release, đọc thông tin nhạy cảm từ file KHÔNG commit.</li>
+<li>Hiểu <code>versionCode</code>/<code>versionName</code> khác nhau ra sao và quy tắc tăng chúng qua mỗi lần phát hành.</li>
+<li>Phân biệt APK và Android App Bundle (AAB) — vì sao Google Play khuyến nghị AAB.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch38-release-build/</code> — hoàn thiện nốt phần build release mà Chương 27 mới dừng ở bước ProGuard/R8.</p>
+</blockquote>
+<h2>38.1 Không bao giờ để mật khẩu keystore trong file commit</h2>
+<p>Chương 27 đã cảnh báo: mất keystore đồng nghĩa không update được app cũ. Cảnh báo thứ hai cũng quan trọng không kém: <strong>để lộ mật khẩu keystore</strong> (commit nhầm lên Git, kể cả repo riêng tư) cũng nguy hiểm tương đương — ai có mật khẩu đều ký được bản cập nhật giả mạo dưới danh nghĩa app của bạn.</p>
+<pre><code class="language-groovy">def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file(&quot;keystore.properties&quot;)
+def hasKeystoreConfig = keystorePropertiesFile.exists()
+if (hasKeystoreConfig) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    signingConfigs {
+        release {
+            if (hasKeystoreConfig) {
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
+    buildTypes {
+        release {
+            if (hasKeystoreConfig) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+}
+</code></pre>
+<p><code>keystore.properties</code> nằm trong <code>.gitignore</code> — thông tin thật (mật khẩu, đường dẫn file <code>.jks</code>) chỉ tồn tại <strong>cục bộ trên máy</strong> của người thực hiện build release, không bao giờ đi qua hệ thống quản lý phiên bản. <code>keystore.properties.example</code> (có commit) chỉ là <strong>khuôn mẫu</strong> để người khác biết cần điền gì.</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    Dev[&quot;Máy của bạn&quot;] --&gt;|&quot;keystore.properties&lt;br/&gt;(THẬT, có mật khẩu)&quot;| LocalOnly[&quot;Chỉ tồn tại CỤC BỘ&lt;br/&gt;— trong .gitignore&quot;]
+    Repo[&quot;Git repository&quot;] --&gt;|&quot;keystore.properties.example&lt;br/&gt;(khuôn mẫu, không có mật khẩu thật)&quot;| Committed[&quot;Commit bình thường&quot;]
+</pre></div>
+<h2>38.2 <code>versionCode</code> và <code>versionName</code> — hai con số, hai vai trò khác nhau</h2>
+<pre><code class="language-groovy">defaultConfig {
+    versionCode 3        // SỐ NGUYÊN — Play Console dùng để biết bản nào MỚI HƠN
+    versionName &quot;1.2.0&quot;  // CHUỖI hiển thị cho người dùng — tự do đặt quy ước
+}
+</code></pre>
+<p><code>versionCode</code> <strong>bắt buộc tăng dần</strong> qua mỗi lần tải bản mới lên Play Console — Google Play từ chối thẳng một bản tải lên có <code>versionCode</code> bằng hoặc nhỏ hơn bản đã có. <code>versionName</code> chỉ mang tính hiển thị (người dùng thấy trong Play Store, trong Settings app), không ảnh hưởng logic cập nhật — quy ước phổ biến là semantic versioning (<code>MAJOR.MINOR.PATCH</code>), nhưng hoàn toàn tự do đặt theo cách bạn muốn.</p>
+<h2>38.3 APK và Android App Bundle (AAB) — vì sao Google khuyến nghị AAB?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    subgraph APK[&quot;gradlew assembleRelease&quot;]
+        A1[&quot;Một file .apk DUY NHẤT&quot;]
+        A2[&quot;Chứa ĐỦ tài nguyên cho MỌI cấu hình thiết bị&lt;br/&gt;(mọi mật độ điểm ảnh, mọi kiến trúc CPU...)&quot;]
+        A3[&quot;Cài trực tiếp bằng adb install&quot;]
+    end
+    subgraph AAB[&quot;gradlew bundleRelease&quot;]
+        B1[&quot;Một file .aab — KHÔNG cài trực tiếp được&quot;]
+        B2[&quot;Tải lên Google Play&quot;]
+        B3[&quot;Play Store tự SINH RA các APK&lt;br/&gt;TỐI ƯU RIÊNG cho từng thiết bị cụ thể&quot;]
+    end
+    APK -.-&gt;|&quot;Thường NẶNG HƠN vì chứa dư thừa&quot;| Compare[&quot;So sánh kích thước&quot;]
+    AAB -.-&gt;|&quot;NHẸ HƠN — mỗi thiết bị chỉ tải đúng phần cần&quot;| Compare
+</pre></div>
+<p>APK truyền thống đóng gói <strong>mọi biến thể tài nguyên</strong> (mọi mật độ màn hình, mọi kiến trúc CPU) vào một file duy nhất — thiết bị nào cũng tải về đủ cả, dù chỉ dùng một phần nhỏ. AAB giao cho Google Play việc &quot;cắt&quot; ra đúng APK phù hợp cho từng thiết bị tải xuống, giảm dung lượng tải về đáng kể. Từ 2021, Google Play <strong>yêu cầu bắt buộc</strong> định dạng AAB cho app mới — sẽ dùng trực tiếp ở Chương 39.</p>
+<pre><code class="language-powershell">.\gradlew.bat assembleRelease   # ra .apk
+.\gradlew.bat bundleRelease     # ra .aab — dùng cho Chương 39
+</code></pre>
+<h2>Bài tập</h2>
+<ol>
+<li>Build thử <code>assembleRelease</code> khi chưa có <code>keystore.properties</code> — xác nhận vẫn ra được file APK (chưa ký).</li>
+<li>Tự tạo keystore thử nghiệm theo README, tạo <code>keystore.properties</code> trỏ tới nó, build lại — dùng <code>apksigner verify --print-certs</code> xác nhận APK đã được ký.</li>
+<li>Tăng <code>versionCode</code> lên 4, build lại — so sánh với bước 2, xác nhận Gradle không phàn nàn gì (không có ràng buộc gì ở tầng build cục bộ, ràng buộc versionCode chỉ được Play Console kiểm tra khi tải lên thật, xem Chương 39).</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Commit nhầm file <code>keystore.properties</code> thật (không phải <code>.example</code>) lên Git</strong>: rò rỉ mật khẩu keystore — nếu đã lỡ commit, phải coi như mật khẩu đã bị lộ, đổi mật khẩu/tạo lại toàn bộ keystore nếu có thể (dù việc đổi keystore cho app đã public gặp đúng vấn đề Chương 27 đã cảnh báo).</li>
+<li><strong>Quên tăng <code>versionCode</code> trước khi build bản mới</strong>: Google Play từ chối bản tải lên với thông báo lỗi rõ ràng — dễ khắc phục nhưng dễ quên nếu không có quy trình nhắc nhở.</li>
+<li><strong>Tưởng file <code>.aab</code> cài trực tiếp được như <code>.apk</code></strong>: <code>adb install app-release.aab</code> báo lỗi — AAB chỉ dùng để tải lên Play Console, muốn cài thử cục bộ cần dùng công cụ <code>bundletool</code> để tự sinh APK từ AAB (nằm ngoài phạm vi chi tiết của sách).</li>
+<li><strong>Đặt cùng một mật khẩu cho <code>storePassword</code> và <code>keyPassword</code></strong>: hoạt động được nhưng làm giảm một lớp bảo vệ — dù không bắt buộc phải khác nhau, cân nhắc dùng hai mật khẩu riêng biệt cho dữ liệu thật.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có một file AAB đã ký, sẵn sàng để phát hành. Chương 39 hướng dẫn đưa file này lên Google Play Console — bước cuối cùng để ứng dụng của bạn tới được tay người dùng thật.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="../part7-interop-hardware/ch37-quyen-phan-cung.html">&larr; 37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a><a class="next" href="./ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

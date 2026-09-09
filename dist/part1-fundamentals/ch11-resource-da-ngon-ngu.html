@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="./ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="./ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="./ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="./ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="./ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class="active"><a href="./ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 11: Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Hiểu cơ chế <strong>resource qualifier</strong> — cách Android tự chọn đúng file resource theo ngôn ngữ, chế độ sáng/tối, kích thước màn hình.</li>
+<li>Tổ chức được <code>strings.xml</code>, <code>dimens.xml</code>, <code>colors.xml</code> hỗ trợ đa ngôn ngữ và đa kích thước màn hình mà không cần rẽ nhánh code Java.</li>
+<li>Biết vì sao <strong>luôn phải có resource mặc định</strong> (không có hậu tố qualifier) làm phương án dự phòng.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch11-resources-i18n/</code>.</p>
+</blockquote>
+<h2>11.1 Resource qualifier là gì?</h2>
+<p>Tên thư mục con trong <code>res/</code> có thể mang thêm hậu tố (qualifier) để chỉ báo &quot;chỉ dùng file này khi điều kiện X đúng&quot;:</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Request[&quot;App cần: string 'greeting'&quot;] --&gt; Check1{&quot;Ngôn ngữ hệ thống&lt;br/&gt;có match values-XX?&quot;}
+    Check1 --&gt;|&quot;Có (vd values-en)&quot;| UseEn[&quot;Dùng values-en/strings.xml&quot;]
+    Check1 --&gt;|&quot;Không&quot;| Default[&quot;Dùng values/strings.xml&lt;br/&gt;(mặc định, BẮT BUỘC phải có)&quot;]
+</pre></div>
+<p>Một vài qualifier thường dùng:</p>
+<table>
+<thead>
+<tr>
+<th>Qualifier</th>
+<th>Ý nghĩa</th>
+<th>Ví dụ thư mục</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ngôn ngữ</td>
+<td>Mã ngôn ngữ theo chuẩn ISO</td>
+<td><code>values-en</code>, <code>values-ja</code></td>
+</tr>
+<tr>
+<td>Chế độ tối</td>
+<td>Dark theme đang bật</td>
+<td><code>values-night</code></td>
+</tr>
+<tr>
+<td>Chiều rộng màn hình tối thiểu</td>
+<td>dp, không phụ thuộc mật độ điểm ảnh</td>
+<td><code>values-sw600dp</code></td>
+</tr>
+<tr>
+<td>Hướng màn hình</td>
+<td>Ngang/dọc</td>
+<td><code>layout-land</code></td>
+</tr>
+<tr>
+<td>Mật độ điểm ảnh</td>
+<td>ldpi/mdpi/hdpi/xhdpi...</td>
+<td><code>drawable-xhdpi</code></td>
+</tr>
+</tbody>
+</table>
+<p>Android tự chọn thư mục khớp nhất với thiết bị hiện tại tại <strong>thời điểm chạy</strong> (không phải lúc build) — cùng một file APK, cài trên máy tiếng Việt và máy tiếng Anh sẽ tự hiển thị đúng ngôn ngữ tương ứng.</p>
+<h2>11.2 <code>values/</code> mặc định — bắt buộc phải đầy đủ</h2>
+<p>Đây là lỗi người mới hay gặp nhất: chỉ định nghĩa string mới trong <code>values-en/strings.xml</code> mà quên định nghĩa nó trong <code>values/strings.xml</code> (mặc định). Kết quả: app chạy bình thường trên máy tiếng Anh, nhưng <strong>crash</strong> trên máy có ngôn ngữ khác (không phải Anh, không khớp bất kỳ qualifier nào bạn có) vì không tìm thấy resource nào cả.</p>
+<p>Quy tắc: <code>values/</code> (không qualifier) phải luôn chứa <strong>đầy đủ mọi string/dimen/color</strong> app cần — coi nó là &quot;sự thật cuối cùng&quot;, các thư mục có qualifier khác chỉ <strong>ghi đè một phần</strong>.</p>
+<h2>11.3 Ví dụ áp dụng trong code mẫu</h2>
+<pre><code class="language-xml">&lt;!-- res/values/strings.xml (mặc định — tiếng Việt) --&gt;
+&lt;string name=&quot;greeting&quot;&gt;Xin chào!&lt;/string&gt;
+
+&lt;!-- res/values-en/strings.xml (ghi đè khi hệ thống English) --&gt;
+&lt;string name=&quot;greeting&quot;&gt;Hello!&lt;/string&gt;
+</code></pre>
+<pre><code class="language-xml">&lt;!-- res/values/dimens.xml (mặc định — điện thoại) --&gt;
+&lt;dimen name=&quot;screen_padding&quot;&gt;24dp&lt;/dimen&gt;
+
+&lt;!-- res/values-sw600dp/dimens.xml (ghi đè khi màn hình ≥ 600dp — tablet) --&gt;
+&lt;dimen name=&quot;screen_padding&quot;&gt;64dp&lt;/dimen&gt;
+</code></pre>
+<pre><code class="language-xml">&lt;!-- res/values/colors.xml (mặc định — nền sáng) --&gt;
+&lt;color name=&quot;screen_background&quot;&gt;#FFFFFF&lt;/color&gt;
+
+&lt;!-- res/values-night/colors.xml (ghi đè khi Dark theme bật) --&gt;
+&lt;color name=&quot;screen_background&quot;&gt;#14171C&lt;/color&gt;
+</code></pre>
+<p>Layout chỉ tham chiếu resource bằng tên, không quan tâm giá trị cụ thể đến từ thư mục nào:</p>
+<pre><code class="language-xml">&lt;TextView
+    android:text=&quot;@string/greeting&quot;
+    android:textSize=&quot;@dimen/greeting_text_size&quot; /&gt;
+</code></pre>
+<h2>11.4 Vì sao không nối chuỗi bằng <code>+</code>?</h2>
+<pre><code class="language-java">// SAI — không dịch được, và sai ngữ pháp với nhiều ngôn ngữ
+String msg = &quot;Xin chào, &quot; + name + &quot;!&quot;;
+</code></pre>
+<pre><code class="language-xml">&lt;!-- ĐÚNG — placeholder %1$s, dịch tự nhiên theo từng ngôn ngữ --&gt;
+&lt;string name=&quot;greeting_name&quot;&gt;Xin chào, %1$s!&lt;/string&gt;
+</code></pre>
+<pre><code class="language-java">String msg = getString(R.string.greeting_name, name);
+</code></pre>
+<p>Đã dùng cách này từ Chương 7 (<code>result_greeting</code>) — lý do sâu xa chính là để bản dịch tiếng Anh/ngôn ngữ khác có thể sắp xếp lại vị trí tham số nếu ngữ pháp yêu cầu (<code>%1$s</code> cho phép đổi thứ tự bằng cách đổi vị trí <code>%1$s</code> trong chuỗi dịch, code Java không cần đổi gì).</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, đổi ngôn ngữ hệ thống sang English trong Settings, mở lại app — xác nhận nội dung đổi theo <code>values-en/</code>.</li>
+<li>Bật Dark theme của hệ thống, xác nhận màu nền/chữ đổi theo <code>values-night/</code>.</li>
+<li>Thêm một string mới CHỈ trong <code>values-en/strings.xml</code> mà không thêm vào <code>values/strings.xml</code> — build và chạy thử trên thiết bị/máy ảo có ngôn ngữ khác English lẫn tiếng Việt hệ mặc định (ví dụ đổi máy ảo sang tiếng Nhật) để tự chứng kiến lỗi ở mục 11.2.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Thiếu resource trong <code>values/</code> mặc định</strong>: app crash trên ngôn ngữ không được hỗ trợ tường minh — luôn kiểm tra <code>values/</code> có đủ mọi key trước khi thêm bản dịch khác.</li>
+<li><strong>Viết cứng chuỗi/kích thước trong code Java hoặc layout</strong> (<code>android:padding=&quot;24dp&quot;</code> thay vì <code>@dimen/...</code>): mất khả năng điều chỉnh tập trung, tablet và điện thoại buộc dùng chung một giá trị.</li>
+<li><strong>Nối chuỗi bằng <code>+</code> thay vì placeholder</strong>: khó dịch đúng ngữ pháp, một số ngôn ngữ cần đổi thứ tự từ.</li>
+<li><strong>Quên rằng qualifier áp dụng theo TÊN THƯ MỤC, không phải theo tên file</strong>: <code>values-en/string.xml</code> (thiếu &quot;s&quot;) sẽ không được Android nhận diện đúng cách nếu đặt sai tên thư mục, dù nội dung file đúng.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã hoàn thành <strong>Phần 1 — Nền tảng</strong>: vòng đời, layout, Intent, Fragment, RecyclerView, và hệ thống resource. Đây là bộ kỹ năng đủ để xây một ứng dụng có giao diện hoàn chỉnh. Phần 2 bắt đầu từ Chương 12, chuyển sang chủ đề lưu trữ dữ liệu — bắt đầu với <code>SharedPreferences</code>.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch10-recyclerview-adapter.html">&larr; 10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a><a class="next" href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản) &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

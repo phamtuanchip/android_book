@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class="active"><a href="./ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="./ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="./ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="./ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="./ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 1: Giới thiệu Android</h1>
+<h2>Mục tiêu học</h2>
+<p>Sau chương này, bạn sẽ:</p>
+<ul>
+<li>Giải thích được Android là gì và vị trí của nó trong hệ sinh thái thiết bị di động.</li>
+<li>Mô tả được các tầng kiến trúc của hệ điều hành Android và vai trò từng tầng.</li>
+<li>Hiểu khái niệm <strong>API level</strong> và vì sao nó quan trọng khi viết ứng dụng.</li>
+<li>Có cái nhìn tổng quan (chưa đi sâu) về vòng đời một ứng dụng Android, để làm nền cho Chương 6.</li>
+</ul>
+<p>Bạn đã biết Java/OOP nhưng chưa cần biết gì về Android — chương này không có code, chỉ có khái niệm và sơ đồ. Từ Chương 4 trở đi bạn sẽ bắt đầu gõ code thật.</p>
+<h2>1.1 Android là gì?</h2>
+<p>Android là hệ điều hành mã nguồn mở (dựa trên nhân Linux) do Google phát triển, dùng chủ yếu cho điện thoại, máy tính bảng, TV (Android TV), đồng hồ (Wear OS), và cả một số thiết bị nhúng (Android Things/Android Automotive).</p>
+<p>Điểm khác biệt lớn nhất so với lập trình Java &quot;thông thường&quot; mà bạn đã quen:</p>
+<ul>
+<li>Ứng dụng <strong>không có hàm <code>main()</code></strong> chạy tuyến tính. Hệ điều hành gọi vào các <strong>thành phần</strong> (Activity, Service, BroadcastReceiver, ContentProvider) theo vòng đời riêng của từng loại.</li>
+<li>Mỗi ứng dụng chạy trong <strong>sandbox</strong> riêng (tiến trình Linux riêng, user ID riêng) — chi tiết ở Chương 26.</li>
+<li>Tài nguyên (chuỗi, hình ảnh, layout...) tách khỏi code, quản lý qua hệ thống <strong>resource</strong> — chi tiết ở Chương 11.</li>
+</ul>
+<h2>1.2 Kiến trúc hệ điều hành Android</h2>
+<p>Android được xếp thành các tầng, tầng trên dùng dịch vụ của tầng dưới:</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TB
+    subgraph L5[&quot;Tầng 5 — System Apps&quot;]
+        A1[&quot;Điện thoại, Danh bạ, Trình duyệt...&quot;]
+    end
+    subgraph L4[&quot;Tầng 4 — Java API Framework&quot;]
+        A2[&quot;Activity Manager · Window Manager · Content Providers · View System · Notification Manager&quot;]
+    end
+    subgraph L3[&quot;Tầng 3 — Android Runtime &amp; Native Libraries&quot;]
+        A3[&quot;ART (Android Runtime)&quot;]
+        A4[&quot;Thư viện native C/C++: SQLite, OpenGL, WebKit...&quot;]
+    end
+    subgraph L2[&quot;Tầng 2 — Hardware Abstraction Layer (HAL)&quot;]
+        A5[&quot;Camera HAL · Bluetooth HAL · Sensors HAL...&quot;]
+    end
+    subgraph L1[&quot;Tầng 1 — Linux Kernel&quot;]
+        A6[&quot;Driver, quản lý tiến trình, bộ nhớ, bảo mật&quot;]
+    end
+
+    L5 --&gt; L4 --&gt; L3 --&gt; L2 --&gt; L1
+</pre></div>
+<p>Ứng dụng bạn viết chạy trên tầng <strong>Java API Framework</strong>, được ART biên dịch và thực thi. Bạn hầu như không cần đụng tới HAL hay Linux Kernel trực tiếp — nhưng biết chúng tồn tại giúp bạn hiểu tại sao có khái niệm <strong>permission</strong> (Chương 26) hay vì sao truy cập phần cứng như Bluetooth/NFC (Chương 35–36) phải đi qua framework API thay vì gọi thẳng driver.</p>
+<h2>1.3 API level và vòng đời phiên bản</h2>
+<p>Mỗi phiên bản Android có một <strong>API level</strong> (số nguyên tăng dần). Khi viết ứng dụng, bạn khai báo:</p>
+<ul>
+<li><code>minSdkVersion</code>: phiên bản thấp nhất máy người dùng phải có để cài được app.</li>
+<li><code>targetSdkVersion</code>: phiên bản bạn đã test và tối ưu hành vi cho nó.</li>
+</ul>
+<div class="mermaid-wrap"><pre class="mermaid">
+timeline
+    title Một vài mốc API level quan trọng
+    API 21 (Android 5.0) : Material Design, ART thay Dalvik
+    API 23 (Android 6.0) : Runtime permission
+    API 26 (Android 8.0) : Giới hạn chạy nền (Background execution limits)
+    API 29 (Android 10)  : Scoped storage
+    API 31 (Android 12)  : Material You, giới hạn Bluetooth scan
+    API 33 (Android 13)  : Runtime permission cho Notification
+</pre></div>
+<p>Đây là lý do vì sao nhiều chương sau (lưu trữ file, chạy nền, Bluetooth...) đều phải nói rõ &quot;hành vi này khác nhau theo API level&quot; — Android không &quot;đứng yên&quot;, và sách sẽ luôn ghi chú mốc phiên bản liên quan.</p>
+<h2>1.4 Nhìn trước: vòng đời một ứng dụng</h2>
+<p>Bạn chưa cần nhớ chi tiết sơ đồ dưới đây — đây chỉ là bức tranh toàn cảnh để bạn thấy trước khi vào Chương 6:</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+stateDiagram-v2
+    [*] --&gt; ChuaChay: Chưa cài / chưa mở
+    ChuaChay --&gt; DangChay: Người dùng mở app
+    DangChay --&gt; TamDung: App khác che lên (Paused)
+    TamDung --&gt; DangChay: Quay lại app
+    TamDung --&gt; DaDung: App bị đưa xuống nền hẳn (Stopped)
+    DaDung --&gt; DangChay: Người dùng mở lại
+    DaDung --&gt; BiHuy: Hệ thống thu hồi bộ nhớ (Destroyed)
+    BiHuy --&gt; [*]
+</pre></div>
+<p>Khác với ứng dụng desktop, <strong>hệ điều hành có quyền tự ý huỷ tiến trình ứng dụng của bạn</strong> khi thiết bị thiếu bộ nhớ — kể cả khi người dùng không chủ động thoát app. Đây là lý do Android bắt buộc bạn thiết kế app theo tư duy &quot;trạng thái có thể mất bất cứ lúc nào&quot;, chứ không phải chi tiết vặt vãnh.</p>
+<h2>1.5 Ví dụ minh hoạ: một AndroidManifest.xml thực tế</h2>
+<p>Mọi ứng dụng Android đều có một file khai báo trung tâm là <code>AndroidManifest.xml</code>. Đây là ví dụ rút gọn (bạn sẽ tự tạo file này ở Chương 4, giờ chỉ cần đọc hiểu):</p>
+<pre><code class="language-xml">&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;vn.example.helloandroid&quot;&gt;
+
+    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+
+    &lt;application
+        android:label=&quot;Hello Android&quot;
+        android:icon=&quot;@mipmap/ic_launcher&quot;&gt;
+
+        &lt;activity android:name=&quot;.MainActivity&quot; android:exported=&quot;true&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre>
+<p>Ba điều đáng chú ý ngay từ bây giờ:</p>
+<ol>
+<li><code>package</code> là định danh duy nhất của app trên máy (và trên Google Play).</li>
+<li><code>&lt;uses-permission&gt;</code> là nơi bạn <strong>khai báo trước</strong> những gì app cần quyền truy cập — hệ quả trực tiếp của mô hình sandbox (Chương 26).</li>
+<li><code>&lt;intent-filter&gt;</code> với <code>MAIN</code>/<code>LAUNCHER</code> là cách hệ thống biết &quot;đây là màn hình khởi động khi người dùng bấm icon app&quot; — một ví dụ cụ thể của cơ chế Intent (Chương 8).</li>
+</ol>
+<h2>Bài tập</h2>
+<ol>
+<li>Vẽ lại sơ đồ kiến trúc 5 tầng ở mục 1.2 theo cách hiểu của riêng bạn, thêm chú thích ví dụ thực tế cho mỗi tầng (không cần đúng thuật ngữ, miễn giải thích được vai trò).</li>
+<li>Tra cứu (tìm trên tài liệu chính thức của Android) xem thiết bị bạn đang dùng chạy phiên bản Android nào, tương ứng API level bao nhiêu.</li>
+<li>Từ sơ đồ vòng đời 1.4, dự đoán: nếu bạn đang nhập một đoạn văn bản dài trong app, rồi có cuộc gọi đến làm app bị che khuất, dữ liệu bạn gõ có khả năng bị mất không? Ghi lại dự đoán — Chương 6 sẽ giải thích chính xác.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Nhầm &quot;phiên bản Android&quot; với &quot;API level&quot;</strong>: Android 13 không phải lúc nào cũng là API 33 trên mọi thiết bị (một số thiết bị OEM có thể chậm cập nhật). Khi viết code, luôn dựa vào <strong>API level</strong>, không dựa vào tên phiên bản.</li>
+<li><strong>Cho rằng app của mình sẽ luôn chạy nền vô hạn định</strong>: từ API 26 trở đi, hệ thống giới hạn mạnh việc chạy nền (xem Chương 16–18). Nhiều lỗi &quot;tại sao thông báo của tôi không đến&quot; bắt nguồn từ đây.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có bức tranh tổng quan về Android: kiến trúc hệ thống, khái niệm API level, và một cái nhìn sơ bộ về vòng đời ứng dụng. Chương 2 sẽ bắt đầu phần thực hành: cài đặt JDK, Android Studio và SDK để chuẩn bị viết dòng code Android đầu tiên.</p>
+
+</article>
+<div class="prev-next"><span></span><a class="next" href="./ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

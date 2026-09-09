@@ -1,0 +1,124 @@
+/* In cho PDF — chỉ nền sáng, không cần dark mode/sidebar/pan-zoom như bản web. */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, "Noto Sans", sans-serif;
+  font-size: 11pt;
+  line-height: 1.55;
+  color: #1c2127;
+  background: #ffffff;
+}
+
+.pdf-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 240mm;
+}
+.pdf-cover h1 { font-size: 30pt; margin-bottom: 0.5em; }
+.pdf-cover .pdf-subtitle { font-size: 14pt; color: #5b6472; }
+
+.pdf-toc {
+  break-before: page;
+  page-break-before: always;
+}
+.pdf-toc h1 { font-size: 20pt; }
+.pdf-toc h2 { font-size: 13pt; margin-top: 1.4em; border-top: none; padding-top: 0; }
+.pdf-toc ul { list-style: none; margin: 0.3em 0 0.3em 0; padding: 0; }
+.pdf-toc li { margin: 0.15em 0; font-size: 10.5pt; }
+.pdf-toc a { color: #1c2127; text-decoration: none; }
+
+.pdf-part-divider {
+  break-before: page;
+  page-break-before: always;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200mm;
+  text-align: center;
+}
+.pdf-part-divider h1 { font-size: 22pt; }
+
+.pdf-chapter {
+  break-before: page;
+  page-break-before: always;
+}
+
+h1 { font-size: 18pt; margin-top: 0; }
+h2 {
+  font-size: 14pt;
+  margin-top: 1.6em;
+  border-top: 1px solid #e2e5ea;
+  padding-top: 1em;
+  break-after: avoid-page;
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt;
+  margin-top: 1.2em;
+  break-after: avoid-page;
+  page-break-after: avoid;
+}
+
+p, li { orphans: 3; widows: 3; }
+
+a { color: #1a73e8; }
+
+code {
+  font-family: "Cascadia Code", Consolas, "SF Mono", monospace;
+  font-size: 9pt;
+}
+:not(pre) > code {
+  background: #f5f6f8;
+  border: 1px solid #e2e5ea;
+  border-radius: 3px;
+  padding: 0.05em 0.3em;
+}
+
+pre:not(.mermaid) {
+  background: #f5f6f8;
+  border: 1px solid #e2e5ea;
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+blockquote {
+  margin: 1em 0;
+  padding: 0.4em 1em;
+  border-left: 3px solid #1a73e8;
+  background: #f5f6f8;
+  color: #5b6472;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 9.5pt;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+th, td { border: 1px solid #d6d9df; padding: 0.4em 0.6em; text-align: left; }
+th { background: #f5f6f8; }
+
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.mermaid svg {
+  max-width: 100% !important;
+  height: auto !important;
+}

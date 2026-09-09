@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>25. UI test với Espresso — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="../part1-fundamentals/ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="../part1-fundamentals/ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class=""><a href="../part1-fundamentals/ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="../part1-fundamentals/ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="../part1-fundamentals/ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="../part1-fundamentals/ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="./ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class="active"><a href="./ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="./ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="./ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 25: UI test với Espresso</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Viết được Instrumented test — chạy trên máy ảo/thiết bị thật, thao tác lên UI như người dùng.</li>
+<li>Dùng ba bước cốt lõi của Espresso: tìm View (<code>onView</code>), thao tác (<code>perform</code>), kiểm tra (<code>check</code>).</li>
+<li>Biết <code>ActivityScenarioRule</code> tự động hoá việc mở/đóng Activity cho mỗi test.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch25-ui-test-espresso/</code> — cùng app Chương 24, thêm test UI.</p>
+</blockquote>
+<h2>25.1 Espresso hoạt động thế nào?</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    Test[&quot;@Test method&quot;] --&gt; Find[&quot;onView(withId(...))&lt;br/&gt;TÌM view trên màn hình&quot;]
+    Find --&gt; Act[&quot;perform(typeText(...), click()...)&lt;br/&gt;THAO TÁC như người dùng thật&quot;]
+    Act --&gt; Check[&quot;check(matches(withText(...)))&lt;br/&gt;KIỂM TRA kết quả&quot;]
+</pre></div>
+<p>Ba bước này lặp lại trong hầu hết mọi test Espresso: <strong>tìm</strong> một View bằng ID hoặc thuộc tính khác, <strong>thao tác</strong> lên nó (gõ chữ, bấm, cuộn...), rồi <strong>kiểm tra</strong> trạng thái sau đó đúng như mong đợi. Khác Unit test (Chương 24) gọi thẳng hàm Java, Espresso mô phỏng chính xác hành vi người dùng thật trên giao diện thật.</p>
+<h2>25.2 <code>ActivityScenarioRule</code> — tự mở/đóng Activity mỗi test</h2>
+<pre><code class="language-java">@RunWith(AndroidJUnit4.class)
+public class MainActivityEspressoTest {
+
+    @Rule
+    public ActivityScenarioRule&lt;MainActivity&gt; activityRule =
+            new ActivityScenarioRule&lt;&gt;(MainActivity.class);
+
+    @Test
+    public void goMatKhauYeu_hienThiNhanYeu() {
+        onView(withId(R.id.editPassword))
+                .perform(typeText(&quot;abc&quot;), closeSoftKeyboard());
+
+        onView(withId(R.id.textStrength))
+                .check(matches(withText(&quot;Yếu&quot;)));
+    }
+}
+</code></pre>
+<p><code>@Rule</code> là cơ chế của JUnit cho phép chạy code thiết lập/dọn dẹp quanh mỗi <code>@Test</code> — ở đây <code>ActivityScenarioRule</code> tự mở <code>MainActivity</code> <strong>trước</strong> mỗi test, tự đóng lại <strong>sau</strong> mỗi test, đảm bảo các test không ảnh hưởng lẫn nhau (một nguyên tắc đã nhắc ở Chương 24: mỗi test case nên độc lập).</p>
+<h2>25.3 Các thao tác (<code>ViewActions</code>) thường dùng</h2>
+<table>
+<thead>
+<tr>
+<th>Hàm</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>typeText(&quot;...&quot;)</code></td>
+<td>Gõ chữ vào ô nhập (như <code>EditText</code>)</td>
+</tr>
+<tr>
+<td><code>clearText()</code></td>
+<td>Xoá sạch nội dung đang có</td>
+</tr>
+<tr>
+<td><code>click()</code></td>
+<td>Bấm vào View (nút, item danh sách...)</td>
+</tr>
+<tr>
+<td><code>closeSoftKeyboard()</code></td>
+<td>Đóng bàn phím ảo — thường cần sau <code>typeText</code> để tránh bàn phím che View khác</td>
+</tr>
+<tr>
+<td><code>scrollTo()</code></td>
+<td>Cuộn tới một View đang nằm ngoài vùng nhìn thấy</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-java">onView(withId(R.id.editPassword))
+        .perform(typeText(&quot;Abcdefgh123&quot;), closeSoftKeyboard());
+</code></pre>
+<p>Nhiều thao tác có thể nối chuỗi trong cùng một <code>perform()</code>, thực hiện tuần tự theo đúng thứ tự liệt kê.</p>
+<h2>25.4 Các phép kiểm tra (<code>ViewAssertions</code>/<code>Matchers</code>) thường dùng</h2>
+<pre><code class="language-java">onView(withId(R.id.textStrength)).check(matches(withText(&quot;Mạnh&quot;)));
+</code></pre>
+<p><code>matches(withText(&quot;...&quot;))</code> kiểm tra View có đúng nội dung chữ. Các matcher khác thường gặp: <code>isDisplayed()</code> (View có đang hiển thị), <code>isChecked()</code> (với <code>CheckBox</code>/<code>Switch</code>, dùng lại được ngay cho code từ Chương 12), <code>hasChildCount(n)</code> (với <code>ViewGroup</code>).</p>
+<h2>25.5 So sánh trực tiếp với Unit test (Chương 24)</h2>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    subgraph JUnit[&quot;Chương 24 — PasswordStrengthCheckerTest&quot;]
+        J1[&quot;PasswordStrengthChecker.check('abc')&quot;]
+        J2[&quot;assertEquals(WEAK, ...)&quot;]
+    end
+    subgraph Espresso[&quot;Chương 25 — MainActivityEspressoTest&quot;]
+        E1[&quot;Gõ 'abc' vào EditText THẬT&quot;]
+        E2[&quot;Đọc TextView THẬT trên màn hình&quot;]
+        E3[&quot;So khớp đúng 'Yếu'&quot;]
+    end
+    JUnit -.-&gt;|&quot;Test cùng MỘT logic,&lt;br/&gt;hai GÓC NHÌN khác nhau&quot;| Espresso
+</pre></div>
+<p>Cả hai chương đều đang kiểm tra cùng một quy tắc nghiệp vụ (<code>PasswordStrengthChecker</code>), nhưng từ hai góc độ bổ sung cho nhau: Unit test xác nhận <strong>logic tính toán đúng</strong>, Espresso xác nhận <strong>logic đó thật sự được nối đúng dây với giao diện</strong> (đúng ID, đúng sự kiện, hiển thị đúng chỗ). Một dự án lớn cần cả hai loại — Unit test nhiều vì nhanh, Espresso ít hơn nhưng bao quát đúng những luồng người dùng quan trọng nhất.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy cả 3 test có sẵn trên máy ảo/thiết bị, xác nhận đều pass.</li>
+<li>Thêm một test case mới kiểm tra trường hợp <code>Strength.MEDIUM</code> (gõ một chuỗi có đúng 2 loại ký tự, độ dài từ 6 trở lên).</li>
+<li>Cố tình đổi <code>R.id.textStrength</code> thành một ID không tồn tại trong một test, chạy lại — đọc thông báo lỗi Espresso đưa ra (<code>NoMatchingViewException</code>) để làm quen với loại lỗi này khi gặp trong thực tế.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Quên <code>closeSoftKeyboard()</code> sau <code>typeText()</code></strong>: bàn phím ảo có thể che mất View cần thao tác tiếp theo, gây lỗi &quot;view not displayed&quot; dù code test có vẻ đúng logic.</li>
+<li><strong>Đặt file test vào <code>app/src/test/</code> thay vì <code>app/src/androidTest/</code></strong>: sai vị trí khiến Gradle không nhận diện đây là Instrumented test, hoặc biên dịch lỗi vì thiếu Android framework thật.</li>
+<li><strong>Chạy Espresso test mà không có máy ảo/thiết bị nào đang kết nối</strong>: Android Studio báo lỗi rõ ràng &quot;no target device&quot; — cần một máy ảo/thiết bị đã bật, khác Unit test ở Chương 24 không cần gì cả.</li>
+<li><strong>Viết test phụ thuộc animation/thời gian chờ không xác định</strong>: Espresso mặc định tự đồng bộ với main thread khá tốt, nhưng animation dài hoặc network call thật trong lúc test có thể gây flaky test (lúc pass lúc fail) — nên tránh gọi mạng thật trong Espresso test cơ bản như ở chương này.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã có cả hai công cụ kiểm thử tự động: Unit test cho logic, Espresso cho giao diện. Chương 26 chuyển hướng sang một chủ đề nền tảng khác của Android: mô hình sandbox và hệ thống quyền (permission) — đã được nhắc tới thoáng qua từ Chương 1, giờ sẽ giải thích đầy đủ.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch24-unit-test-junit.html">&larr; 24. Unit test với JUnit</a><a class="next" href="./ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

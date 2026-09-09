@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "node tools/build.js",
+    "build:pdf": "node tools/build-pdf.js",
+    "build:all": "node tools/build.js && node tools/build-pdf.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "markdown-it": "^15.0.1"
   },

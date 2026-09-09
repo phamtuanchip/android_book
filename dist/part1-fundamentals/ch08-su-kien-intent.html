@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình — Android Từ Cơ Bản Đến Nâng Cao</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" aria-label="Mở/đóng mục lục">☰</button>
+<nav class="sidebar"><div class="sidebar-title"><a href="../index.html">Android Từ Cơ Bản Đến Nâng Cao</a></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 0 — Chuẩn bị môi trường</div><ul><li class=""><a href="../part0-setup/ch01-gioi-thieu-android.html">1. Giới thiệu Android: kiến trúc hệ điều hành, vòng đời phiên bản, hệ sinh thái</a></li><li class=""><a href="../part0-setup/ch02-cai-dat-moi-truong.html">2. Cài đặt JDK, Android Studio, SDK/SDK Manager</a></li><li class=""><a href="../part0-setup/ch03-may-ao-thiet-bi-that.html">3. Tạo và cấu hình máy ảo (AVD), kết nối thiết bị thật (USB debugging, ADB)</a></li><li class=""><a href="../part0-setup/ch04-project-dau-tien.html">4. Tạo project đầu tiên: cấu trúc project, Gradle, AndroidManifest.xml</a></li><li class=""><a href="../part0-setup/ch05-hello-world.html">5. Build &amp; deploy ứng dụng &quot;Hello World&quot; đầu tiên lên emulator/thiết bị thật</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 1 — Nền tảng</div><ul><li class=""><a href="./ch06-vong-doi-activity.html">6. Vòng đời Activity &amp; Application</a></li><li class=""><a href="./ch07-layout-views.html">7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a></li><li class="active"><a href="./ch08-su-kien-intent.html">8. Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</a></li><li class=""><a href="./ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component</a></li><li class=""><a href="./ch10-recyclerview-adapter.html">10. RecyclerView &amp; Adapter (danh sách, hiệu năng)</a></li><li class=""><a href="./ch11-resource-da-ngon-ngu.html">11. Resource: string/dimens/style, đa ngôn ngữ, đa kích thước màn hình</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 2 — Lưu trữ dữ liệu</div><ul><li class=""><a href="../part2-storage/ch12-shared-preferences.html">12. SharedPreferences (cấu hình, trạng thái đơn giản)</a></li><li class=""><a href="../part2-storage/ch13-sqlite-room.html">13. SQLite &amp; Room (cơ sở dữ liệu quan hệ)</a></li><li class=""><a href="../part2-storage/ch14-file-storage.html">14. File storage: internal vs external, scoped storage</a></li><li class=""><a href="../part2-storage/ch15-datastore.html">15. Jetpack DataStore (thay thế SharedPreferences hiện đại)</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 3 — Chạy ngầm &amp; bất đồng bộ</div><ul><li class=""><a href="../part3-background/ch16-service.html">16. Service &amp; foreground service</a></li><li class=""><a href="../part3-background/ch17-broadcast-receiver.html">17. BroadcastReceiver, hệ thống sự kiện của Android</a></li><li class=""><a href="../part3-background/ch18-workmanager.html">18. WorkManager (tác vụ nền có lịch/điều kiện)</a></li><li class=""><a href="../part3-background/ch19-bat-dong-bo.html">19. Xử lý bất đồng bộ: Thread/Executor (Java) và Coroutine (mở rộng Kotlin)</a></li><li class=""><a href="../part3-background/ch20-notification.html">20. Notification</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 4 — Mạng &amp; API</div><ul><li class=""><a href="../part4-networking/ch21-http-retrofit.html">21. Gọi HTTP với OkHttp/Retrofit</a></li><li class=""><a href="../part4-networking/ch22-json-parsing.html">22. Parse JSON (Gson/Moshi), mapping dữ liệu</a></li><li class=""><a href="../part4-networking/ch23-loi-mang-cache.html">23. Xử lý lỗi mạng, retry, cache offline-first cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 5 — Kiểm thử, Sandbox &amp; Bảo mật</div><ul><li class=""><a href="../part5-testing-security/ch24-unit-test-junit.html">24. Unit test với JUnit</a></li><li class=""><a href="../part5-testing-security/ch25-ui-test-espresso.html">25. UI test với Espresso</a></li><li class=""><a href="../part5-testing-security/ch26-sandbox-permission.html">26. Sandbox của Android: mô hình quyền (permission), runtime permission</a></li><li class=""><a href="../part5-testing-security/ch27-bao-mat-co-ban.html">27. Bảo mật cơ bản: ProGuard/R8, keystore, ký ứng dụng</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 6 — Kiến trúc nâng cao</div><ul><li class=""><a href="../part6-architecture/ch28-mvvm-livedata.html">28. MVVM, ViewModel &amp; LiveData</a></li><li class=""><a href="../part6-architecture/ch29-di-hilt.html">29. Dependency Injection với Hilt</a></li><li class=""><a href="../part6-architecture/ch30-jetpack-compose.html">30. Giới thiệu Jetpack Compose</a></li><li class=""><a href="../part6-architecture/ch31-clean-architecture.html">31. Clean Architecture cơ bản cho ứng dụng Android</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 7 — Giao tiếp liên ứng dụng &amp; phần cứng nâng cao</div><ul><li class=""><a href="../part7-interop-hardware/ch32-content-provider.html">32. Content Provider: chia sẻ dữ liệu có kiểm soát giữa các ứng dụng</a></li><li class=""><a href="../part7-interop-hardware/ch33-app-links-share.html">33. Giao tiếp liên ứng dụng nâng cao: App Links/Deep Link, Share sheet, PendingIntent</a></li><li class=""><a href="../part7-interop-hardware/ch34-aidl-bound-service.html">34. AIDL &amp; Bound Service: giao tiếp liên tiến trình (IPC) giữa các app</a></li><li class=""><a href="../part7-interop-hardware/ch35-bluetooth.html">35. Bluetooth: Classic &amp; BLE — quét thiết bị, kết nối, truyền/nhận dữ liệu</a></li><li class=""><a href="../part7-interop-hardware/ch36-nfc.html">36. NFC: đọc/ghi tag, Host Card Emulation (HCE), giao tiếp giữa 2 thiết bị</a></li><li class=""><a href="../part7-interop-hardware/ch37-quyen-phan-cung.html">37. Quyền &amp; sandbox cho phần cứng: location cho BLE/NFC, background location, runtime permission theo API level</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phần 8 — Xuất bản ứng dụng</div><ul><li class=""><a href="../part8-publishing/ch38-release-build.html">38. Chuẩn bị release build, ký ứng dụng, tối ưu kích thước (App Bundle)</a></li><li class=""><a href="../part8-publishing/ch39-google-play-console.html">39. Đưa ứng dụng lên Google Play Console</a></li><li class=""><a href="../part8-publishing/ch40-theo-doi-sau-phat-hanh.html">40. Theo dõi sau phát hành: Crashlytics, Analytics cơ bản</a></li></ul></div><div class="sidebar-part"><div class="sidebar-part-title">Phụ lục</div><ul><li class=""><a href="../part9-appendix/appendix-a-loi-thuong-gap.html">Phụ lục A — Bảng tổng hợp lỗi thường gặp &amp; cách xử lý</a></li><li class=""><a href="../part9-appendix/appendix-b-tai-lieu-tham-khao.html">Phụ lục B — Tài liệu tham khảo &amp; nguồn học thêm</a></li></ul></div></nav>
+<main class="content">
+<article>
+<h1>Chương 8: Sự kiện, Intent (explicit/implicit), điều hướng giữa các màn hình</h1>
+<h2>Mục tiêu học</h2>
+<ul>
+<li>Phân biệt explicit Intent (mở màn hình cụ thể trong app mình) và implicit Intent (nhờ hệ thống tìm app phù hợp xử lý).</li>
+<li>Truyền dữ liệu giữa hai Activity, và nhận lại kết quả bằng Activity Result API.</li>
+<li>Hiểu vì sao <code>startActivityForResult()</code> cũ đã lỗi thời và không nên dùng trong code mới.</li>
+</ul>
+<blockquote>
+<p>Code mẫu: <code>code/ch08-intent-navigation/</code>.</p>
+</blockquote>
+<h2>8.1 Intent là gì?</h2>
+<p><code>Intent</code> là một &quot;thông điệp&quot; mô tả một hành động cần thực hiện — có thể là mở một Activity, khởi động một Service (Chương 16), hoặc gửi broadcast (Chương 17). Có hai kiểu:</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+flowchart TD
+    Intent((&quot;Intent&quot;)) --&gt; Explicit[&quot;Explicit Intent&lt;br/&gt;chỉ đích danh class&quot;]
+    Intent --&gt; Implicit[&quot;Implicit Intent&lt;br/&gt;chỉ mô tả action + data&quot;]
+
+    Explicit --&gt; E1[&quot;new Intent(context, SecondActivity.class)&quot;]
+    Explicit --&gt; E2[&quot;Dùng khi: mở màn hình&lt;br/&gt;trong CHÍNH app của mình&quot;]
+
+    Implicit --&gt; I1[&quot;new Intent(ACTION_VIEW, uri)&quot;]
+    Implicit --&gt; I2[&quot;Hệ thống tìm app nào&lt;br/&gt;có intent-filter khớp&quot;]
+    Implicit --&gt; I3[&quot;Dùng khi: mở trình duyệt,&lt;br/&gt;gọi điện, chia sẻ... (Chương 33)&quot;]
+</pre></div>
+<h2>8.2 Explicit Intent — truyền dữ liệu bằng <code>putExtra</code></h2>
+<pre><code class="language-java">Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+intent.putExtra(EXTRA_MESSAGE, message);
+startActivity(intent);
+</code></pre>
+<p>Phía nhận đọc lại bằng <code>getIntent()</code>:</p>
+<pre><code class="language-java">String message = getIntent().getStringExtra(EXTRA_MESSAGE);
+</code></pre>
+<p>Lưu ý dùng <strong>hằng số <code>public static final String</code></strong> cho key của extra (như <code>EXTRA_MESSAGE</code> trong code mẫu) thay vì viết chuỗi <code>&quot;message&quot;</code> trực tiếp ở cả hai nơi — tránh gõ sai key giữa Activity gửi và nhận, một lỗi runtime rất khó phát hiện vì không có cảnh báo lúc build.</p>
+<h2>8.3 Nhận kết quả trả về — Activity Result API</h2>
+<p>Tài liệu cũ hay dạy <code>startActivityForResult()</code> + override <code>onActivityResult()</code> — cách này <strong>đã lỗi thời</strong>, Google khuyến nghị thay bằng Activity Result API:</p>
+<div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant A as MainActivity
+    participant B as SecondActivity
+
+    Note over A: Đăng ký launcher trong onCreate&lt;br/&gt;(TRƯỚC khi Activity resume)
+    A-&gt;&gt;B: launcher.launch(intent)
+    Note over B: Người dùng bấm &quot;Trả lời&quot;
+    B-&gt;&gt;B: setResult(RESULT_OK, data)
+    B-&gt;&gt;B: finish()
+    B--&gt;&gt;A: callback launcher nhận result
+    Note over A: Đọc result.getData()
+</pre></div>
+<pre><code class="language-java">private final ActivityResultLauncher&lt;Intent&gt; secondActivityLauncher =
+        registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -&gt; {
+            if (result.getResultCode() == RESULT_OK &amp;&amp; result.getData() != null) {
+                String reply = result.getData().getStringExtra(EXTRA_REPLY);
+                // cập nhật UI với reply
+            }
+        });
+</code></pre>
+<p><code>registerForActivityResult(...)</code> <strong>phải gọi ở cấp field hoặc trong <code>onCreate</code> trước khi Activity resume</strong> — gọi trễ hơn (ví dụ trong <code>onClickListener</code>) sẽ ném lỗi runtime. Đây là điểm khác biệt quan trọng nhất so với cách cũ, và cũng là lỗi người mới hay gặp nhất khi mới chuyển qua API này.</p>
+<p>Phía <code>SecondActivity</code> trả kết quả:</p>
+<pre><code class="language-java">Intent result = new Intent();
+result.putExtra(EXTRA_REPLY, &quot;Đã nhận, cảm ơn!&quot;);
+setResult(RESULT_OK, result);
+finish();
+</code></pre>
+<h2>8.4 Implicit Intent — nhờ hệ thống tìm app xử lý</h2>
+<pre><code class="language-java">Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(&quot;https://developer.android.com&quot;));
+startActivity(intent);
+</code></pre>
+<p>Bạn không cần biết (và không nên quan tâm) máy người dùng cài trình duyệt nào — hệ thống tự tìm app có khai báo <code>&lt;intent-filter&gt;</code> khớp với <code>ACTION_VIEW</code> + scheme <code>https</code>. Nếu nhiều app cùng khớp, hệ thống hiện hộp thoại &quot;Open with&quot; cho người dùng chọn. Cơ chế này sẽ quay lại chi tiết hơn ở Chương 33 khi bàn về App Links và chia sẻ dữ liệu giữa các app.</p>
+<h2>Bài tập</h2>
+<ol>
+<li>Chạy code mẫu, thử luồng gửi tin nhắn → nhận phản hồi đầy đủ như mô tả ở README.</li>
+<li>Thêm một extra thứ hai (ví dụ giờ gửi tin, dùng <code>putExtra</code> với kiểu <code>long</code>), hiển thị nó ở <code>SecondActivity</code>.</li>
+<li>Đổi implicit intent ở mục 8.4 sang <code>Intent.ACTION_DIAL</code> với <code>Uri.parse(&quot;tel:0123456789&quot;)</code> — quan sát hệ thống mở app quay số thay vì trình duyệt.</li>
+</ol>
+<h2>Lỗi thường gặp</h2>
+<ul>
+<li><strong>Gọi <code>registerForActivityResult</code> bên trong <code>onClickListener</code></strong>: ném <code>IllegalStateException</code>, phải đăng ký ở cấp field/<code>onCreate</code> như mục 8.3.</li>
+<li><strong>Quên <code>android:exported=&quot;false&quot;</code> cho Activity không cần app khác gọi tới</strong> (như <code>SecondActivity</code> trong code mẫu) — từ Android 12 phải khai báo rõ giá trị này, không có mặc định ngầm.</li>
+<li><strong>Đọc <code>getStringExtra()</code> mà không kiểm tra <code>null</code></strong>: nếu Activity được mở theo cách khác (không qua đúng luồng bạn nghĩ), extra có thể không tồn tại — luôn có nhánh xử lý <code>null</code>.</li>
+<li><strong>Implicit intent không tìm được app xử lý</strong>: gây crash <code>ActivityNotFoundException</code> nếu máy không cài app nào khớp — nên bọc trong <code>try/catch</code> hoặc kiểm tra bằng <code>intent.resolveActivity()</code> trước khi gọi <code>startActivity</code>.</li>
+</ul>
+<h2>Tóm tắt &amp; tiếp theo</h2>
+<p>Bạn đã biết điều hướng giữa các màn hình bằng Intent theo cả hai chiều (gửi dữ liệu đi, nhận kết quả về), và cách nhờ hệ thống mở app khác. Chương 9 giới thiệu <code>Fragment</code> — đơn vị giao diện có thể tái sử dụng bên trong một Activity, cùng Navigation Component để quản lý điều hướng giữa nhiều Fragment gọn gàng hơn so với việc tạo nhiều Activity.</p>
+
+</article>
+<div class="prev-next"><a class="prev" href="./ch07-layout-views.html">&larr; 7. Layout &amp; Views (XML layout, ConstraintLayout, ViewGroup)</a><a class="next" href="./ch09-fragment-navigation.html">9. Fragment &amp; Navigation Component &rarr;</a></div>
+</main>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+
+if (window.hljs) { hljs.highlightAll(); }
+
+if (window.mermaid) {
+  mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  mermaid.run({ querySelector: '.mermaid' }).then(function () {
+    document.querySelectorAll('.mermaid-wrap').forEach(function (wrap) {
+      var svg = wrap.querySelector('svg');
+      if (!svg || !window.svgPanZoom) return;
+      // Give the SVG concrete pixel dimensions (not "100%") before handing it to
+      // svg-pan-zoom: percentage sizing lets the browser's own preserveAspectRatio
+      // scaling stack on top of svg-pan-zoom's transform, which throws its fit/center
+      // math off by the extra scale factor.
+      svg.style.maxWidth = 'none';
+      svg.setAttribute('width', wrap.clientWidth);
+      svg.setAttribute('height', wrap.clientHeight);
+      var pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.3,
+        maxZoom: 10
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>
