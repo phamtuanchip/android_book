@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">NFC Demo</string>
+    <string name="status_no_nfc_hardware">Thiết bị này không có phần cứng NFC.</string>
+    <string name="status_nfc_disabled">NFC đang TẮT — bật trong Settings để tiếp tục.</string>
+    <string name="status_ready">Sẵn sàng — chạm một thẻ NFC vào mặt sau máy để đọc.</string>
+    <string name="hint_write_text">Nội dung muốn ghi vào thẻ</string>
+    <string name="button_arm_write">Chờ chạm thẻ để GHI (thay vì đọc)</string>
+    <string name="mode_read">Chế độ: ĐỌC (mặc định)</string>
+    <string name="mode_write_armed">Chế độ: sẵn sàng GHI — chạm thẻ ngay bây giờ</string>
+    <string name="log_write_armed">Đã chuyển sang chế độ ghi — chạm thẻ tiếp theo sẽ bị GHI ĐÈ.</string>
+    <string name="log_tag_no_ndef_format">Thẻ %1$s không chứa dữ liệu NDEF (có thể là thẻ trống hoặc định dạng khác).</string>
+    <string name="log_read_format">Đọc thẻ %1$s: \"%2$s\"</string>
+    <string name="log_write_success_format">Đã ghi thành công: \"%1$s\"</string>
+    <string name="log_write_readonly">Thẻ này chỉ đọc (read-only), không ghi được.</string>
+    <string name="log_write_unsupported">Thẻ này không hỗ trợ định dạng NDEF.</string>
+    <string name="log_write_error_format">Lỗi khi ghi: %1$s</string>
+    <string name="hce_service_description">Dịch vụ giả lập thẻ NFC (Host Card Emulation) minh hoạ cho Chương 36</string>
+    <string name="hce_aid_group_description">Nhóm AID minh hoạ</string>
+</resources>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">App Links &amp; Share Demo</string>
+    <string name="hint_message">Nhập một tin nhắn để chia sẻ</string>
+    <string name="button_share">Chia sẻ qua app khác (Share sheet)</string>
+    <string name="chooser_title">Chia sẻ qua</string>
+    <string name="received_share_format">Đã nhận chia sẻ từ app khác: %1$s</string>
+    <string name="button_open_deeplink">Mở deep link ch33share://note/42</string>
+    <string name="note_deeplink_adb">Cũng thử được từ dòng lệnh: adb shell am start -a android.intent.action.VIEW -d "ch33share://note/99"</string>
+    <string name="deeplink_screen_title">Chi tiết ghi chú (mở qua Deep Link)</string>
+    <string name="note_id_format">ID ghi chú: %1$s</string>
+    <string name="source_uri_format">URI gốc: %1$s</string>
+    <string name="no_uri_data">Activity này được mở nhưng không có dữ liệu URI kèm theo.</string>
+</resources>

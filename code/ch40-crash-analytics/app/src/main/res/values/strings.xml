@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Crash &amp; Analytics Demo</string>
+    <string name="label_crash_reporting">Crash reporting (tự cài, không cần Firebase)</string>
+    <string name="button_cause_crash">Gây crash thử (NullPointerException)</string>
+    <string name="button_clear_logs">Xoá crash log đã lưu</string>
+    <string name="label_analytics">Analytics (batching)</string>
+    <string name="button_log_event">Ghi một sự kiện (chờ đợt gửi tiếp theo)</string>
+    <string name="log_no_previous_crash">Không có crash log nào từ lần chạy trước.</string>
+    <string name="log_found_crashes_format">Tìm thấy %1$d crash log từ (các) lần chạy trước:</string>
+    <string name="log_crashes_cleared">Đã xoá toàn bộ crash log.</string>
+    <string name="log_event_queued">Sự kiện đã được xếp hàng, chờ đợt gửi định kỳ tiếp theo (xem Logcat tag AnalyticsLogger).</string>
+    <string name="log_batch_flushed_format">Đã gửi một đợt gồm %1$d sự kiện:</string>
+</resources>

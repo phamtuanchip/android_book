@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Note Client (app khách)</string>
+    <string name="note_no_app">Bấm \"Đọc ghi chú\" để truy vấn ContentProvider của app Note Provider (cần cài cả hai app :app và :client lên cùng thiết bị/máy ảo).</string>
+    <string name="button_query">Đọc ghi chú từ app khác</string>
+    <string name="button_insert">Thêm ghi chú vào app khác</string>
+    <string name="note_count_format">Đọc được %1$d ghi chú từ app Note Provider.</string>
+    <string name="error_format">Lỗi: %1$s (app Note Provider chưa được cài, hoặc không cho phép truy cập?)</string>
+    <string name="note_from_client_format">Ghi chú từ app Client lúc %1$s</string>
+    <string name="inserted_toast">Đã gửi ghi chú mới sang app Note Provider.</string>
+</resources>

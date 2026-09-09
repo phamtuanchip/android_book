@@ -43,6 +43,12 @@ function chapterMdPath(ch) {
   return path.join(BOOK_DIR, ch.partId, `${ch.slug}.md`);
 }
 
+// Most entries are numbered chapters ("12. Tiêu đề"); an entry with an explicit
+// "label" (used for appendix entries) renders as "Phụ lục A — Tiêu đề" instead.
+function numberedTitle(ch) {
+  return ch.label ? `${ch.label} — ${ch.title}` : `${ch.num}. ${ch.title}`;
+}
+
 function relLink(fromFile, toFile) {
   let rel = path.relative(path.dirname(fromFile), toFile).split(path.sep).join("/");
   if (!rel.startsWith(".")) rel = "./" + rel;
@@ -58,7 +64,7 @@ function renderSidebar(currentSlug, outFile) {
       const active = ch.slug === currentSlug ? " active" : "";
       const cls = (has ? "" : "planned") + active;
       const href = relLink(outFile, chapterOutPath({ ...ch, partId: part.id }));
-      html += `<li class="${cls.trim()}"><a href="${href}">${ch.num}. ${md.utils.escapeHtml(ch.title)}</a></li>`;
+      html += `<li class="${cls.trim()}"><a href="${href}">${md.utils.escapeHtml(numberedTitle(ch))}</a></li>`;
     }
     html += `</ul></div>`;
   }
@@ -149,17 +155,17 @@ function buildChapterPage(ch, index) {
     bodyHtml = md.render(src);
     bodyHtml = wrapMermaidDiagrams(bodyHtml);
   } else {
-    bodyHtml = `<h1>${ch.num}. ${md.utils.escapeHtml(ch.title)}</h1><p class="tbd">Chương này đang được biên soạn.</p>`;
+    bodyHtml = `<h1>${md.utils.escapeHtml(numberedTitle(ch))}</h1><p class="tbd">Chương này đang được biên soạn.</p>`;
   }
   const prev = flatChapters[index - 1];
   const next = flatChapters[index + 1];
   let prevNext = `<div class="prev-next">`;
-  prevNext += prev ? `<a class="prev" href="${relLink(outFile, chapterOutPath(prev))}">&larr; ${prev.num}. ${md.utils.escapeHtml(prev.title)}</a>` : `<span></span>`;
-  prevNext += next ? `<a class="next" href="${relLink(outFile, chapterOutPath(next))}">${next.num}. ${md.utils.escapeHtml(next.title)} &rarr;</a>` : `<span></span>`;
+  prevNext += prev ? `<a class="prev" href="${relLink(outFile, chapterOutPath(prev))}">&larr; ${md.utils.escapeHtml(numberedTitle(prev))}</a>` : `<span></span>`;
+  prevNext += next ? `<a class="next" href="${relLink(outFile, chapterOutPath(next))}">${md.utils.escapeHtml(numberedTitle(next))} &rarr;</a>` : `<span></span>`;
   prevNext += `</div>`;
 
   const html = pageShell({
-    title: `${ch.num}. ${ch.title} — ${MANIFEST.title}`,
+    title: `${numberedTitle(ch)} — ${MANIFEST.title}`,
     bodyHtml,
     sidebarHtml: renderSidebar(ch.slug, outFile),
     cssHref,
@@ -178,7 +184,7 @@ function buildIndex() {
     for (const ch of part.chapters) {
       const has = fs.existsSync(chapterMdPath({ ...ch, partId: part.id }));
       const href = relLink(outFile, chapterOutPath({ ...ch, partId: part.id }));
-      toc += `<li class="${has ? "" : "planned"}"><a href="${href}">${ch.num}. ${md.utils.escapeHtml(ch.title)}</a>${has ? "" : ' <span class="badge">sắp có</span>'}</li>`;
+      toc += `<li class="${has ? "" : "planned"}"><a href="${href}">${md.utils.escapeHtml(numberedTitle(ch))}</a>${has ? "" : ' <span class="badge">sắp có</span>'}</li>`;
     }
     toc += `</ul>`;
   }

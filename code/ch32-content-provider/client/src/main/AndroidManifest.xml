@@ -1,0 +1,26 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Từ Android 11 (API 30), muốn "nhìn thấy" một app khác qua package name
+         (queryIntentActivities, hoặc kiểm tra provider tồn tại) cần khai báo
+         <queries> — hạn chế mặc định để chống app do thám danh sách app đã cài
+         trên máy người dùng. Không khai báo Provider của app kia ở đây được (chỉ
+         khai báo package/intent), nhưng content:// URI vẫn gọi thẳng được không
+         cần <queries> vì ta không "dò tìm", chỉ gọi đúng URI đã biết trước. -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.NoteClient">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

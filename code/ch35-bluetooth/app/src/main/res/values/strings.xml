@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Bluetooth Demo</string>
+
+    <string name="status_idle">Chưa kết nối</string>
+    <string name="status_no_bluetooth_hardware">Thiết bị này không có Bluetooth</string>
+    <string name="status_waiting_for_connection">Đang chờ thiết bị khác kết nối tới (server)…</string>
+    <string name="status_connecting">Đang kết nối…</string>
+    <string name="status_connected_format">Đã kết nối với: %1$s</string>
+
+    <string name="button_start_server">Bắt đầu làm Server (chờ kết nối tới)</string>
+    <string name="button_scan_ble">Mở màn hình quét BLE</string>
+    <string name="label_paired_devices">Thiết bị đã ghép đôi (bấm để kết nối làm Client)</string>
+    <string name="hint_message">Nhập tin nhắn</string>
+    <string name="button_send">Gửi</string>
+
+    <string name="log_sent_format">Đã gửi: %1$s</string>
+    <string name="log_received_format">Nhận được: %1$s</string>
+    <string name="log_connected_format">Đã kết nối với %1$s</string>
+    <string name="log_error_format">Lỗi: %1$s</string>
+    <string name="log_disconnected">Đã ngắt kết nối</string>
+    <string name="log_permission_denied">Quyền Bluetooth bị từ chối — không thể tiếp tục.</string>
+
+    <string name="button_start_scan">Bắt đầu quét BLE</string>
+    <string name="button_stop_scan">Dừng quét</string>
+    <string name="scan_status_idle">Chưa quét</string>
+    <string name="scan_status_scanning">Đang quét (tự dừng sau 12 giây)…</string>
+    <string name="scan_status_permission_denied">Quyền bị từ chối — không thể quét.</string>
+    <string name="scan_status_no_ble">Thiết bị này không hỗ trợ Bluetooth Low Energy.</string>
+    <string name="scan_status_failed_format">Quét thất bại, mã lỗi: %1$d</string>
+    <string name="scan_status_done_format">Đã dừng quét — tìm thấy %1$d thiết bị.</string>
+    <string name="ble_unnamed_device">(thiết bị không quảng bá tên)</string>
+    <string name="ble_item_format">%1$s · RSSI: %2$d dBm</string>
+</resources>

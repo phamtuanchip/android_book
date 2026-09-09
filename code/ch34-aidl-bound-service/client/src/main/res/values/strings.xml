@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Calculator Client</string>
+    <string name="status_not_connected">Chưa kết nối tới Calculator Server</string>
+    <string name="status_connected">Đã kết nối tới Calculator Server (tiến trình khác)</string>
+    <string name="status_disconnected_unexpectedly">Mất kết nối đột ngột — tiến trình server có thể đã bị hệ thống kill</string>
+    <string name="status_server_not_installed">Không tìm thấy Calculator Server — hãy cài app đó trước</string>
+    <string name="hint_a">Số A</string>
+    <string name="default_a">12</string>
+    <string name="hint_b">Số B</string>
+    <string name="default_b">30</string>
+    <string name="button_add">Cộng (add) qua AIDL</string>
+    <string name="button_multiply">Nhân (multiply) qua AIDL</string>
+    <string name="result_format">Kết quả: %1$d (server đã xử lý %2$d lượt gọi)</string>
+    <string name="error_invalid_number">Vui lòng nhập số hợp lệ</string>
+    <string name="error_remote_format">Lỗi giao tiếp liên tiến trình: %1$s</string>
+</resources>

@@ -1,0 +1,4 @@
+Phiên bản 1.2.0:
+- Thêm chức năng đồng bộ dữ liệu ngoại tuyến
+- Sửa lỗi hiển thị danh sách ghi chú trên một số thiết bị
+- Cải thiện hiệu năng chung

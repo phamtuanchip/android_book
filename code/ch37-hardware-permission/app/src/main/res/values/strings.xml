@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Location Permission Demo</string>
+    <string name="button_foreground">Bật vị trí (khi đang dùng app)</string>
+    <string name="location_unknown">Chưa có vị trí</string>
+    <string name="location_format">Vĩ độ: %1$.5f, Kinh độ: %2$.5f</string>
+    <string name="location_permission_denied">Quyền vị trí bị từ chối.</string>
+    <string name="location_no_provider">Không có nguồn định vị nào đang bật — mở Cài đặt vị trí.</string>
+    <string name="button_background">Xin thêm quyền chạy NỀN (nếu thật sự cần)</string>
+    <string name="background_not_needed_pre_q">Phiên bản Android này chưa có khái niệm quyền vị trí nền riêng — quyền foreground đã đủ dùng cả khi chạy nền.</string>
+    <string name="background_granted">Đã được cấp quyền vị trí NỀN.</string>
+    <string name="background_denied">Quyền vị trí nền bị từ chối — app vẫn dùng được vị trí khi đang mở.</string>
+    <string name="background_rationale">Chỉ xin quyền này nếu app THẬT SỰ cần biết vị trí khi không mở (ví dụ theo dõi hành trình chạy bộ liên tục).</string>
+</resources>

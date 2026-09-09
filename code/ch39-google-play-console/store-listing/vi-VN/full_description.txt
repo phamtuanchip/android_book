@@ -1,0 +1,12 @@
+Đây là ứng dụng ghi chú đơn giản, dùng làm ví dụ minh hoạ trong sách "Android Từ Cơ Bản Đến
+Nâng Cao" — không phải sản phẩm thương mại thật.
+
+Tính năng chính:
+- Thêm, xem, xoá ghi chú
+- Lưu trữ cục bộ bằng Room (SQLite)
+- Hoạt động ngoại tuyến (offline-first)
+
+Ứng dụng này được xây dựng hoàn toàn bằng Java, minh hoạ các khái niệm nền tảng của lập trình
+Android: vòng đời Activity, RecyclerView, cơ sở dữ liệu, mạng, và kiến trúc MVVM.
+
+Toàn bộ mã nguồn có sẵn công khai kèm theo sách.

@@ -95,6 +95,14 @@
         { "num": 39, "slug": "ch39-google-play-console", "title": "Đưa ứng dụng lên Google Play Console" },
         { "num": 40, "slug": "ch40-theo-doi-sau-phat-hanh", "title": "Theo dõi sau phát hành: Crashlytics, Analytics cơ bản" }
       ]
+    },
+    {
+      "id": "part9-appendix",
+      "title": "Phụ lục",
+      "chapters": [
+        { "num": 41, "label": "Phụ lục A", "slug": "appendix-a-loi-thuong-gap", "title": "Bảng tổng hợp lỗi thường gặp & cách xử lý" },
+        { "num": 42, "label": "Phụ lục B", "slug": "appendix-b-tai-lieu-tham-khao", "title": "Tài liệu tham khảo & nguồn học thêm" }
+      ]
     }
   ]
 }

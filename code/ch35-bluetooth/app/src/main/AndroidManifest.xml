@@ -1,0 +1,43 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
+
+    <!-- Trước Android 12 (API 30 trở xuống): hai quyền "normal" này chỉ cần khai
+         báo manifest, KHÔNG cần xin runtime — nhưng việc QUÉT thiết bị (cả
+         Classic lẫn BLE) trên các phiên bản này còn đòi hỏi thêm quyền vị trí
+         runtime bên dưới, vì lý do lịch sử (địa chỉ MAC BLE từng bị lạm dụng để
+         suy ra vị trí người dùng). -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30" />
+
+    <!-- Từ Android 12 (API 31): hai quyền "dangerous" MỚI, THAY THẾ vai trò của
+         ACCESS_FINE_LOCATION cho việc quét/kết nối Bluetooth — phải xin runtime
+         (Chương 26), xem mục 35.2. usesPermissionFlags="neverForLocation" khai
+         báo rõ app KHÔNG dùng kết quả quét để suy ra vị trí người dùng, cho phép
+         xin BLUETOOTH_SCAN mà KHÔNG cần kèm ACCESS_FINE_LOCATION. -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.HelloAndroid">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".BleScanActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

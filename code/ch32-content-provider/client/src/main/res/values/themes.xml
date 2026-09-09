@@ -1,0 +1,3 @@
+<resources>
+    <style name="Theme.NoteClient" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+</resources>

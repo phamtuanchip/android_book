@@ -1,0 +1,53 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.NFC" />
+    <!-- required="true": app không cài được trên thiết bị không có NFC (Play
+         Store tự lọc). Đổi thành "false" nếu muốn app vẫn cài được, chỉ ẩn/tắt
+         tính năng NFC khi thiếu phần cứng — cần tự kiểm tra bằng
+         PackageManager.hasSystemFeature(FEATURE_NFC) lúc runtime. -->
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+    <uses-feature android:name="android.hardware.nfc.hce" android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.HelloAndroid">
+
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Không bắt buộc vì dùng Foreground Dispatch (mục 36.2) thay vì
+                 <intent-filter> tĩnh — nhưng khai báo thêm để app CŨNG mở được
+                 nếu người dùng chạm thẻ khi app đang đóng hẳn (hệ thống tự tìm
+                 app có filter khớp MIME/NDEF của thẻ đó). -->
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
+        <!-- HostApduService: minh hoạ Host Card Emulation — điện thoại "giả làm"
+             một thẻ contactless khi được đầu đọc NFC quét tới (mục 36.5). -->
+        <service
+            android:name=".HceService"
+            android:exported="true"
+            android:permission="android.permission.BIND_NFC_SERVICE">
+            <intent-filter>
+                <action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.cardemulation.host_apdu_service"
+                android:resource="@xml/apduservice" />
+        </service>
+    </application>
+
+</manifest>

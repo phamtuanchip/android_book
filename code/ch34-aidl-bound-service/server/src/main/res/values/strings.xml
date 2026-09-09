@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Calculator Server</string>
+    <string name="server_explanation">App này công khai CalculatorService qua AIDL. Cài app Calculator Client để gọi thử — không cần mở app này, chỉ cần nó đã được CÀI ĐẶT lên máy.</string>
+</resources>

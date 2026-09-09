@@ -1,0 +1,81 @@
+import java.util.Properties
+
+plugins {
+    id 'com.android.application'
+}
+
+// Đọc thông tin keystore từ MỘT FILE RIÊNG, KHÔNG COMMIT vào git (xem
+// .gitignore trong thư mục này) — mật khẩu keystore không bao giờ nên nằm
+// thẳng trong build.gradle, vì file này thường được commit công khai.
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def hasKeystoreConfig = keystorePropertiesFile.exists()
+if (hasKeystoreConfig) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    namespace 'vn.example.ch38release'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "vn.example.ch38release"
+        minSdk 24
+        targetSdk 34
+        // versionCode: SỐ NGUYÊN, PHẢI TĂNG DẦN qua mỗi lần phát hành — Play
+        // Console dùng giá trị này để biết bản nào mới hơn, KHÔNG dựa vào
+        // versionName. versionName: chuỗi hiển thị cho người dùng, tự do đặt
+        // theo quy ước riêng (ở đây dùng semantic versioning MAJOR.MINOR.PATCH).
+        versionCode 3
+        versionName "1.2.0"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    signingConfigs {
+        release {
+            if (hasKeystoreConfig) {
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            // Bật thu gọn (shrink) + làm rối tên (obfuscate) code cho bản release —
+            // xem Chương 27 để hiểu vì sao và cách viết đúng proguard-rules.pro bên
+            // dưới để không làm hỏng Gson/Retrofit.
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // CHỈ áp dụng signingConfig nếu tìm thấy keystore.properties thật —
+            // nhờ vậy repo mẫu này vẫn build được (`assembleRelease`, ra APK
+            // CHƯA KÝ) ngay cả khi bạn chưa tự tạo keystore theo README.
+            if (hasKeystoreConfig) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+}

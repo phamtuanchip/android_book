@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HelloAndroid"
+rootProject.name = "LayoutViewsDemo"
 include ':app'

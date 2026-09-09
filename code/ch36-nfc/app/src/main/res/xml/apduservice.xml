@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<host-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/hce_service_description"
+    android:requireDeviceUnlock="false">
+
+    <!-- AID (Application Identifier) — "địa chỉ" mà đầu đọc NFC dùng để chọn
+         đúng "ứng dụng thẻ" cần giao tiếp, tương tự AUTHORITY của ContentProvider
+         (Chương 32). Dải AID bắt đầu bằng F0 dành riêng cho mục đích proprietary/
+         nội bộ, KHÔNG trùng với AID thật của Visa/Mastercard/thẻ giao thông. -->
+    <aid-group android:description="@string/hce_aid_group_description" android:category="other">
+        <aid-filter android:name="F0010203040506" />
+    </aid-group>
+</host-apdu-service>
