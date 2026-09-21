@@ -1,4 +1,5 @@
 # Android Book — Kế hoạch biên soạn sách
+**Đọc online (GitHub Pages): https://phamtuanchip.github.io/android_book/**
 
 Sách lập trình Android bằng tiếng Việt, dành cho người đã biết Java OOP cơ bản, đi từ
 cài đặt môi trường đến kiến trúc nâng cao, kèm code mẫu chạy được cho từng chương.
